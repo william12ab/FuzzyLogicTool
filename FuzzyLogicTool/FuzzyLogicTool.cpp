@@ -7,6 +7,7 @@
 #include <SFML/Graphics.hpp>
 #include "TextFieldObject.h"
 #include "InputManager.h"
+#include "AddSetUI.h"
 
 
 int main() {
@@ -22,7 +23,12 @@ int main() {
 	view_.reset(sf::FloatRect(0.f, 0.f, (float)window.getSize().x, (float)window.getSize().y));
 	InputManager input_manager(&input, &view_, &window);
 
-	TextFieldObject ft(20, sf::Vector2f(2.f, 2.f));
+	//TextFieldObject ft(20, sf::Vector2f(2.f, 2.f));
+	AddSetUI first_window(5, 6, &window);
+
+
+	first_window.SetDisplayText();
+
 	bool is_added=false;
 	while (window.isOpen()) {
 		while (window.pollEvent(event)) {
@@ -66,35 +72,17 @@ int main() {
 				break;
 			}
 		}
-		input_manager.HandleTextInput(ft, event);
-		/*ft.SetFocus(false);
-		auto pos = sf::Mouse::getPosition(window);
-
-		if (ft.ifContains(sf::Vector2f(pos))) {
-			ft.SetFocus(true);
-		}
-		if (ft.GetFocus()) {
-			if (event.type != sf::Event::TextEntered) {
-				is_added = false;
-			}
-			else if(is_added==false){
-				if (event.text.unicode == 8) {
-					ft.SubtractKey();
-				}
-				else if (ft.GetTextSize() < ft.GetMaxSize()) {
-					ft.Addletter(event.text.unicode);
-				}
-				is_added = true;
-				ft.SetText();
-			}
-		}*/
+		//input_manager.HandleTextInput(ft, event);
+		first_window.HandleInput(input_manager, event);
 
 		ImGui::SFML::Update(window, delta_clock.restart());
 		ImGui::Begin("Options");
 		ImGui::End();
-		window.clear(sf::Color(1, 1, 1));
-		window.draw(ft.GetShape());
-		window.draw(ft.GetTextField());
+		window.clear(sf::Color(255, 255, 255));
+		//window.draw(ft.GetShape());
+		//window.draw(ft.GetTextField());
+		first_window.Render();
+
 		ImGui::SFML::Render(window);
 		window.display();
 	}

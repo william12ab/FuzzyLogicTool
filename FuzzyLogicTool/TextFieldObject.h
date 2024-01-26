@@ -23,32 +23,24 @@ public:
         text_field.setFillColor(sf::Color::Black);
         is_text_added = false;
     }
-    std::string GetText() const {
-        return m_text;
-    }
-
+    //setters
     void SetIsTextAdded(bool f) { is_text_added = f; }
-    bool GetIsTextAdded() {return is_text_added;}
     void SetText();
-    bool ifContains(sf::Vector2f point) const {
-        return m_rect.getGlobalBounds().contains(point);
-    }
-    void SetFocus(bool focus) {
-        m_hasfocus = focus;
-        if (focus) {
-            m_rect.setOutlineColor(sf::Color::Blue);
-        }
-        else {
-            m_rect.setOutlineColor(sf::Color(127, 127, 127)); // Gray color
-        }
-    }
+    void SetFocus(bool focus);
+
+    //getters
+    bool GetIsTextAdded() {return is_text_added;}
+    std::string GetText() const { return m_text; }
     sf::RectangleShape GetShape() { return m_rect; }
     sf::Text GetTextField() { return text_field; }
     bool GetFocus() { return m_hasfocus; }
-    void SubtractKey();
-    void Addletter(const sf::Uint32& letter);
     int GetTextSize() { return m_text.size(); }
     int GetMaxSize() { return m_size; }
+    bool ifContains(sf::Vector2f point) const {return m_rect.getGlobalBounds().contains(point);}
+    
+    void SubtractKey();
+    void Addletter(const sf::Uint32& letter);
+    void ChangePositions(const sf::Vector2f &p);
 private:
     unsigned int m_size;
     sf::Font m_font;

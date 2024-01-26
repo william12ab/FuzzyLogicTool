@@ -12,6 +12,13 @@ InputManager::InputManager(Input* in, sf::View* view, sf::RenderWindow* hwnd) {
 InputManager::~InputManager() {
 }
 
+void InputManager::ButtonBoolPress(sf::RectangleShape& rect_shape, bool& is_move_on) {
+	if (input->isButtonClicked(rect_shape,sf::Mouse::Left,*window)){
+		rect_shape.setFillColor(sf::Color::Black);
+		is_move_on = true;
+	}
+}
+
 void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event) {
 	text_object.SetFocus(false);
 	auto pos = sf::Vector2f(input->getMouseX(), input->getMouseY());

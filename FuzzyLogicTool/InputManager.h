@@ -13,6 +13,7 @@ public:
 
 
 	void HandleTextInput(TextFieldObject &text_object,sf::Event event);
+	void ButtonBoolPress(sf::RectangleShape& rect_shape,bool &is_move_on);
 private:
 	Input* input;
 	sf::View* view_;
