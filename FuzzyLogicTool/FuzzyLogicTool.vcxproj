@@ -145,6 +145,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="AddSetUI.cpp" />
     <ClCompile Include="DemoWindow.cpp" />
     <ClCompile Include="FuzzyLogicTool.cpp" />
     <ClCompile Include="FuzzySet.cpp" />
@@ -153,10 +154,14 @@
     <ClCompile Include="imgui\imgui_draw.cpp" />
     <ClCompile Include="imgui\imgui_tables.cpp" />
     <ClCompile Include="imgui\imgui_widgets.cpp" />
+    <ClCompile Include="Input.cpp" />
+    <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="Rule.cpp" />
+    <ClCompile Include="TextFieldObject.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="AddSetUI.h" />
     <ClInclude Include="DemoWindow.h" />
     <ClInclude Include="FuzzySet.h" />
     <ClInclude Include="imgui\imconfig-SFML.h" />
@@ -168,8 +173,11 @@
     <ClInclude Include="imgui\imstb_rectpack.h" />
     <ClInclude Include="imgui\imstb_textedit.h" />
     <ClInclude Include="imgui\imstb_truetype.h" />
+    <ClInclude Include="Input.h" />
+    <ClInclude Include="InputManager.h" />
     <ClInclude Include="Operation.h" />
     <ClInclude Include="Rule.h" />
+    <ClInclude Include="TextFieldObject.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

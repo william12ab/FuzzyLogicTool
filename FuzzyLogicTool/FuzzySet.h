@@ -16,5 +16,6 @@ private:
 		std::string graph_name;
 		int graph_type;
 	}fuzzy_set;
+	
 };
 

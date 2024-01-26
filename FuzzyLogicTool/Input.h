@@ -1,5 +1,5 @@
 #pragma once
-
+#include <SFML/Graphics.hpp>
 class Input
 {
 private:
@@ -25,6 +25,9 @@ public:
 	bool isMouseLDown();
 	void setMouseRDown(bool down);
 	bool isMouseRDown();
+
+	bool isButtonClicked(sf::RectangleShape object, sf::Mouse::Button button, sf::RenderWindow& window);
+
 
 private:
 	// Array of booleans representing keys (pressed = true, released = false)
