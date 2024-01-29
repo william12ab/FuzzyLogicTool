@@ -2,11 +2,12 @@
 #include <iostream>
 
 AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd):window(hwnd), is_move_on(false){
+	font.loadFromFile("C:/Windows/Fonts/Arial.ttf");
 	for (int i = 0; i < num_text_fields; i++) {
-		text_fields.push_back(TextFieldObject(10, sf::Vector2f(250.f, 200.f)));
+		text_fields.push_back(TextFieldObject(10, sf::Vector2f(250.f, 200.f),font));
 	}
 	
-	font.loadFromFile("C:/Windows/Fonts/Arial.ttf");
+
 	for (int i = 0; i < num_display_text_fields; i++) {
 		display_text_fields.push_back(sf::Text());
 		display_text_fields[i].setFont(font);
@@ -20,17 +21,17 @@ AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderW
 	bool_shape.setOutlineColor(sf::Color::Black);
 }
 void AddSetUI::Render() {
-	for (int i = 0; i < text_fields.size(); i++){
+	for (size_t  i = 0; i < text_fields.size(); i++){
 		window->draw(text_fields[i].GetShape());
-		//window->draw(text_fields[i].GetTextField());
+		window->draw(text_fields[i].GetTextField());
 	}
-	for (int i = 0; i < display_text_fields.size(); i++) {
+	for (size_t  i = 0; i < display_text_fields.size(); i++) {
 		window->draw(display_text_fields[i]);
 	}
 	window->draw(bool_shape);
 }
 void AddSetUI::HandleInput(InputManager input_manager,sf::Event event) {
-	for (int i = 0; i < text_fields.size(); i++){
+	for (size_t  i = 0; i < text_fields.size(); i++){
 		input_manager.HandleTextInput(text_fields[i], event);
 	}
 	input_manager.ButtonBoolPress(bool_shape, is_move_on);

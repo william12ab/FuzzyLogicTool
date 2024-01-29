@@ -5,23 +5,24 @@
 class TextFieldObject
 {
 public:
-    TextFieldObject(unsigned int maxChars, sf::Vector2f pos) :
+    TextFieldObject(unsigned int maxChars, sf::Vector2f pos, const sf::Font &f_) :
         m_size(maxChars),
         m_rect(sf::Vector2f(15 * m_size, 20)), // 15 pixels per char, 20 pixels height, you can tweak
         m_hasfocus(false)
     {
-        m_font.loadFromFile("C:/Windows/Fonts/Arial.ttf"); // I'm working on Windows, you can put your own font instead
+       // m_font.loadFromFile("C:/Windows/Fonts/Arial.ttf"); // I'm working on Windows, you can put your own font instead
         m_rect.setOutlineThickness(2);
         m_rect.setFillColor(sf::Color::White);
         m_rect.setOutlineColor(sf::Color(127, 127, 127));
         m_rect.setPosition(pos);
         
-        text_field.setFont(m_font);
+        text_field.setFont(f_);
         text_field.setString("asdasd");
         text_field.setCharacterSize(18);
         text_field.setPosition(pos);
         text_field.setFillColor(sf::Color::Black);
         is_text_added = false;
+        m_text = "";
     }
     //setters
     void SetIsTextAdded(bool f) { is_text_added = f; }
@@ -43,7 +44,7 @@ public:
     void ChangePositions(const sf::Vector2f &p);
 private:
     unsigned int m_size;
-    sf::Font m_font;
+ //   sf::Font m_font;
     std::string m_text;
     sf::RectangleShape m_rect;
     sf::Text text_field;
