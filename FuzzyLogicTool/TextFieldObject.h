@@ -7,11 +7,11 @@ class TextFieldObject
 public:
     TextFieldObject(unsigned int maxChars, sf::Vector2f pos, const sf::Font &f_) :
         m_size(maxChars),
-        m_rect(sf::Vector2f(15 * m_size, 20)), // 15 pixels per char, 20 pixels height, you can tweak
+        m_rect(sf::Vector2f(150, 20)), // 15 pixels per char, 20 pixels height, you can tweak
         m_hasfocus(false)
     {
        // m_font.loadFromFile("C:/Windows/Fonts/Arial.ttf"); // I'm working on Windows, you can put your own font instead
-        m_rect.setOutlineThickness(2);
+        m_rect.setOutlineThickness(1.f);
         m_rect.setFillColor(sf::Color::White);
         m_rect.setOutlineColor(sf::Color(127, 127, 127));
         m_rect.setPosition(pos);

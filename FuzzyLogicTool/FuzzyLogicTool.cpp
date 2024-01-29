@@ -24,7 +24,7 @@ int main() {
 	InputManager input_manager(&input, &view_, &window);
 
 	//TextFieldObject ft(20, sf::Vector2f(2.f, 2.f));
-	AddSetUI first_window(5, 6, &window);
+	AddSetUI first_window(5, 6, &window,false,false);
 
 
 	first_window.SetDisplayText();
