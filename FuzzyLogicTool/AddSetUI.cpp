@@ -1,8 +1,8 @@
 #include "AddSetUI.h"
 #include <iostream>
 
-AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence):window(hwnd), is_move_on(false){
-	font.loadFromFile("C:/Windows/Fonts/Arial.ttf"), is_second = e_is_second , is_consequence = e_is_consequence;
+AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator):window(hwnd), is_move_on(false){
+	font.loadFromFile("C:/Windows/Fonts/Arial.ttf"), is_second = e_is_second , is_consequence = e_is_consequence, is_operator=e_is_operator;
 	for (int i = 0; i < num_text_fields; i++) {
 		text_fields.push_back(TextFieldObject(20, sf::Vector2f(250.f, 200.f),font));
 	}
@@ -16,7 +16,7 @@ AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderW
 	}
 
 	bool_shape.setSize(sf::Vector2f(45, 45));
-	bool_shape.setPosition(450,400);
+	bool_shape.setPosition(600,400);
 	bool_shape.setFillColor(sf::Color::White);
 	bool_shape.setOutlineColor(sf::Color::Black);
 	bool_shape.setOutlineThickness(1.f);
@@ -58,6 +58,12 @@ void AddSetUI::SetDisplayText() {
 	text_fields[2].ChangePositions(sf::Vector2f(320, 250));
 	text_fields[3].ChangePositions(sf::Vector2f(320, 300));
 	text_fields[4].ChangePositions(sf::Vector2f(320, 350));
+	
+	if (is_operator){
+		text_fields[5].ChangePositions(sf::Vector2f(320, 400));
+		display_text_fields[6].setString("Operator: ");
+		display_text_fields[6].setPosition(sf::Vector2f(200, 400));
+	}
 
 	if (is_consequence){
 		display_text_fields[0].setString("Add consequence: if: ");
@@ -75,7 +81,7 @@ void AddSetUI::SetDisplayText() {
 	display_text_fields[4].setString("Graph type: ");
 	display_text_fields[4].setPosition(sf::Vector2f(200, 350));
 	display_text_fields[5].setString("Done: ");
-	display_text_fields[5].setPosition(sf::Vector2f(400, 400));
+	display_text_fields[5].setPosition(sf::Vector2f(550, 400));
 
 	back_text.setString("Back");
 	back_text.setPosition(sf::Vector2f(50, 50));

@@ -4,7 +4,7 @@
 class AddSetUI
 {
 public:
-	AddSetUI(int num_text_fields,int num_display_text_fields, sf::RenderWindow* hwnd,const bool& e_is_second,const bool& e_is_consequence);//set positions
+	AddSetUI(int num_text_fields,int num_display_text_fields, sf::RenderWindow* hwnd,const bool& e_is_second,const bool& e_is_consequence, const bool&e_is_operator);//set positions
 
 	void SetDisplayText();
 	void Render();
@@ -26,5 +26,6 @@ private:
 	bool is_move_on;
 	bool is_second;
 	bool is_consequence;
+	bool is_operator;
 };
 

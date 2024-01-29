@@ -23,8 +23,7 @@ int main() {
 	view_.reset(sf::FloatRect(0.f, 0.f, (float)window.getSize().x, (float)window.getSize().y));
 	InputManager input_manager(&input, &view_, &window);
 
-	//TextFieldObject ft(20, sf::Vector2f(2.f, 2.f));
-	AddSetUI first_window(5, 6, &window,false,false);
+	AddSetUI first_window(6, 7, &window,false,false,true);
 
 
 	first_window.SetDisplayText();
