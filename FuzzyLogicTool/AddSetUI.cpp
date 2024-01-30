@@ -2,12 +2,12 @@
 #include <iostream>
 
 
-AddSetUI::AddSetUI() :is_consequence(false), is_move_on(false), is_second(false), is_operator(true),window(nullptr), has_operator(false) {
+AddSetUI::AddSetUI() :is_consequence(false), is_move_on(false), is_second(false), is_operator(true),window(nullptr), has_operator(false),is_go_back(false) {
 }
 AddSetUI::~AddSetUI() {
 
 }
-AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator, const sf::Font& font):window(hwnd), is_move_on(false), has_operator(false) {
+AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator, const sf::Font& font):window(hwnd), is_move_on(false), has_operator(false), is_go_back(false) {
 	is_second = e_is_second , is_consequence = e_is_consequence, is_operator=e_is_operator;
 	for (int i = 0; i < num_text_fields; i++) {
 		text_fields.push_back(TextFieldObject(20, sf::Vector2f(250.f, 200.f),font));
@@ -66,16 +66,23 @@ void AddSetUI::Update() {
 	}
 }
 
+void AddSetUI::SetPreviousItems() {
+	if (is_go_back){
+		SetDisplayText();
+	}
+}
+
 void AddSetUI::HandleInput(InputManager input_manager,sf::Event event) {
 	for (size_t  i = 0; i < text_fields.size(); i++){
 		input_manager.HandleTextInput(text_fields[i], event);
 	}
 	input_manager.ButtonBoolPress(bool_shape, is_move_on);
+	input_manager.ButtonBoolPress(bacK_button, is_go_back);
 }
 
 void AddSetUI::SetDisplayText() {
 	if (is_consequence){
-		text_fields[0].ChangePositions(sf::Vector2f(380, 200));
+		text_fields[0].ChangePositions(sf::Vector2f(370, 200));
 	}
 	else {
 		text_fields[0].ChangePositions(sf::Vector2f(360, 200));

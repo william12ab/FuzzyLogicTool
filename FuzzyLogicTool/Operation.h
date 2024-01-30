@@ -6,8 +6,9 @@ public:
 	Operation();
 	~Operation();
 	void AddRule(const bool& is_antecedent);
-
 	void AddSetData(const std::string &data, const int &index,const bool& has_operator);
+
+	void GetData(const bool& is_consequence, const bool& has_operator);
 
 	void ClearTemplate();
 private:

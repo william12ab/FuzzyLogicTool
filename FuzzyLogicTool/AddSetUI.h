@@ -12,6 +12,8 @@ public:
 	void Update();
 	void HandleInput(InputManager input_manager, sf::Event event);
 	void ChangeWindowAppearance(const bool& is_second_e, const bool& is_consequence_e);
+	void SetPreviousItems();
+
 
 	bool GetIsMoveOne() {return is_move_on;}
 	bool GetIsSecond() { return is_second; }
@@ -29,6 +31,7 @@ private:
 	sf::Text back_text;
 
 	bool is_move_on;
+	bool is_go_back;
 	bool is_second;
 	bool is_consequence;
 	bool is_operator;

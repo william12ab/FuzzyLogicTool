@@ -9,9 +9,18 @@ void Rule::AddConsequence(FuzzySet consequence) {
 	consequence_vector.push_back(consequence);
 }
 
-
-void Rule::test() {
-	int a = consequence_vector.size();
-	int b = consequence_vector.size();
-	int c = consequence_vector.size();
+const FuzzySet Rule::GetSetValues(const bool& is_consequence, const bool& has_operator){
+	if (is_consequence){
+		auto to_return = consequence_vector.back();	
+		consequence_vector.pop_back();
+		return to_return;
+	}
+	else {
+		if (has_operator) {
+			operator_vector.pop_back();
+		}
+		auto to_return = antecedent_vector.back();
+		antecedent_vector.pop_back();
+		return to_return;
+	}
 }

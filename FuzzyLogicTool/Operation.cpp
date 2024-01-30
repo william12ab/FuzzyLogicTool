@@ -1,7 +1,7 @@
 #include "Operation.h"
 
 Operation::Operation() {
-
+	
 }
 Operation::~Operation() {
 	if (rule_vector.size()>0){
@@ -52,5 +52,16 @@ void Operation::AddSetData(const std::string & data, const int& index, const boo
 			rule_template.AddOperator(std::stoi(data));
 		}
 		break;
+	}
+}
+
+void Operation::GetData(const bool& is_consequence, const bool& has_operator) {
+	if (is_consequence)	{
+		auto temp = rule_vector.back();
+		rule_vector.pop_back();
+		fuzzy_set_template=temp.GetSetValues(is_consequence,has_operator);
+	}
+	else {
+		fuzzy_set_template=rule_template.GetSetValues(is_consequence, has_operator);
 	}
 }

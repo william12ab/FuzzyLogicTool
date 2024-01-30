@@ -8,9 +8,7 @@ public:
 	void AddOperator(int operator_value);
 	void AddConsequence(FuzzySet consequence);
 
-
-
-	void test();
+	const FuzzySet GetSetValues(const bool& is_consequence, const bool& has_operator);
 private:
 	std::vector<FuzzySet> antecedent_vector;
 	std::vector<FuzzySet> consequence_vector;

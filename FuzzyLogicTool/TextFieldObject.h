@@ -16,7 +16,7 @@ public:
         m_rect.setPosition(pos);
         
         text_field.setFont(f_);
-        text_field.setString("Please enter");
+        text_field.setString("");
         text_field.setCharacterSize(18);
         text_field.setPosition(pos);
         text_field.setFillColor(sf::Color::Black);
