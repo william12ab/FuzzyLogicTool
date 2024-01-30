@@ -1,8 +1,14 @@
 #include "AddSetUI.h"
 #include <iostream>
 
-AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator):window(hwnd), is_move_on(false){
-	font.loadFromFile("C:/Windows/Fonts/Arial.ttf"), is_second = e_is_second , is_consequence = e_is_consequence, is_operator=e_is_operator;
+
+AddSetUI::AddSetUI() :is_consequence(false), is_move_on(false), is_second(false), is_operator(true),window(nullptr) {
+}
+AddSetUI::~AddSetUI() {
+
+}
+AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator, const sf::Font& font):window(hwnd), is_move_on(false){
+	is_second = e_is_second , is_consequence = e_is_consequence, is_operator=e_is_operator;
 	for (int i = 0; i < num_text_fields; i++) {
 		text_fields.push_back(TextFieldObject(20, sf::Vector2f(250.f, 200.f),font));
 	}
@@ -45,6 +51,7 @@ void AddSetUI::Render() {
 		window->draw(back_text);
 	}
 }
+
 void AddSetUI::HandleInput(InputManager input_manager,sf::Event event) {
 	for (size_t  i = 0; i < text_fields.size(); i++){
 		input_manager.HandleTextInput(text_fields[i], event);
@@ -85,4 +92,8 @@ void AddSetUI::SetDisplayText() {
 
 	back_text.setString("Back");
 	back_text.setPosition(sf::Vector2f(50, 50));
+}
+
+const std::string AddSetUI::GetInfoFromTextField(const int& text_index)const {
+	return text_fields[text_index].GetText();
 }

@@ -5,8 +5,16 @@ class Operation
 public:
 	Operation();
 	~Operation();
-	void CreateNewOperation(Rule new_rule);
+	void AddRule(const bool& is_antecedent);
+
+	void AddSetData(const std::string &data, const int &index,const bool& is_antecedent);
+
+	void ClearTemplate();
 private:
 	std::vector<Rule> rule_vector;
+
+	FuzzySet fuzzy_set_template;
+	Rule rule_template;
+	int operator_value_template;
 };
 

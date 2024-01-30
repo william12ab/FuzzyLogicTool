@@ -156,6 +156,7 @@
     <ClCompile Include="imgui\imgui_widgets.cpp" />
     <ClCompile Include="Input.cpp" />
     <ClCompile Include="InputManager.cpp" />
+    <ClCompile Include="LogicHandler.cpp" />
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="Rule.cpp" />
     <ClCompile Include="TextFieldObject.cpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="imgui\imstb_truetype.h" />
     <ClInclude Include="Input.h" />
     <ClInclude Include="InputManager.h" />
+    <ClInclude Include="LogicHandler.h" />
     <ClInclude Include="Operation.h" />
     <ClInclude Include="Rule.h" />
     <ClInclude Include="TextFieldObject.h" />

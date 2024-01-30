@@ -4,7 +4,7 @@
 void DemoWindow::CreateRule(std::string& n, FuzzySet& antecedent, Rule& new_rule, int& operator_value, Operation& new_operation) {
     GetAntecedentValues(n, antecedent, new_rule, operator_value);
     GetConsequenceValues(n, antecedent, new_rule);
-    new_operation.CreateNewOperation(new_rule);
+    new_operation.AddRule(bool());
 }
 
 void DemoWindow::CreateOpertation() {

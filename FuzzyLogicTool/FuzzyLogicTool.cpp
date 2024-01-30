@@ -7,27 +7,22 @@
 #include <SFML/Graphics.hpp>
 #include "TextFieldObject.h"
 #include "InputManager.h"
+#include "Operation.h"
 #include "AddSetUI.h"
-
+#include "LogicHandler.h"
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "title");
 	sf::Event event;
 	ImGui::SFML::Init(window);
 	sf::Clock delta_clock;
-
-	DemoWindow demo;
-	//demo.CreateOpertation();
 	Input input;
 	sf::View view_;
+	sf::Font font;
+	font.loadFromFile("C:/Windows/Fonts/Arial.ttf");
 	view_.reset(sf::FloatRect(0.f, 0.f, (float)window.getSize().x, (float)window.getSize().y));
 	InputManager input_manager(&input, &view_, &window);
-
-	AddSetUI first_window(6, 7, &window,false,false,true);
-
-
-	first_window.SetDisplayText();
-
+	LogicHandler program_runner(&window,font);
 	bool is_added=false;
 	while (window.isOpen()) {
 		while (window.pollEvent(event)) {
@@ -71,17 +66,24 @@ int main() {
 				break;
 			}
 		}
-		//input_manager.HandleTextInput(ft, event);
-		first_window.HandleInput(input_manager, event);
+		//input
+		//first_window.HandleInput(input_manager, event);
+		program_runner.HandleInput(input_manager, event);
 
+		//update
 		ImGui::SFML::Update(window, delta_clock.restart());
 		ImGui::Begin("Options");
 		ImGui::End();
-		window.clear(sf::Color(255, 255, 255));
-		//window.draw(ft.GetShape());
-		//window.draw(ft.GetTextField());
-		first_window.Render();
+	/*	if (first_window.GetIsMoveOne()){
+			for (int i = 0; i < 6; i++){
+				new_operation.AddSetData(first_window.GetInfoFromTextField(i),i,true);
+			}
+		}*/
 
+		//render
+		window.clear(sf::Color(255, 255, 255));
+		//first_window.Render();
+		program_runner.Render();
 		ImGui::SFML::Render(window);
 		window.display();
 	}
