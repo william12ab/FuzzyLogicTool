@@ -10,7 +10,6 @@ public:
         m_rect(sf::Vector2f(150, 20)), // 15 pixels per char, 20 pixels height, you can tweak
         m_hasfocus(false)
     {
-       // m_font.loadFromFile("C:/Windows/Fonts/Arial.ttf"); // I'm working on Windows, you can put your own font instead
         m_rect.setOutlineThickness(1.f);
         m_rect.setFillColor(sf::Color::White);
         m_rect.setOutlineColor(sf::Color(127, 127, 127));
@@ -28,6 +27,7 @@ public:
     void SetIsTextAdded(bool f) { is_text_added = f; }
     void SetText();
     void SetFocus(bool focus);
+    void ClearText();
 
     //getters
     bool GetIsTextAdded() {return is_text_added;}

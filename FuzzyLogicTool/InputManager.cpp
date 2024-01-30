@@ -17,6 +17,10 @@ void InputManager::ButtonBoolPress(sf::RectangleShape& rect_shape, bool& is_move
 		rect_shape.setFillColor(sf::Color::Black);
 		is_move_on = true;
 	}
+	else {
+		rect_shape.setFillColor(sf::Color::White);
+		is_move_on = false;
+	}
 }
 
 void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event) {

@@ -2,18 +2,16 @@
 #include <iostream>
 
 
-AddSetUI::AddSetUI() :is_consequence(false), is_move_on(false), is_second(false), is_operator(true),window(nullptr) {
+AddSetUI::AddSetUI() :is_consequence(false), is_move_on(false), is_second(false), is_operator(true),window(nullptr), has_operator(false) {
 }
 AddSetUI::~AddSetUI() {
 
 }
-AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator, const sf::Font& font):window(hwnd), is_move_on(false){
+AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator, const sf::Font& font):window(hwnd), is_move_on(false), has_operator(false) {
 	is_second = e_is_second , is_consequence = e_is_consequence, is_operator=e_is_operator;
 	for (int i = 0; i < num_text_fields; i++) {
 		text_fields.push_back(TextFieldObject(20, sf::Vector2f(250.f, 200.f),font));
 	}
-	
-
 	for (int i = 0; i < num_display_text_fields; i++) {
 		display_text_fields.push_back(sf::Text());
 		display_text_fields[i].setFont(font);
@@ -38,17 +36,33 @@ AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderW
 	back_text.setCharacterSize(18);
 }
 void AddSetUI::Render() {
-	for (size_t  i = 0; i < text_fields.size(); i++){
+	int loop_index = text_fields.size();
+	int loop_index_two = display_text_fields.size();
+	if (is_consequence) {
+		loop_index -= 1;
+		loop_index_two -= 1;
+	}
+	for (size_t  i = 0; i < loop_index; i++){
 		window->draw(text_fields[i].GetShape());
 		window->draw(text_fields[i].GetTextField());
 	}
-	for (size_t  i = 0; i < display_text_fields.size(); i++) {
+	for (size_t  i = 0; i < loop_index_two; i++) {
 		window->draw(display_text_fields[i]);
 	}
 	window->draw(bool_shape);
 	if (is_second){
 		window->draw(bacK_button);
 		window->draw(back_text);
+	}
+}
+void AddSetUI::Update() {
+	if (!is_consequence){
+		if (text_fields[5].GetText()=="") {
+			has_operator = false;
+		}
+		else {
+			has_operator = true;
+		}
 	}
 }
 
@@ -60,7 +74,12 @@ void AddSetUI::HandleInput(InputManager input_manager,sf::Event event) {
 }
 
 void AddSetUI::SetDisplayText() {
-	text_fields[0].ChangePositions(sf::Vector2f(360, 200));
+	if (is_consequence){
+		text_fields[0].ChangePositions(sf::Vector2f(380, 200));
+	}
+	else {
+		text_fields[0].ChangePositions(sf::Vector2f(360, 200));
+	}
 	text_fields[1].ChangePositions(sf::Vector2f(550, 200));
 	text_fields[2].ChangePositions(sf::Vector2f(320, 250));
 	text_fields[3].ChangePositions(sf::Vector2f(320, 300));
@@ -96,4 +115,20 @@ void AddSetUI::SetDisplayText() {
 
 const std::string AddSetUI::GetInfoFromTextField(const int& text_index)const {
 	return text_fields[text_index].GetText();
+}
+
+
+void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_consequence_e) {
+	is_second = is_second_e;
+	is_consequence = is_consequence_e;
+	is_move_on = false;
+	has_operator = false;
+	is_operator = !is_consequence_e;
+	for (int i = 0; i < text_fields.size(); i++){
+		text_fields[i].ClearText();
+		for (size_t i = 0; i < text_fields[i].GetText().size(); i++)	{
+			text_fields[i].SubtractKey();
+		}
+	}
+	SetDisplayText();
 }

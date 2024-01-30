@@ -9,11 +9,15 @@ public:
 	~AddSetUI();
 	void SetDisplayText();
 	void Render();
+	void Update();
 	void HandleInput(InputManager input_manager, sf::Event event);
+	void ChangeWindowAppearance(const bool& is_second_e, const bool& is_consequence_e);
 
 	bool GetIsMoveOne() {return is_move_on;}
 	bool GetIsSecond() { return is_second; }
 	bool GetIsConsequence() {return is_consequence;}
+	bool GetIsOperator() { return is_operator; }
+	bool GetHasOperator() { return has_operator; }
 	const std::string GetInfoFromTextField(const int& text_index) const;
 private:
 
@@ -28,6 +32,6 @@ private:
 	bool is_second;
 	bool is_consequence;
 	bool is_operator;
-
+	bool has_operator;
 };
 

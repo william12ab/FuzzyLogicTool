@@ -7,7 +7,7 @@ public:
 	~Operation();
 	void AddRule(const bool& is_antecedent);
 
-	void AddSetData(const std::string &data, const int &index,const bool& is_antecedent);
+	void AddSetData(const std::string &data, const int &index,const bool& has_operator);
 
 	void ClearTemplate();
 private:

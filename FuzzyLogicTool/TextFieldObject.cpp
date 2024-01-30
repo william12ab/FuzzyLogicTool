@@ -17,6 +17,9 @@ void TextFieldObject::SetText() {
 	text_field.setString(m_text);
 }
 
+void TextFieldObject::ClearText() {
+    m_text = "";
+}
 
 void TextFieldObject::SetFocus(bool focus) {
     m_hasfocus = focus;

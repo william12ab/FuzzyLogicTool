@@ -28,7 +28,7 @@ void Operation::ClearTemplate() {
 	fuzzy_set_template.SetGraphType(0);
 }
 
-void Operation::AddSetData(const std::string & data, const int& index, const bool& is_antecedent) {
+void Operation::AddSetData(const std::string & data, const int& index, const bool& has_operator) {
 	switch (index)
 	{
 	case 0:
@@ -46,10 +46,11 @@ void Operation::AddSetData(const std::string & data, const int& index, const boo
 	case 4:
 		fuzzy_set_template.SetGraphType(std::stoi(data));
 		break;
-		if (is_antecedent) {
+		
 	case 5:
-		rule_template.AddOperator(std::stoi(data));
-		break;
+		if (has_operator) {
+			rule_template.AddOperator(std::stoi(data));
 		}
+		break;
 	}
 }

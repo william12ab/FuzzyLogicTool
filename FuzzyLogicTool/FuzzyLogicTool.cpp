@@ -67,22 +67,18 @@ int main() {
 			}
 		}
 		//input
-		//first_window.HandleInput(input_manager, event);
+
 		program_runner.HandleInput(input_manager, event);
 
 		//update
 		ImGui::SFML::Update(window, delta_clock.restart());
 		ImGui::Begin("Options");
 		ImGui::End();
-	/*	if (first_window.GetIsMoveOne()){
-			for (int i = 0; i < 6; i++){
-				new_operation.AddSetData(first_window.GetInfoFromTextField(i),i,true);
-			}
-		}*/
+		program_runner.Update();
 
 		//render
 		window.clear(sf::Color(255, 255, 255));
-		//first_window.Render();
+		
 		program_runner.Render();
 		ImGui::SFML::Render(window);
 		window.display();
