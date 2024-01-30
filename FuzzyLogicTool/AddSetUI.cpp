@@ -126,8 +126,8 @@ void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_co
 	is_operator = !is_consequence_e;
 	for (int i = 0; i < text_fields.size(); i++){
 		text_fields[i].ClearText();
-		for (size_t i = 0; i < text_fields[i].GetText().size(); i++)	{
-			text_fields[i].SubtractKey();
+		for (size_t i = 0; i < text_fields[i].GetTextField().getString(); i++)	{
+			text_fields[i].ClearText();
 		}
 	}
 	SetDisplayText();
