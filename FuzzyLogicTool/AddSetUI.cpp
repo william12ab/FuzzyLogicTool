@@ -49,7 +49,9 @@ void AddSetUI::Render() {
 	for (size_t  i = 0; i < loop_index_two; i++) {
 		window->draw(display_text_fields[i]);
 	}
-	window->draw(bool_shape);
+	if (ShouldRenderButton()){
+		window->draw(bool_shape);
+	}
 	if (is_second){
 		window->draw(bacK_button);
 		window->draw(back_text);
@@ -64,6 +66,7 @@ void AddSetUI::Update() {
 			has_operator = true;
 		}
 	}
+	
 }
 
 void AddSetUI::SetPreviousItems(FuzzySet temp, const bool&is_con_e, const bool&is_second_e) {
@@ -129,6 +132,19 @@ const std::string AddSetUI::GetInfoFromTextField(const int& text_index)const {
 	return text_fields[text_index].GetText();
 }
 
+bool AddSetUI::ShouldRenderButton() {
+	bool is_written = false;
+	int counter = 0;
+	for (int i = 0; i < 5; i++){
+		if (text_fields[i].GetText()!=""){
+			counter++;
+		}
+	}
+	if (counter>=5){
+		is_written = true;
+	}
+	return is_written;
+}
 
 void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_consequence_e) {
 	is_second = is_second_e;
