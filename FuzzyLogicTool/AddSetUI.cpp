@@ -26,6 +26,12 @@ AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderW
 	bool_shape.setOutlineColor(sf::Color::Black);
 	bool_shape.setOutlineThickness(1.f);
 
+	finish_button.setSize(sf::Vector2f(45, 45));
+	finish_button.setPosition(600, 450);
+	finish_button.setFillColor(sf::Color::White);
+	finish_button.setOutlineColor(sf::Color::Black);
+	finish_button.setOutlineThickness(1.f);
+
 	bacK_button.setSize(sf::Vector2f(55, 20));
 	bacK_button.setPosition(50, 50);
 	bacK_button.setFillColor(sf::Color::White);
@@ -35,6 +41,12 @@ AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderW
 	back_text.setFont(font);
 	back_text.setFillColor(sf::Color(0, 0, 0));
 	back_text.setCharacterSize(18);
+
+	finished_text.setFont(font);
+	finished_text.setFillColor(sf::Color(0, 0, 0));
+	finished_text.setPosition(sf::Vector2f(520, 450));
+	finished_text.setString("Finished:");
+	finished_text.setCharacterSize(18);
 
 	rule_number_text.setFont(font);
 	rule_number_text.setFillColor(sf::Color(0, 0, 0));
@@ -60,6 +72,10 @@ void AddSetUI::Render() {
 	}
 	if (ShouldRenderButton()){
 		window->draw(bool_shape);
+		if (is_consequence){
+			window->draw(finish_button);
+			window->draw(finished_text);
+		}
 	}
 	if (is_second){
 		window->draw(bacK_button);
@@ -104,6 +120,9 @@ void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
 		input_manager.ButtonBoolPress(bool_shape, is_move_on);
 		if (is_move_on &&is_consequence){
 			is_operation_done = true;
+		}
+		if (is_consequence){
+			input_manager.ButtonBoolPress(finish_button, is_finished);
 		}
 	}
 		

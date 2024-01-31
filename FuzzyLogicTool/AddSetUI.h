@@ -13,6 +13,7 @@ public:
 	void SetIsSecond(bool b) { is_second = b; }
 	void SetIsoperator(bool b) { is_operator = b; }
 	void SetIsOperationDone(bool b) { is_operation_done = b; }
+	void SetIsFinished(bool b) { is_finished = b; }
 
 	void Render();
 	void Update();
@@ -28,6 +29,7 @@ public:
 	bool GetHasOperator();
 	bool GetIsGoBack() { return is_go_back; }
 	bool GetIsOperationDone() { return is_operation_done;}
+	bool GetIsFinished() { return is_finished; }
 	const std::string GetInfoFromTextField(const int& text_index) const;
 private:
 
@@ -36,8 +38,10 @@ private:
 	sf::RenderWindow* window;
 	sf::RectangleShape bool_shape;
 	sf::RectangleShape bacK_button;
+	sf::RectangleShape finish_button;
 	sf::Text back_text;
 	sf::Text rule_number_text;
+	sf::Text finished_text;
 
 
 	bool is_move_on;
@@ -47,7 +51,7 @@ private:
 	bool is_operator;
 	bool has_operator;
 	bool is_operation_done;
-
+	bool is_finished;
 
 	int current_text_field;
 };
