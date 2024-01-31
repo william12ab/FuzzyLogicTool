@@ -9,6 +9,7 @@ AddSetUI::~AddSetUI() {
 }
 AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator, const sf::Font& font):window(hwnd), is_move_on(false), has_operator(false), is_go_back(false) {
 	is_second = e_is_second , is_consequence = e_is_consequence, is_operator=e_is_operator;
+	is_operation_done = false;
 	for (int i = 0; i < num_text_fields; i++) {
 		text_fields.push_back(TextFieldObject(20, sf::Vector2f(250.f, 200.f),font));
 	}
@@ -93,6 +94,9 @@ void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
 	}
 	if (ShouldRenderButton()){
 		input_manager.ButtonBoolPress(bool_shape, is_move_on);
+		if (is_move_on &&is_consequence){
+			is_operation_done = true;
+		}
 	}
 		
 	input_manager.IsTabPressed(text_fields[current_text_field],current_text_field,is_consequence);

@@ -18,3 +18,8 @@ const FuzzySet Rule::GetSetValues(const bool& is_consequence, const bool& has_op
 		return to_return;
 	}
 }
+
+void Rule::ClearVectors() {
+	antecedent_vector.clear();
+	consequence_vector.clear();
+}

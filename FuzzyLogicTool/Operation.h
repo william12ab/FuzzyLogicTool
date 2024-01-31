@@ -14,6 +14,7 @@ public:
 	Rule GetRuleTemplate() { return rule_template; }
 
 	void ClearTemplate();
+	void ClearRuleTemplate();
 private:
 	std::vector<Rule> rule_vector;
 

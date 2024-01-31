@@ -16,8 +16,13 @@ void Operation::AddRule(const bool& is_consequence) {
 	else {
 		rule_template.AddConsequence(fuzzy_set_template);
 		rule_vector.push_back(rule_template);
+		ClearRuleTemplate();
 	}
 	ClearTemplate();
+}
+void Operation::ClearRuleTemplate() {
+	ClearTemplate();
+	rule_template.ClearVectors();
 }
 
 void Operation::ClearTemplate() {

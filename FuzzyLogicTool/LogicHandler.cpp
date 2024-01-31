@@ -7,6 +7,7 @@ LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font) {
 }
 void LogicHandler::Update() {
 	window_template.Update();
+	//displaying old info page
 	if (window_template.GetIsGoBack()) {
 		auto temp = new_operation.GetData();
 		if (temp.GetSetType() == 0) {
@@ -24,6 +25,7 @@ void LogicHandler::Update() {
 		}
 		window_template.SetPreviousItems(temp, window_template.GetIsConsequence(), window_template.GetIsSecond());
 	}
+	//displaying new info page
 	if (window_template.GetIsMoveOne()) {
 		int loop_size = 6;
 		if (window_template.GetIsConsequence()) {
@@ -34,10 +36,13 @@ void LogicHandler::Update() {
 		}
 		new_operation.AddRule(window_template.GetIsConsequence());
 		if (window_template.GetHasOperator()) {
-			window_template.ChangeWindowAppearance(true, false);
+			window_template.ChangeWindowAppearance(true, false);//is second antecedent
+		}
+		else if(!window_template.GetIsOperationDone()){
+			window_template.ChangeWindowAppearance(true, true);//is consequence
 		}
 		else {
-			window_template.ChangeWindowAppearance(true, true);
+			window_template.ChangeWindowAppearance(false, false);//is antecedent, NEW RULE
 		}
 	}
 }

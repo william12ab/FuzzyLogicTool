@@ -12,6 +12,7 @@ public:
 	void SetIsConsequence(bool b) { is_consequence = b;}
 	void SetIsSecond(bool b) { is_second = b; }
 	void SetIsoperator(bool b) { is_operator = b; }
+	void SetIsOperationDone(bool b) { is_operation_done = b; }
 
 	void Render();
 	void Update();
@@ -26,6 +27,7 @@ public:
 	bool GetIsOperator() { return is_operator; }
 	bool GetHasOperator();
 	bool GetIsGoBack() { return is_go_back; }
+	bool GetIsOperationDone() { return is_operation_done;}
 	const std::string GetInfoFromTextField(const int& text_index) const;
 private:
 
@@ -42,6 +44,8 @@ private:
 	bool is_consequence;
 	bool is_operator;
 	bool has_operator;
+	bool is_operation_done;
+
 
 	int current_text_field;
 };
