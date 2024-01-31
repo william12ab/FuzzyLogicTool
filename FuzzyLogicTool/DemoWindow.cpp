@@ -38,7 +38,7 @@ void DemoWindow::GetOperatorValue(std::string& n, int& operator_value, Rule& new
             operator_value = 1;
         }
         new_rule.AddAntecedent(antecedent);
-        new_rule.AddOperator(operator_value);
+        //new_rule.AddOperator(operator_value);
         GetAntecedentValues(n, antecedent, new_rule, operator_value);
     }
     else {

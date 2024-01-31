@@ -55,7 +55,7 @@ void Operation::AddSetData(const std::string & data, const int& index, const boo
 		
 	case 5:
 		if (has_operator) {
-			rule_template.AddOperator(std::stoi(data));
+			fuzzy_set_template.SetOperatorValue(std::stoi(data));
 		}
 		break;
 	}
@@ -69,9 +69,6 @@ const FuzzySet Operation::GetData() {
 	}
 	else {
 		whats_next = false;
-		if (rule_template.GetSizeOfOperator()>0){
-			has_operator = true;
-		}
 	}
 	fuzzy_set_template=rule_template.GetSetValues(whats_next, has_operator);
 	return fuzzy_set_template;

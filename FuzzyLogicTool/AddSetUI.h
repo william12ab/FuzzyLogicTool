@@ -24,7 +24,7 @@ public:
 	bool GetIsSecond() { return is_second; }
 	bool GetIsConsequence() {return is_consequence;}
 	bool GetIsOperator() { return is_operator; }
-	bool GetHasOperator() { return has_operator; }
+	bool GetHasOperator();
 	bool GetIsGoBack() { return is_go_back; }
 	const std::string GetInfoFromTextField(const int& text_index) const;
 private:

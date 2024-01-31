@@ -9,7 +9,7 @@ public:
 	void SetGraphName(std::string n) { fuzzy_set.graph_name = n; }
 	void SetGraphType(int p) { fuzzy_set.graph_type = p; }
 	void SetSetType(int p) { fuzzy_set.set_type = p; }
-
+	void SetOperatorValue(int p) { fuzzy_set.operator_value = p; }
 
 	float GetMin() { return fuzzy_set.min; }
 	float GetMax() { return fuzzy_set.max; }
@@ -17,6 +17,7 @@ public:
 	std::string GetGraphName() { return fuzzy_set.graph_name; }
 	int GetGraphType() { return fuzzy_set.graph_type; }
 	int GetSetType() { return fuzzy_set.set_type; }
+	int GetOperatorValue() { return fuzzy_set.operator_value; }
 private:
 	struct set{
 		float min;
@@ -25,6 +26,7 @@ private:
 		std::string graph_name;
 		int graph_type;
 		int set_type;
+		int operator_value;
 	}fuzzy_set;
 	
 };
