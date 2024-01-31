@@ -34,6 +34,7 @@ AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderW
 	back_text.setFont(font);
 	back_text.setFillColor(sf::Color(0, 0, 0));
 	back_text.setCharacterSize(18);
+	current_text_field = 0;
 }
 void AddSetUI::Render() {
 	int loop_index = text_fields.size();
@@ -66,7 +67,7 @@ void AddSetUI::Update() {
 			has_operator = true;
 		}
 	}
-	
+	std::cout << current_text_field << "\n";
 }
 
 void AddSetUI::SetPreviousItems(FuzzySet temp, const bool&is_con_e, const bool&is_second_e) {
@@ -84,8 +85,14 @@ void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
 	for (size_t  i = 0; i < text_fields.size(); i++){
 		input_manager.HandleTextInput(text_fields[i], e);
 	}
-	input_manager.ButtonBoolPress(bool_shape, is_move_on);
-	input_manager.ButtonBoolPress(bacK_button, is_go_back);
+	if (is_second){
+		input_manager.ButtonBoolPress(bacK_button, is_go_back);
+	}
+	if (ShouldRenderButton()){
+		input_manager.ButtonBoolPress(bool_shape, is_move_on);
+	}
+		
+	input_manager.IsTabPressed(text_fields[current_text_field],current_text_field,is_consequence);
 }
 
 void AddSetUI::SetDisplayText() {

@@ -42,5 +42,7 @@ private:
 	bool is_consequence;
 	bool is_operator;
 	bool has_operator;
+
+	int current_text_field;
 };
 

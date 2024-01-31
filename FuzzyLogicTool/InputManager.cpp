@@ -45,5 +45,24 @@ void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event
 			text_object.SetText();
 		}
 	}
+	
+}
 
+void InputManager::IsTabPressed(TextFieldObject& text_object, int& current_index, const bool& is_consequence) {
+	if (input->isKeyDown(sf::Keyboard::Tab)){
+		auto pos = text_object.GetShape().getPosition();
+		input->setMouseX(pos.x);
+		input->setMouseY(pos.y);
+		input->setKeyUp(sf::Keyboard::Tab);
+		
+		current_index++;
+		int limit = 6;
+		if (is_consequence){
+			limit--;
+		}
+		if (current_index== limit){
+			current_index = 0;
+		}
+		
+	}
 }
