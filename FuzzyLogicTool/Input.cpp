@@ -14,7 +14,6 @@ void Input::setKeyDown(int key){
 
 bool Input::isMouseReleased(sf::RectangleShape object, sf::RenderWindow& window) {
 	if (mouse.left){
-		std::cout << "true button pressed\n";
 		sf::IntRect tempRect(object.getPosition().x, object.getPosition().y, object.getGlobalBounds().width, object.getGlobalBounds().height);
 		if (tempRect.contains(sf::Mouse::getPosition(window))) {
 			mouse.left = false;

@@ -18,7 +18,8 @@ void TextFieldObject::SetText() {
 }
 
 void TextFieldObject::ClearText() {
-    text_field.setString("");
+    m_text = "";
+    text_field.setString(m_text);
 }
 void TextFieldObject::SetPrevious(std::string s) {
     m_text = s;

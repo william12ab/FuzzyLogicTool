@@ -16,9 +16,9 @@ const FuzzySet Rule::GetSetValues(const bool& is_consequence, const bool& has_op
 		return to_return;
 	}
 	else {
-		if (has_operator) {
+	/*	if (has_operator) {
 			operator_vector.pop_back();
-		}
+		}*/
 		auto to_return = antecedent_vector.back();
 		antecedent_vector.pop_back();
 		return to_return;

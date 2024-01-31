@@ -8,7 +8,7 @@ LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font) {
 void LogicHandler::Update() {
 	window_template.Update();
 	if (window_template.GetIsGoBack()) {
-		auto temp = new_operation.GetData(!window_template.GetIsConsequence(), false);
+		auto temp = new_operation.GetData();
 		if (temp.GetSetType() == 0) {
 			//is consequence
 			window_template.SetIsSecond(true);
@@ -22,7 +22,7 @@ void LogicHandler::Update() {
 			}
 			window_template.SetIsConsequence(false);
 		}
-		window_template.SetPreviousItems(temp, window_template.GetIsSecond(), window_template.GetIsConsequence());
+		window_template.SetPreviousItems(temp, window_template.GetIsConsequence(), window_template.GetIsSecond());
 	}
 	if (window_template.GetIsMoveOne()) {
 		int loop_size = 6;

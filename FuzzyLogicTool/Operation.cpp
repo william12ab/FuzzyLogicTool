@@ -61,15 +61,18 @@ void Operation::AddSetData(const std::string & data, const int& index, const boo
 	}
 }
 
-const FuzzySet Operation::GetData(const bool& is_consequence, const bool& has_operator) {
-	if (is_consequence)	{
-		auto temp = rule_vector.back();
-		rule_vector.pop_back();
-		fuzzy_set_template=temp.GetSetValues(is_consequence,has_operator);
-		return fuzzy_set_template;
+const FuzzySet Operation::GetData() {
+	bool whats_next=true;//false is antecedent
+	bool has_operator = false;
+	if (rule_vector.size()>0){
+
 	}
 	else {
-		fuzzy_set_template=rule_template.GetSetValues(is_consequence, has_operator);
-		return fuzzy_set_template;
+		whats_next = false;
+		if (rule_template.GetSizeOfOperator()>0){
+			has_operator = true;
+		}
 	}
+	fuzzy_set_template=rule_template.GetSetValues(whats_next, has_operator);
+	return fuzzy_set_template;
 }
