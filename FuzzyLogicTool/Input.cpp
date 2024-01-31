@@ -1,24 +1,33 @@
 #include "Input.h"
 
-void Input::setKeyDown(int key)
-{
-	if (key >= 0)
-	{
+void Input::setKeyDown(int key){
+	if (key >= 0){
 		keys[key] = true;
 	}
 }
 
-bool Input::isButtonClicked(sf::RectangleShape object, sf::Mouse::Button button, sf::RenderWindow& window)
-{
-	if (sf::Mouse::isButtonPressed(button))
-	{
+bool Input::isMouseReleased(sf::RectangleShape object, sf::RenderWindow& window) {
+	if (mouse.left){
 		sf::IntRect tempRect(object.getPosition().x, object.getPosition().y, object.getGlobalBounds().width, object.getGlobalBounds().height);
-
-		if (tempRect.contains(sf::Mouse::getPosition(window)))
-		{
+		if (tempRect.contains(sf::Mouse::getPosition(window))) {
+			mouse.left = false;
 			return true;
 		}
+		else {
+			return false;
+		}
+	}
+	else {
+		return false;
+	}
+}
 
+bool Input::isButtonClicked(sf::RectangleShape object, sf::Mouse::Button button, sf::RenderWindow& window){
+	if (sf::Mouse::isButtonPressed(button)){
+		sf::IntRect tempRect(object.getPosition().x, object.getPosition().y, object.getGlobalBounds().width, object.getGlobalBounds().height);
+		if (tempRect.contains(sf::Mouse::getPosition(window))){
+			return true;
+		}
 	}
 	return false;
 }

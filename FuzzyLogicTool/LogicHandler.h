@@ -12,5 +12,6 @@ private:
 	std::vector< AddSetUI> set_windows;
 	AddSetUI window_template;
 	Operation new_operation;
+	bool is_added;
 };
 

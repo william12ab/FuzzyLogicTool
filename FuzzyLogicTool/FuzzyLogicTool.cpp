@@ -16,6 +16,7 @@ int main() {
 	sf::Event event;
 	ImGui::SFML::Init(window);
 	sf::Clock delta_clock;
+	sf::Clock elapsed_time;
 	Input input;
 	sf::View view_;
 	sf::Font font;
@@ -75,7 +76,7 @@ int main() {
 		ImGui::Begin("Options");
 		ImGui::End();
 		program_runner.Update();
-
+		//std::cout << elapsed_time.getElapsedTime().asSeconds()<<"\n";
 		//render
 		window.clear(sf::Color(255, 255, 255));
 		

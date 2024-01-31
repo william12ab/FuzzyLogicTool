@@ -66,18 +66,23 @@ void AddSetUI::Update() {
 	}
 }
 
-void AddSetUI::SetPreviousItems() {
+void AddSetUI::SetPreviousItems(FuzzySet temp, const bool&is_con_e, const bool&is_second_e) {
 	if (is_go_back){
-		SetDisplayText();
+		ChangeWindowAppearance(is_second_e,is_con_e);
+		text_fields[0].SetPrevious(temp.GetxName());
+		text_fields[1].SetPrevious(temp.GetGraphName());
+		text_fields[2].SetPrevious(std::to_string(temp.GetMin()));
+		text_fields[3].SetPrevious(std::to_string(temp.GetMax()));
+		text_fields[4].SetPrevious(std::to_string(temp.GetGraphType()));
 	}
 }
 
-void AddSetUI::HandleInput(InputManager input_manager,sf::Event event) {
+void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
 	for (size_t  i = 0; i < text_fields.size(); i++){
-		input_manager.HandleTextInput(text_fields[i], event);
+		input_manager.HandleTextInput(text_fields[i], e);
 	}
-	input_manager.ButtonBoolPress(bool_shape, is_move_on);
-	input_manager.ButtonBoolPress(bacK_button, is_go_back);
+	input_manager.ButtonBoolPress(bool_shape, is_move_on,e);
+	input_manager.ButtonBoolPress(bacK_button, is_go_back, e);
 }
 
 void AddSetUI::SetDisplayText() {
@@ -133,9 +138,6 @@ void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_co
 	is_operator = !is_consequence_e;
 	for (int i = 0; i < text_fields.size(); i++){
 		text_fields[i].ClearText();
-		for (size_t i = 0; i < text_fields[i].GetTextField().getString(); i++)	{
-			text_fields[i].ClearText();
-		}
 	}
 	SetDisplayText();
 }

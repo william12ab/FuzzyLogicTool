@@ -27,7 +27,7 @@ public:
 	bool isMouseRDown();
 
 	bool isButtonClicked(sf::RectangleShape object, sf::Mouse::Button button, sf::RenderWindow& window);
-
+	bool isMouseReleased(sf::RectangleShape object, sf::RenderWindow& window);
 
 private:
 	// Array of booleans representing keys (pressed = true, released = false)

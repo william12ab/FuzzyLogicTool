@@ -20,6 +20,10 @@ void TextFieldObject::SetText() {
 void TextFieldObject::ClearText() {
     text_field.setString("");
 }
+void TextFieldObject::SetPrevious(std::string s) {
+    m_text = s;
+    SetText();
+}
 
 void TextFieldObject::SetFocus(bool focus) {
     m_hasfocus = focus;

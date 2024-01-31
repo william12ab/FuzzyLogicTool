@@ -5,10 +5,13 @@ class Operation
 public:
 	Operation();
 	~Operation();
-	void AddRule(const bool& is_antecedent);
-	void AddSetData(const std::string &data, const int &index,const bool& has_operator);
+	void AddRule(const bool& is_consequence);
+	void AddSetData(const std::string &data, const int &index,const bool& has_operator, const bool& is_consequence);
 
-	void GetData(const bool& is_consequence, const bool& has_operator);
+
+	const FuzzySet GetData(const bool& is_consequence, const bool& has_operator);
+	const int GetSizeVector() { return rule_vector.size(); }
+	Rule GetRuleTemplate() { return rule_template; }
 
 	void ClearTemplate();
 private:

@@ -28,6 +28,8 @@ public:
     void SetText();
     void SetFocus(bool focus);
     void ClearText();
+    void SetPrevious(std::string s);
+
 
     //getters
     bool GetIsTextAdded() {return is_text_added;}

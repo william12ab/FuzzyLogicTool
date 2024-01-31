@@ -9,8 +9,8 @@ Operation::~Operation() {
 	}
 }
 
-void Operation::AddRule(const bool& is_antecedent) {
-	if (is_antecedent) {
+void Operation::AddRule(const bool& is_consequence) {
+	if (!is_consequence) {
 		rule_template.AddAntecedent(fuzzy_set_template);
 	}
 	else {
@@ -28,7 +28,7 @@ void Operation::ClearTemplate() {
 	fuzzy_set_template.SetGraphType(0);
 }
 
-void Operation::AddSetData(const std::string & data, const int& index, const bool& has_operator) {
+void Operation::AddSetData(const std::string & data, const int& index, const bool& has_operator, const bool&is_consequence) {
 	switch (index)
 	{
 	case 0:
@@ -45,6 +45,12 @@ void Operation::AddSetData(const std::string & data, const int& index, const boo
 		break;
 	case 4:
 		fuzzy_set_template.SetGraphType(std::stoi(data));
+		if (is_consequence){
+			fuzzy_set_template.SetSetType(0);
+		}
+		else {
+			fuzzy_set_template.SetSetType(1);
+		}
 		break;
 		
 	case 5:
@@ -55,13 +61,15 @@ void Operation::AddSetData(const std::string & data, const int& index, const boo
 	}
 }
 
-void Operation::GetData(const bool& is_consequence, const bool& has_operator) {
+const FuzzySet Operation::GetData(const bool& is_consequence, const bool& has_operator) {
 	if (is_consequence)	{
 		auto temp = rule_vector.back();
 		rule_vector.pop_back();
 		fuzzy_set_template=temp.GetSetValues(is_consequence,has_operator);
+		return fuzzy_set_template;
 	}
 	else {
 		fuzzy_set_template=rule_template.GetSetValues(is_consequence, has_operator);
+		return fuzzy_set_template;
 	}
 }

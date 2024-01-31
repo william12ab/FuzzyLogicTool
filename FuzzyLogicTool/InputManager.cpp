@@ -1,21 +1,22 @@
 #include "InputManager.h"
 #include <SFML/Window/Keyboard.hpp>
+#include <iostream>
 
 InputManager::InputManager(Input* in, sf::View* view, sf::RenderWindow* hwnd) {
 	input = in;
 	view_ = view;
 	window = hwnd;
-
-	
+	is_pressed = false;
 }
 
 InputManager::~InputManager() {
 }
 
 void InputManager::ButtonBoolPress(sf::RectangleShape& rect_shape, bool& is_move_on) {
-	if (input->isButtonClicked(rect_shape,sf::Mouse::Left,*window)){
+	if (input->isMouseReleased(rect_shape,sf::Mouse::Left,*window,e)){
 		rect_shape.setFillColor(sf::Color::Black);
 		is_move_on = true;
+		std::cout << "asd\n";
 	}
 	else {
 		rect_shape.setFillColor(sf::Color::White);
@@ -45,4 +46,5 @@ void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event
 			text_object.SetText();
 		}
 	}
+
 }

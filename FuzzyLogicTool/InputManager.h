@@ -14,10 +14,12 @@ public:
 
 	void HandleTextInput(TextFieldObject &text_object,sf::Event event);
 	void ButtonBoolPress(sf::RectangleShape& rect_shape,bool &is_move_on);
+
+	bool GetIsPressed() { return is_pressed; }
 private:
 	Input* input;
 	sf::View* view_;
 	sf::RenderWindow* window;
-	
+	bool is_pressed;
 };
 

@@ -1,6 +1,7 @@
 #pragma once
 #include "TextFieldObject.h"
 #include "InputManager.h"
+#include "FuzzySet.h"
 class AddSetUI
 {
 public:
@@ -8,11 +9,15 @@ public:
 	AddSetUI();
 	~AddSetUI();
 	void SetDisplayText();
+	void SetIsConsequence(bool b) { is_consequence = b;}
+	void SetIsSecond(bool b) { is_second = b; }
+	void SetIsoperator(bool b) { is_operator = b; }
+
 	void Render();
 	void Update();
-	void HandleInput(InputManager input_manager, sf::Event event);
+	void HandleInput(InputManager input_manager, sf::Event e);
 	void ChangeWindowAppearance(const bool& is_second_e, const bool& is_consequence_e);
-	void SetPreviousItems();
+	void SetPreviousItems(FuzzySet temp, const bool& is_con_e, const bool& is_second_e);
 
 
 	bool GetIsMoveOne() {return is_move_on;}
@@ -20,6 +25,7 @@ public:
 	bool GetIsConsequence() {return is_consequence;}
 	bool GetIsOperator() { return is_operator; }
 	bool GetHasOperator() { return has_operator; }
+	bool GetIsGoBack() { return is_go_back; }
 	const std::string GetInfoFromTextField(const int& text_index) const;
 private:
 
