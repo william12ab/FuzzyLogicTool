@@ -81,8 +81,8 @@ void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
 	for (size_t  i = 0; i < text_fields.size(); i++){
 		input_manager.HandleTextInput(text_fields[i], e);
 	}
-	input_manager.ButtonBoolPress(bool_shape, is_move_on,e);
-	input_manager.ButtonBoolPress(bacK_button, is_go_back, e);
+	input_manager.ButtonBoolPress(bool_shape, is_move_on);
+	input_manager.ButtonBoolPress(bacK_button, is_go_back);
 }
 
 void AddSetUI::SetDisplayText() {
