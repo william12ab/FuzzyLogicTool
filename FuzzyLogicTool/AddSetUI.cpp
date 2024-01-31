@@ -35,6 +35,13 @@ AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderW
 	back_text.setFont(font);
 	back_text.setFillColor(sf::Color(0, 0, 0));
 	back_text.setCharacterSize(18);
+
+	rule_number_text.setFont(font);
+	rule_number_text.setFillColor(sf::Color(0, 0, 0));
+	rule_number_text.setPosition(sf::Vector2f(200, 50));
+	rule_number_text.setString("Rule: 0" );
+	rule_number_text.setCharacterSize(18);
+
 	current_text_field = 0;
 }
 void AddSetUI::Render() {
@@ -58,6 +65,7 @@ void AddSetUI::Render() {
 		window->draw(bacK_button);
 		window->draw(back_text);
 	}
+	window->draw(rule_number_text);
 }
 void AddSetUI::Update() {
 	if (!is_consequence){
@@ -70,9 +78,9 @@ void AddSetUI::Update() {
 	}
 }
 
-void AddSetUI::SetPreviousItems(FuzzySet temp, const bool&is_con_e, const bool&is_second_e) {
+void AddSetUI::SetPreviousItems(FuzzySet temp, const bool&is_con_e, const bool&is_second_e, const int& rule_number) {
 	if (is_go_back){
-		ChangeWindowAppearance(is_second_e,is_con_e);
+		ChangeWindowAppearance(is_second_e,is_con_e, rule_number);
 		text_fields[0].SetPrevious(temp.GetxName());
 		text_fields[1].SetPrevious(temp.GetGraphName());
 		text_fields[2].SetPrevious(std::to_string(temp.GetMin()));
@@ -103,6 +111,7 @@ void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
 }
 
 void AddSetUI::SetDisplayText() {
+
 	if (is_consequence){
 		text_fields[0].ChangePositions(sf::Vector2f(370, 200));
 	}
@@ -160,7 +169,7 @@ bool AddSetUI::ShouldRenderButton() {
 	return is_written;
 }
 
-void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_consequence_e) {
+void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_consequence_e,const int& rule_number) {
 	is_second = is_second_e;
 	is_consequence = is_consequence_e;
 	is_move_on = false;
@@ -170,6 +179,8 @@ void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_co
 		text_fields[i].ClearText();
 	}
 	SetDisplayText();
+	rule_number_text.setPosition(sf::Vector2f(200, 50));
+	rule_number_text.setString("Rule: " + std::to_string(rule_number));
 }
 
 bool AddSetUI::GetHasOperator() {

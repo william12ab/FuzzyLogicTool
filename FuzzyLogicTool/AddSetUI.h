@@ -17,8 +17,8 @@ public:
 	void Render();
 	void Update();
 	void HandleInput(InputManager input_manager, sf::Event e);
-	void ChangeWindowAppearance(const bool& is_second_e, const bool& is_consequence_e);
-	void SetPreviousItems(FuzzySet temp, const bool& is_con_e, const bool& is_second_e);
+	void ChangeWindowAppearance(const bool& is_second_e, const bool& is_consequence_e, const int& rule_number);
+	void SetPreviousItems(FuzzySet temp, const bool& is_con_e, const bool& is_second_e, const int& rule_number);
 	bool ShouldRenderButton();
 
 	bool GetIsMoveOne() {return is_move_on;}
@@ -37,6 +37,8 @@ private:
 	sf::RectangleShape bool_shape;
 	sf::RectangleShape bacK_button;
 	sf::Text back_text;
+	sf::Text rule_number_text;
+
 
 	bool is_move_on;
 	bool is_go_back;
