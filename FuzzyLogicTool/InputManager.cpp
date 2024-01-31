@@ -16,7 +16,6 @@ void InputManager::ButtonBoolPress(sf::RectangleShape& rect_shape, bool& is_move
 	if (input->isMouseReleased(rect_shape,*window)){
 		rect_shape.setFillColor(sf::Color::Black);
 		is_move_on = true;
-		std::cout << "asd\n";
 	}
 	else {
 		rect_shape.setFillColor(sf::Color::White);

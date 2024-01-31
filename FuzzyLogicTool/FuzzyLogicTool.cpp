@@ -51,6 +51,7 @@ int main() {
 				if (event.mouseButton.button == sf::Mouse::Left) {
 					//update input class
 					input.setMouseLDown(true);
+					//std::cout<<"true\n";
 				}
 				else if (event.mouseButton.button == sf::Mouse::Right) {
 					input.setMouseRDown(true);
