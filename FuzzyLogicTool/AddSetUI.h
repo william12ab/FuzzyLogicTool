@@ -14,6 +14,7 @@ public:
 	void SetIsoperator(bool b) { is_operator = b; }
 	void SetIsOperationDone(bool b) { is_operation_done = b; }
 	void SetIsFinished(bool b) { is_finished = b; }
+	void SetIsLoadPanel(bool b) { is_load_panel = b; }
 
 	void Render();
 	void Update();
@@ -22,6 +23,7 @@ public:
 	void SetPreviousItems(FuzzySet temp, const bool& is_con_e, const bool& is_second_e, const int& rule_number);
 	bool ShouldRenderButton();
 
+	bool GetIsLoadPanel() { return is_load_panel; }
 	bool GetIsMoveOne() {return is_move_on;}
 	bool GetIsSecond() { return is_second; }
 	bool GetIsConsequence() {return is_consequence;}
@@ -39,11 +41,14 @@ private:
 	sf::RectangleShape bool_shape;
 	sf::RectangleShape bacK_button;
 	sf::RectangleShape finish_button;
+	sf::RectangleShape description_button;
+	sf::Text description_text;
 	sf::Text back_text;
 	sf::Text rule_number_text;
 	sf::Text finished_text;
 
 
+	bool is_load_panel;
 	bool is_move_on;
 	bool is_go_back;
 	bool is_second;

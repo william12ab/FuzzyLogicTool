@@ -10,6 +10,7 @@ AddSetUI::~AddSetUI() {
 AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator, const sf::Font& font):window(hwnd), is_move_on(false), has_operator(false), is_go_back(false) {
 	is_second = e_is_second , is_consequence = e_is_consequence, is_operator=e_is_operator;
 	is_operation_done = false;
+	is_finished = false;
 	for (int i = 0; i < num_text_fields; i++) {
 		text_fields.push_back(TextFieldObject(20, sf::Vector2f(250.f, 200.f),font));
 	}
@@ -25,6 +26,11 @@ AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderW
 	bool_shape.setFillColor(sf::Color::White);
 	bool_shape.setOutlineColor(sf::Color::Black);
 	bool_shape.setOutlineThickness(1.f);
+	description_button.setSize(sf::Vector2f(45, 20));
+	description_button.setPosition(120, 50);
+	description_button.setFillColor(sf::Color::White);
+	description_button.setOutlineColor(sf::Color::Black);
+	description_button.setOutlineThickness(1.f);
 
 	finish_button.setSize(sf::Vector2f(45, 45));
 	finish_button.setPosition(600, 450);
@@ -41,6 +47,13 @@ AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderW
 	back_text.setFont(font);
 	back_text.setFillColor(sf::Color(0, 0, 0));
 	back_text.setCharacterSize(18);
+
+	description_text.setFont(font);
+	description_text.setFillColor(sf::Color(0, 0, 0));
+	description_text.setPosition(sf::Vector2f(120, 50));
+	description_text.setString("Help");
+	description_text.setCharacterSize(18);
+
 
 	finished_text.setFont(font);
 	finished_text.setFillColor(sf::Color(0, 0, 0));
@@ -81,6 +94,8 @@ void AddSetUI::Render() {
 		window->draw(bacK_button);
 		window->draw(back_text);
 	}
+	window->draw(description_button);
+	window->draw(description_text);
 	window->draw(rule_number_text);
 }
 void AddSetUI::Update() {
@@ -114,18 +129,19 @@ void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
 		input_manager.HandleTextInput(text_fields[i], e,i);
 	}
 	if (is_second){
-		input_manager.ButtonBoolPress(bacK_button, is_go_back);
+		input_manager.ButtonBoolPress(bacK_button, is_go_back,1);
 	}
 	if (ShouldRenderButton()){
-		input_manager.ButtonBoolPress(bool_shape, is_move_on);
+		input_manager.ButtonBoolPress(bool_shape, is_move_on,1);
 		if (is_move_on &&is_consequence){
 			is_operation_done = true;
 		}
 		if (is_consequence){
-			input_manager.ButtonBoolPress(finish_button, is_finished);
+			input_manager.ButtonBoolPress(finish_button, is_finished,1);
 		}
 	}
-		
+	input_manager.ButtonBoolPress(description_button, is_load_panel,0);
+
 	input_manager.IsTabPressed(text_fields[current_text_field],current_text_field,is_consequence);
 }
 

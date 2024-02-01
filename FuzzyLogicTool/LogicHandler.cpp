@@ -1,9 +1,18 @@
 #include "LogicHandler.h"
+#include <iostream>
 LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font) {
 	AddSetUI* temp = new AddSetUI(6, 7, window, false, false, true, font);
 	window_template = *temp;
+	
 	window_template.SetDisplayText();
 	is_added = false;
+	DescriptionInputs *temphelp = new DescriptionInputs(font, window);
+	help_panel = *temphelp;
+
+	delete temp;
+	temp = NULL;
+	delete temphelp;
+	temphelp = NULL;
 }
 void LogicHandler::Update() {
 	window_template.Update();
@@ -47,8 +56,18 @@ void LogicHandler::Update() {
 	}
 }
 void LogicHandler::Render() {
-	window_template.Render();
+	window_template.Render(); 
+	if (window_template.GetIsLoadPanel()) {
+		help_panel.Render();
+		if (help_panel.GetIsGoBack()) {
+			window_template.SetIsLoadPanel(false);
+		}
+	}
+	else {
+		help_panel.SetIsGoBack(false);
+	}
 }
 void LogicHandler::HandleInput(InputManager input_manger, sf::Event e) {
 	window_template.HandleInput(input_manger, e);
+	help_panel.Input(input_manger);
 }

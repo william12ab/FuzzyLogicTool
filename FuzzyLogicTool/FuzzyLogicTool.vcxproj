@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClCompile Include="AddSetUI.cpp" />
     <ClCompile Include="DemoWindow.cpp" />
+    <ClCompile Include="DescriptionInputs.cpp" />
     <ClCompile Include="FuzzyLogicTool.cpp" />
     <ClCompile Include="FuzzySet.cpp" />
     <ClCompile Include="imgui\imgui-SFML.cpp" />
@@ -164,6 +165,7 @@
   <ItemGroup>
     <ClInclude Include="AddSetUI.h" />
     <ClInclude Include="DemoWindow.h" />
+    <ClInclude Include="DescriptionInputs.h" />
     <ClInclude Include="FuzzySet.h" />
     <ClInclude Include="imgui\imconfig-SFML.h" />
     <ClInclude Include="imgui\imconfig.h" />

@@ -12,14 +12,21 @@ InputManager::InputManager(Input* in, sf::View* view, sf::RenderWindow* hwnd) {
 InputManager::~InputManager() {
 }
 
-void InputManager::ButtonBoolPress(sf::RectangleShape& rect_shape, bool& is_move_on) {
-	if (input->isMouseReleased(rect_shape,*window)){
-		rect_shape.setFillColor(sf::Color::Black);
-		is_move_on = true;
+void InputManager::ButtonBoolPress(sf::RectangleShape& rect_shape, bool& is_move_on, const int& a) {
+	if (a==0){
+		if (input->isMouseReleased(rect_shape, *window)) {
+			is_move_on = true;
+		}
 	}
 	else {
-		rect_shape.setFillColor(sf::Color::White);
-		is_move_on = false;
+		if (input->isMouseReleased(rect_shape, *window)) {
+			rect_shape.setFillColor(sf::Color::Black);
+			is_move_on = true;
+		}
+		else {
+			rect_shape.setFillColor(sf::Color::White);
+			is_move_on = false;
+		}
 	}
 }
 
@@ -57,7 +64,6 @@ void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event
 			text_object.SetText();
 		}
 	}
-	
 }
 
 void InputManager::IsTabPressed(TextFieldObject& text_object, int& current_index, const bool& is_consequence) {
