@@ -23,7 +23,7 @@ void InputManager::ButtonBoolPress(sf::RectangleShape& rect_shape, bool& is_move
 	}
 }
 
-void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event) {
+void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event, const int& index) {
 	text_object.SetFocus(false);
 	auto pos = sf::Vector2f(input->getMouseX(), input->getMouseY());
 
@@ -39,7 +39,19 @@ void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event
 				text_object.SubtractKey();
 			}
 			else if (text_object.GetTextSize() < text_object.GetMaxSize()) {
-				text_object.Addletter(event.text.unicode);
+				if (index>=0&& index<=1){
+					std::cout << event.text.unicode << "\n";
+					if (event.text.unicode>=48&& event.text.unicode<=57){
+					}
+					else {
+						text_object.Addletter(event.text.unicode);
+					}
+				}
+				if (index>=1&&index<=5){
+					if (event.text.unicode >= 48 && event.text.unicode <= 57) {
+						text_object.Addletter(event.text.unicode);
+					}
+				}
 			}
 			text_object.SetIsTextAdded(true);
 			text_object.SetText();

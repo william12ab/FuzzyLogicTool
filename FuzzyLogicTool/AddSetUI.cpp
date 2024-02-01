@@ -111,7 +111,7 @@ void AddSetUI::SetPreviousItems(FuzzySet temp, const bool&is_con_e, const bool&i
 
 void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
 	for (size_t  i = 0; i < text_fields.size(); i++){
-		input_manager.HandleTextInput(text_fields[i], e);
+		input_manager.HandleTextInput(text_fields[i], e,i);
 	}
 	if (is_second){
 		input_manager.ButtonBoolPress(bacK_button, is_go_back);
