@@ -9,7 +9,7 @@ LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font) {
 	DescriptionInputs *temphelp = new DescriptionInputs(font, window);
 	help_panel = *temphelp;
 
-	ReviewPanel* tempreview = new ReviewPanel(window,0,font);
+	ReviewPanel* tempreview = new ReviewPanel(window,1,font);
 	review_panel= *tempreview;
 
 	delete temp;
