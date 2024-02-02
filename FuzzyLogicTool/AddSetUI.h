@@ -15,6 +15,7 @@ public:
 	void SetIsOperationDone(bool b) { is_operation_done = b; }
 	void SetIsFinished(bool b) { is_finished = b; }
 	void SetIsLoadPanel(bool b) { is_load_panel = b; }
+	void SetIsTriggerIsFinish(bool b) { is_trigger_finished = b; }
 
 	void Render();
 	void Update();
@@ -32,6 +33,7 @@ public:
 	bool GetIsGoBack() { return is_go_back; }
 	bool GetIsOperationDone() { return is_operation_done;}
 	bool GetIsFinished() { return is_finished; }
+	bool GetIsTriggerIsFinish() { return is_trigger_finished; }
 	const std::string GetInfoFromTextField(const int& text_index) const;
 private:
 
@@ -57,6 +59,7 @@ private:
 	bool has_operator;
 	bool is_operation_done;
 	bool is_finished;
+	bool is_trigger_finished;
 
 	int current_text_field;
 };

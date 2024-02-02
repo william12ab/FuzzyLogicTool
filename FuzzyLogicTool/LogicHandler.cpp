@@ -44,7 +44,7 @@ void LogicHandler::Update() {
 			window_template.SetPreviousItems(temp, window_template.GetIsConsequence(), window_template.GetIsSecond(), new_operation.GetSizeVector());
 		}
 		//displaying new info page
-		if (window_template.GetIsMoveOne()) {
+		if (window_template.GetIsMoveOne()|| window_template.GetIsTriggerIsFinish()) {
 			int loop_size = 6;
 			if (window_template.GetIsConsequence()) {
 				loop_size = 5;
@@ -53,14 +53,19 @@ void LogicHandler::Update() {
 				new_operation.AddSetData(window_template.GetInfoFromTextField(i), i, window_template.GetHasOperator(), window_template.GetIsConsequence());
 			}
 			new_operation.AddRule(window_template.GetIsConsequence());
-			if (window_template.GetHasOperator()) {
-				window_template.ChangeWindowAppearance(true, false, new_operation.GetSizeVector());//is second antecedent
-			}
-			else if (!window_template.GetIsOperationDone()) {
-				window_template.ChangeWindowAppearance(true, true, new_operation.GetSizeVector());//is consequence
+			if (window_template.GetIsTriggerIsFinish()) {
+				window_template.SetIsFinished(true);
 			}
 			else {
-				window_template.ChangeWindowAppearance(false, false, new_operation.GetSizeVector());//is antecedent, NEW RULE
+				if (window_template.GetHasOperator()) {
+					window_template.ChangeWindowAppearance(true, false, new_operation.GetSizeVector());//is second antecedent
+				}
+				else if (!window_template.GetIsOperationDone()) {
+					window_template.ChangeWindowAppearance(true, true, new_operation.GetSizeVector());//is consequence
+				}
+				else {
+					window_template.ChangeWindowAppearance(false, false, new_operation.GetSizeVector());//is antecedent, NEW RULE
+				}
 			}
 		}
 	}

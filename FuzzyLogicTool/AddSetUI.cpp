@@ -11,6 +11,7 @@ AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderW
 	is_second = e_is_second , is_consequence = e_is_consequence, is_operator=e_is_operator;
 	is_operation_done = false;
 	is_finished = false;
+	is_trigger_finished = false;
 	for (int i = 0; i < num_text_fields; i++) {
 		text_fields.push_back(TextFieldObject(20, sf::Vector2f(250.f, 200.f),font));
 	}
@@ -137,7 +138,7 @@ void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
 			is_operation_done = true;
 		}
 		if (is_consequence){
-			input_manager.ButtonBoolPress(finish_button, is_finished,1);
+			input_manager.ButtonBoolPress(finish_button, is_trigger_finished,1);
 		}
 	}
 	input_manager.ButtonBoolPress(description_button, is_load_panel,0);
