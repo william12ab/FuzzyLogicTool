@@ -8,6 +8,7 @@ public:
 	void AddRule(const bool& is_consequence);
 	void AddSetData(const std::string &data, const int &index,const bool& has_operator, const bool& is_consequence);
 
+	
 
 	const FuzzySet GetData();
 	const int GetSizeVector() { return rule_vector.size(); }

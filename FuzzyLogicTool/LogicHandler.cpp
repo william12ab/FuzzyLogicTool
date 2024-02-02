@@ -19,6 +19,7 @@ void LogicHandler::Update() {
 	//displaying old info page
 	if (window_template.GetIsGoBack()) {
 		auto temp = new_operation.GetData();
+		
 		if (temp.GetSetType() == 0) {
 			//is consequence
 			window_template.SetIsSecond(true);

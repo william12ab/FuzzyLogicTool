@@ -18,6 +18,15 @@ public:
 	int GetGraphType() { return fuzzy_set.graph_type; }
 	int GetSetType() { return fuzzy_set.set_type; }
 	int GetOperatorValue() { return fuzzy_set.operator_value; }
+
+
+	const float GetMin() const { return fuzzy_set.min; }
+	const float GetMax() const { return fuzzy_set.max; }
+	const std::string GetxName() const { return fuzzy_set.x_axis_name; }
+	const std::string GetGraphName()const { return fuzzy_set.graph_name; }
+	const int GetGraphType() const { return fuzzy_set.graph_type; }
+	const int GetSetType() const { return fuzzy_set.set_type; }
+	const int GetOperatorValue() const { return fuzzy_set.operator_value; }
 private:
 	struct set{
 		float min;

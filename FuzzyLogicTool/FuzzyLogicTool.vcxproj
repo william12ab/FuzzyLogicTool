@@ -159,6 +159,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="LogicHandler.cpp" />
     <ClCompile Include="Operation.cpp" />
+    <ClCompile Include="ReviewPanel.cpp" />
     <ClCompile Include="Rule.cpp" />
     <ClCompile Include="TextFieldObject.cpp" />
   </ItemGroup>
@@ -180,6 +181,7 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="LogicHandler.h" />
     <ClInclude Include="Operation.h" />
+    <ClInclude Include="ReviewPanel.h" />
     <ClInclude Include="Rule.h" />
     <ClInclude Include="TextFieldObject.h" />
   </ItemGroup>

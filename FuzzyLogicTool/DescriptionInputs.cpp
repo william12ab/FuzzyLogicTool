@@ -42,7 +42,6 @@ void DescriptionInputs::Input(InputManager input_manager) {
 }
 
 void DescriptionInputs::SetText() {
-	std::string output_string = "First two inputs take adjective word to describe rule, example: if temp is cold\n\n Second Two inputs take range of first temp\n\n Graph input is number from 0-X\n\n Operator input: 0(no operator), 1(OR), 2(AND)";
+	std::string output_string = "First two inputs take adjective word to describe rule, example: if temp is cold\n\n Second Two inputs take range of first temp(min &max)\n\n Graph input is number from 0-X\n\n Operator input: 0(no operator), 1(OR), 2(AND)";
 	description_text.setString(output_string);
-	description_text.setStyle(sf::Text::Bold);
 }

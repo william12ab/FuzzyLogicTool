@@ -7,6 +7,7 @@ Operation::~Operation() {
 	if (rule_vector.size()>0){
 		rule_vector.clear();
 	}
+	
 }
 
 void Operation::AddRule(const bool& is_consequence) {
