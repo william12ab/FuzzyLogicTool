@@ -2,12 +2,12 @@
 #include <iostream>
 
 
-AddSetUI::AddSetUI() :is_consequence(false), is_move_on(false), is_second(false), is_operator(true),window(nullptr), has_operator(false),is_go_back(false) {
+AddSetUI::AddSetUI() :is_consequence(false), is_move_on(false), is_second(false), is_operator(true), window(nullptr), has_operator(false), is_go_back(false), is_finished(false),is_load_panel(false),is_operation_done(false) {
 }
 AddSetUI::~AddSetUI() {
 
 }
-AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator, const sf::Font& font):window(hwnd), is_move_on(false), has_operator(false), is_go_back(false) {
+AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator, const sf::Font& font):window(hwnd), is_move_on(false), has_operator(false), is_go_back(false),is_finished(false), is_load_panel(false), is_operation_done(false) {
 	is_second = e_is_second , is_consequence = e_is_consequence, is_operator=e_is_operator;
 	is_operation_done = false;
 	is_finished = false;

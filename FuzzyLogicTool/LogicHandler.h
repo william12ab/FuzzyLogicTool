@@ -2,6 +2,7 @@
 #include "AddSetUI.h"
 #include "Operation.h"
 #include "DescriptionInputs.h"
+#include "ReviewPanel.h"
 class LogicHandler
 {
 public:
@@ -14,6 +15,8 @@ private:
 	AddSetUI window_template;
 	Operation new_operation;
 	DescriptionInputs help_panel;
+	ReviewPanel review_panel;
 	bool is_added;
+	bool is_review_created;
 };
 

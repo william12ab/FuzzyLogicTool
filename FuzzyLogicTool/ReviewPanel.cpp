@@ -1,6 +1,10 @@
 #include "ReviewPanel.h"
 
 
+ReviewPanel::ReviewPanel():window(nullptr) {
+
+}
+
 ReviewPanel::ReviewPanel(sf::RenderWindow* hwnd, const int& size_of_rule_vector, const sf::Font&font):window(hwnd) {
 	rule_name_text.resize(size_of_rule_vector);
 	rule_text_box.resize(size_of_rule_vector);
@@ -28,15 +32,28 @@ ReviewPanel::ReviewPanel(sf::RenderWindow* hwnd, const int& size_of_rule_vector,
 	done_text.setCharacterSize(18);
 }
 
+void ReviewPanel::SetSizes(const int& size) {
+	rule_name_text.resize(size);
+	rule_text_box.resize(size);
+	
+	for (int i = 0; i < rule_name_text.size(); i++) {
+		rule_text_box[i].setFont(*rule_text_box[0].getFont());
+		rule_text_box[i].setFillColor(sf::Color(0, 0, 0));
+
+		rule_text_box[i].setCharacterSize(18);
+		rule_name_text[i].setFont(*rule_text_box[0].getFont());
+		rule_name_text[i].setFillColor(sf::Color(0, 0, 0));
+
+		rule_name_text[i].setCharacterSize(18);
+	}
+}
 
 void ReviewPanel::SetText(const std::vector<Rule>& rule_vector) {
+	SetSizes(rule_vector.size());
 	for (int i = 0; i < rule_name_text.size(); i++){
 		rule_name_text[i].setString("Rule: " + std::to_string(i));
 		rule_name_text[i].setPosition(sf::Vector2f(0, 0));
 	}
-
-	
-
 	for (int i = 0; i < rule_vector.size(); i++){
 		std::string full_string = "If ";
 		for (int j = 0; j < rule_vector[0].GetAntecedentVector().size();j++) {

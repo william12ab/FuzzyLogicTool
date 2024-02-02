@@ -6,11 +6,13 @@
 class ReviewPanel
 {
 public:
+	ReviewPanel();
 	ReviewPanel(sf::RenderWindow* hwnd, const int& size_of_rule_vector,const sf::Font &font);
 	void Render();
 	void Input(InputManager input_manager);
 
 	void SetText(const std::vector<Rule> &rule_vector);
+	void SetSizes(const int&size);
 private:
 	sf::RectangleShape done_button;
 	
