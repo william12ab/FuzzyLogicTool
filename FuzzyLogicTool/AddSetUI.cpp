@@ -166,10 +166,10 @@ void AddSetUI::SetDisplayText() {
 	}
 
 	if (is_consequence){
-		display_text_fields[0].setString("Add consequence: if: ");
+		display_text_fields[0].setString("Add consequence: Then: ");
 	}
 	else {
-		display_text_fields[0].setString("Add antecedent: if: ");
+		display_text_fields[0].setString("Add antecedent: If: ");
 	}
 	display_text_fields[0].setPosition(sf::Vector2f(200,200));
 	display_text_fields[1].setString(" is: ");
