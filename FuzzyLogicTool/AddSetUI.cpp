@@ -147,14 +147,15 @@ void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
 }
 
 void AddSetUI::SetDisplayText() {
-
 	if (is_consequence){
-		text_fields[0].ChangePositions(sf::Vector2f(370, 200));
+		text_fields[0].ChangePositions(sf::Vector2f(400, 200));
+		text_fields[1].ChangePositions(sf::Vector2f(590, 200));
 	}
 	else {
 		text_fields[0].ChangePositions(sf::Vector2f(360, 200));
+		text_fields[1].ChangePositions(sf::Vector2f(550, 200));
 	}
-	text_fields[1].ChangePositions(sf::Vector2f(550, 200));
+	
 	text_fields[2].ChangePositions(sf::Vector2f(320, 250));
 	text_fields[3].ChangePositions(sf::Vector2f(320, 300));
 	text_fields[4].ChangePositions(sf::Vector2f(320, 350));
@@ -167,13 +168,16 @@ void AddSetUI::SetDisplayText() {
 
 	if (is_consequence){
 		display_text_fields[0].setString("Add consequence: Then: ");
+		display_text_fields[1].setString(" is: ");
+		display_text_fields[1].setPosition(sf::Vector2f(560, 200));
 	}
 	else {
 		display_text_fields[0].setString("Add antecedent: If: ");
+		display_text_fields[1].setString(" is: ");
+		display_text_fields[1].setPosition(sf::Vector2f(520, 200));
 	}
 	display_text_fields[0].setPosition(sf::Vector2f(200,200));
-	display_text_fields[1].setString(" is: ");
-	display_text_fields[1].setPosition(sf::Vector2f(520, 200));
+	
 	display_text_fields[2].setString("Min value is: ");
 	display_text_fields[2].setPosition(sf::Vector2f(200, 250));
 	display_text_fields[3].setString("Max value is: ");
