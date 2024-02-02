@@ -52,7 +52,6 @@ void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event
 					}
 				}
 				if (index>=0&& index<=1){
-					std::cout << event.text.unicode << "\n";
 					if (event.text.unicode>=48&& event.text.unicode<=57){
 					}
 					else {
