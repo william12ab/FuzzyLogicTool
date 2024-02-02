@@ -10,6 +10,7 @@
 #include "Operation.h"
 #include "AddSetUI.h"
 #include "LogicHandler.h"
+#include "GraphFunctionCalculator.h"
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "title");
@@ -24,6 +25,11 @@ int main() {
 	InputManager input_manager(&input, &view_, &window);
 	LogicHandler program_runner(&window,font);
 	bool is_added=false;
+
+	GraphFunctionCalculator g;
+	auto a=g.TriangularFunction(4.f, 8.f, 5.78f);
+	std::cout << a<<"\n";
+
 	while (window.isOpen()) {
 		while (window.pollEvent(event)) {
 			ImGui::SFML::ProcessEvent(event);

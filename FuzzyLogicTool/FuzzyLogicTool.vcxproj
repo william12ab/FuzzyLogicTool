@@ -150,6 +150,7 @@
     <ClCompile Include="DescriptionInputs.cpp" />
     <ClCompile Include="FuzzyLogicTool.cpp" />
     <ClCompile Include="FuzzySet.cpp" />
+    <ClCompile Include="GraphFunctionCalculator.cpp" />
     <ClCompile Include="imgui\imgui-SFML.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
@@ -168,6 +169,7 @@
     <ClInclude Include="DemoWindow.h" />
     <ClInclude Include="DescriptionInputs.h" />
     <ClInclude Include="FuzzySet.h" />
+    <ClInclude Include="GraphFunctionCalculator.h" />
     <ClInclude Include="imgui\imconfig-SFML.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui-SFML.h" />
