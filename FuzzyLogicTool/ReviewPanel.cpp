@@ -48,13 +48,16 @@ void ReviewPanel::SetSizes(const int& size) {
 
 void ReviewPanel::SetText(const std::vector<Rule>& rule_vector) {
 	SetSizes(rule_vector.size());
+	int y_pos=100;
 	for (int i = 0; i < rule_name_text.size(); i++){
 		rule_name_text[i].setString("Rule: " + std::to_string(i));
-		rule_name_text[i].setPosition(sf::Vector2f(100, 0));
+		rule_name_text[i].setPosition(sf::Vector2f(100, y_pos));
+		y_pos += 100;
 	}
+	y_pos = 100;
 	for (int i = 0; i < rule_vector.size(); i++){
 		std::string full_string = "If ";
-		for (int j = 0; j < rule_vector[0].GetAntecedentVector().size();j++) {
+		for (int j = 0; j < rule_vector[i].GetAntecedentVector().size();j++) {
 			full_string.append(rule_vector[i].GetAntecedentVector()[j].GetxName());
 			full_string.append(" is ");
 			full_string.append(rule_vector[i].GetAntecedentVector()[j].GetGraphName());
@@ -71,10 +74,9 @@ void ReviewPanel::SetText(const std::vector<Rule>& rule_vector) {
 		full_string.append(rule_vector[i].GetConsequenceVector()[0].GetxName());
 		full_string.append(" is ");
 		full_string.append(rule_vector[i].GetConsequenceVector()[0].GetGraphName());
-
 		rule_text_box[i].setString(full_string);
-		rule_text_box[i].setPosition(sf::Vector2f(200, 0));
-		
+		rule_text_box[i].setPosition(sf::Vector2f(200, y_pos));
+		y_pos += 100;
 	}
 }
 

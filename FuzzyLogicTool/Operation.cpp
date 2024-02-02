@@ -32,6 +32,7 @@ void Operation::ClearTemplate() {
 	fuzzy_set_template.SetMax(0);
 	fuzzy_set_template.SetMax(0);
 	fuzzy_set_template.SetGraphType(0);
+	fuzzy_set_template.SetOperatorValue(0);
 }
 
 void Operation::AddSetData(const std::string & data, const int& index, const bool& has_operator, const bool&is_consequence) {

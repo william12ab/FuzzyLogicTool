@@ -65,6 +65,7 @@ void LogicHandler::Update() {
 				}
 				else {
 					window_template.ChangeWindowAppearance(false, false, new_operation.GetSizeVector());//is antecedent, NEW RULE
+					window_template.SetIsOperationDone(false);
 				}
 			}
 		}
