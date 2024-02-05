@@ -21,3 +21,30 @@ float GraphFunctionCalculator::TriangularFunction(const float& a, const float& c
 	}
 	return return_value;
 }
+
+
+float GraphFunctionCalculator::ZFunction(const float& a, const float& b, const float& input_value) {
+	float return_value = 0.0f;
+	if (input_value< a){
+		return_value = 1.0f;
+	}
+	if (a<= input_value && input_value<=b){
+		return_value = (a - input_value) / (a - b);
+	}
+	if (input_value>b){
+		return_value = 0;
+	}
+	return return_value;
+}
+float GraphFunctionCalculator::SFunction(const float& a, const float& b, const float& input_value) {
+	float return_value=0.f;
+	if (input_value<a){
+		return_value = 0.f;
+	}
+	if (a<=input_value&& input_value<=b){
+		return_value=(input_value - a) / (b - a);
+	}
+	if (input_value>b){
+		return_value = 1.0f;
+	}
+}
