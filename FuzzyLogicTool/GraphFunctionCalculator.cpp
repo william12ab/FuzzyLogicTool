@@ -47,4 +47,33 @@ float GraphFunctionCalculator::SFunction(const float& a, const float& b, const f
 	if (input_value>b){
 		return_value = 1.0f;
 	}
+	return return_value;
+}
+
+float GraphFunctionCalculator::TrapezoidalFunction(const float& a, const float& d, const float& x) {
+	float midpoint = (a + d) / 2.f;
+	float gap = midpoint - a;
+	gap = gap / 2.f;
+
+	float b = a+gap;
+	//peak of a
+	float c = d-gap;
+	//peak of d
+	float return_value = 0.0f;
+	if (x<=a){
+		return_value = 0.f;
+	}
+	if (a<=x && x<=b){
+		return_value = (x - a) / (b - a);
+	}
+	if (c<=x && x<=d){
+		return_value = (d - x) / (d - c);
+	}
+	if (d<=x){
+		return_value = 0.0f;
+	}
+	if (b<=x&&x<=c){
+		return_value = 1.0f;
+	}
+	return return_value;
 }

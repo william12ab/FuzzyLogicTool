@@ -27,7 +27,7 @@ int main() {
 	bool is_added=false;
 
 	GraphFunctionCalculator g;
-	auto a=g.TriangularFunction(4.f, 8.f, 5.78f);
+	auto a=g.TrapezoidalFunction(2.f, 8.f, 5.78f);
 	std::cout << a<<"\n";
 
 	while (window.isOpen()) {
