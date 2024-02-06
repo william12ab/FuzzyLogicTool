@@ -10,7 +10,8 @@
 #include "Operation.h"
 #include "AddSetUI.h"
 #include "LogicHandler.h"
-#include "GraphFunctionCalculator.h"
+
+
 
 int main() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "title");
@@ -25,10 +26,6 @@ int main() {
 	InputManager input_manager(&input, &view_, &window);
 	LogicHandler program_runner(&window,font);
 	bool is_added=false;
-
-	GraphFunctionCalculator g;
-	auto a = g.ZFunction(4, 8, 5);
-	std::cout << a<<"\n";
 
 	while (window.isOpen()) {
 		while (window.pollEvent(event)) {
@@ -85,7 +82,6 @@ int main() {
 		program_runner.Update();
 		//render
 		window.clear(sf::Color(255, 255, 255));
-		
 		program_runner.Render();
 		ImGui::SFML::Render(window);
 		window.display();

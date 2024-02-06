@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "InputManager.h"
+#include "GraphDisplay.h"
 
 class DescriptionInputs
 {
@@ -25,5 +26,8 @@ private:
 	sf::RenderWindow* window;
 
 	bool is_go_back;
+
+	GraphDisplay graph_slot;
 };
+
 

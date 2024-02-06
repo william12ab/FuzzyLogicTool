@@ -84,14 +84,14 @@ float GraphFunctionCalculator::SmoothZFunction(const float& a, const float& b, c
 	if (x<=a){
 		return_value = 1.0f;
 	}
-	if (a<=x && x<= (a+b)/(2.f)){
+	if (a<=x && x<= ((a+b)/(2.f))){
 		float brackets = (x - a) / (b - a);
 		brackets *= brackets;
 		brackets *= 2.0f;
 		return_value = 1.0f - brackets;
 	}
 	if (((a+b)/2.f) <=x && x<=b){
-		return_value = 2.f * ((x - b) / (b - a));
+		return_value = 2.f * (((x - b) / (b - a))* ((x - b) / (b - a)));
 	}
 	if (x >= b) {
 		return_value = 0.0f;
@@ -103,11 +103,11 @@ float GraphFunctionCalculator::SmoothSFunction(const float& a, const float& b, c
 	if (x <= a) {
 		return_value = 0.0f;
 	}
-	if (a <= x && x <= (a + b) / (2.f)) {
-		return_value = 2.f * ((x - b) / (b - a));
+	if (a <= x && x <= ((a + b) / (2.f))) {
+		return_value = 2.f * (((x - a) / (b - a))* ((x - a) / (b - a)));
 	}
 	if (((a + b) / 2.f) <= x && x <= b) {
-		float brackets = (x - a) / (b - a);
+		float brackets = ((x - b) / (b - a));
 		brackets *= brackets;
 		brackets *= 2.0f;
 		return_value = 1.0f - brackets;

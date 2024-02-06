@@ -30,12 +30,14 @@ DescriptionInputs::DescriptionInputs(const sf::Font& font, sf::RenderWindow* hwn
 	popup_slot.setOutlineThickness(1.f);
 
 	SetText();
+	graph_slot.Init();
 }
 void DescriptionInputs::Render() {
 	window->draw(popup_slot);
 	window->draw(back_button);
 	window->draw(back_text);
 	window->draw(description_text);
+	graph_slot.Render(*window);
 }
 void DescriptionInputs::Input(InputManager input_manager) {
 	input_manager.ButtonBoolPress(back_button, is_go_back,0);
