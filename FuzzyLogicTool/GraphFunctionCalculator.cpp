@@ -30,7 +30,7 @@ float GraphFunctionCalculator::ZFunction(const float& a, const float& b, const f
 		return_value = 1.0f;
 	}
 	if (a<= input_value && input_value<=b){
-		return_value = (a - input_value) / (a - b);
+		return_value = (input_value - b) / (a - b);
 	}
 	if (input_value>b){
 		return_value = 0;
