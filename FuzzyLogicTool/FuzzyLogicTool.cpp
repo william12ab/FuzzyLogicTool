@@ -27,7 +27,7 @@ int main() {
 	bool is_added=false;
 
 	GraphFunctionCalculator g;
-	auto a=g.TrapezoidalFunction(2.f, 8.f, 5.78f);
+	auto a = g.GaussianFunction(4, 8, 5);
 	std::cout << a<<"\n";
 
 	while (window.isOpen()) {

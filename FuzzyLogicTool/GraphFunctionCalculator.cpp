@@ -1,4 +1,5 @@
 #include "GraphFunctionCalculator.h"
+#include <vector>
 
 
 float GraphFunctionCalculator::TriangularFunction(const float& a, const float& c, const float& input_value) {
@@ -78,7 +79,7 @@ float GraphFunctionCalculator::TrapezoidalFunction(const float& a, const float& 
 	return return_value;
 }
 
-float SmoothZFunction(const float& a, const float& b, const float& x) {
+float GraphFunctionCalculator::SmoothZFunction(const float& a, const float& b, const float& x) {
 	float return_value = 0.0f;
 	if (x<=a){
 		return_value = 1.0f;
@@ -97,7 +98,7 @@ float SmoothZFunction(const float& a, const float& b, const float& x) {
 	}
 	return return_value;
 }
-float SmoothSFunction(const float& a, const float& b, const float& x) {
+float GraphFunctionCalculator::SmoothSFunction(const float& a, const float& b, const float& x) {
 	float return_value = 0.0f;
 	if (x <= a) {
 		return_value = 0.0f;
@@ -115,4 +116,41 @@ float SmoothSFunction(const float& a, const float& b, const float& x) {
 		return_value = 1.0f;
 	}
 	return return_value;
+}
+
+
+sf::Vector2f GraphFunctionCalculator::StandardDeviation(const float &a, const float&b) {
+	std::vector<float> arr;
+	int i = 1;
+	float mean = 0;
+	//step 1
+	arr.push_back(a);
+	mean += arr[0];
+	while (arr.back() < b) {
+		arr.push_back(a + (i));
+		mean += arr[i];
+		i++;
+	}
+	mean /= i;
+
+	//step 2 
+	float mean_of_sq = 0;;
+	for (size_t i = 0; i < arr.size(); i++) {
+		mean_of_sq += (arr[i] - mean) * (arr[i] - mean);
+	}
+	//step 3
+	mean_of_sq /= i;
+	//step 4
+	float s_d = sqrt(mean_of_sq);
+	return sf::Vector2f(mean, s_d);
+}
+
+float GraphFunctionCalculator::GaussianFunction(const float& a, const float& b, const float& x) {
+	auto components = StandardDeviation(a, b);
+
+	float numerator = (x - components.x) * (x - components.x);
+	float demoninator = 2.f * (components.y * components.y);
+	float to_power = -numerator / demoninator;
+	float f = exp(to_power);
+	return f;
 }
