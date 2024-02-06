@@ -16,7 +16,7 @@ public:
 
 	sf::Vector2f StandardDeviation(const float& min, const float& max);
 	
-	
+	void Test();
 
 
 };

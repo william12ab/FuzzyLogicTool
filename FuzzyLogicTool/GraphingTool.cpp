@@ -21,6 +21,8 @@ void GraphingTool::CreatePoints(const int& index, const int& min, const int& max
 		}
 	}
 	CleanUp();
+
+	g.Test();
 }
 
 void GraphingTool::CleanUp() {

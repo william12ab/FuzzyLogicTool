@@ -12,5 +12,6 @@ private:
 	sf::RectangleShape slot;
 	std::vector<GraphingTool> graphs;
 	std::vector<sf::RectangleShape> graph_slot;
+	
 };
 
