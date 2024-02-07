@@ -17,6 +17,8 @@ public:
 
 	void ClearTemplate();
 	void ClearRuleTemplate();
+
+	void PerformOperation(const std::vector<float> &defuzzy_values);
 private:
 	std::vector<Rule> rule_vector;
 

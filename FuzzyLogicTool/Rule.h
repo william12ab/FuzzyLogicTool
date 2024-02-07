@@ -1,6 +1,7 @@
 #pragma once
 #include <vector>
 #include "FuzzySet.h"
+#include "MathsOperator.h"
 class Rule
 {
 public:
@@ -14,8 +15,16 @@ public:
 	const std::vector<FuzzySet> GetAntecedentVector() const{ return antecedent_vector; }
 	const std::vector<FuzzySet> GetConsequenceVector() const { return consequence_vector; }
 
+	const int OperationWork(const std::vector<float> &defuzzy_values);
+
+
+	const float GetOperatorValue() const { return rule_fuzzy_value; }
 private:
 	std::vector<FuzzySet> antecedent_vector;
 	std::vector<FuzzySet> consequence_vector;
+
+	std::vector<float> fuzzy_values;
+	float rule_fuzzy_value;
+	MathsOperator calculator;
 };
 

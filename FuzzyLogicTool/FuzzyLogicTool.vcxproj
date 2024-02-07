@@ -162,6 +162,7 @@
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="InputPanel.cpp" />
     <ClCompile Include="LogicHandler.cpp" />
+    <ClCompile Include="MathsOperator.cpp" />
     <ClCompile Include="Operation.cpp" />
     <ClCompile Include="ReviewPanel.cpp" />
     <ClCompile Include="Rule.cpp" />
@@ -188,10 +189,14 @@
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="InputPanel.h" />
     <ClInclude Include="LogicHandler.h" />
+    <ClInclude Include="MathsOperator.h" />
     <ClInclude Include="Operation.h" />
     <ClInclude Include="ReviewPanel.h" />
     <ClInclude Include="Rule.h" />
     <ClInclude Include="TextFieldObject.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

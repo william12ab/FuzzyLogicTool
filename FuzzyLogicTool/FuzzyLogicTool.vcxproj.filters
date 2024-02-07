@@ -84,6 +84,9 @@
     <ClCompile Include="InputPanel.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MathsOperator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FuzzySet.h">
@@ -158,5 +161,11 @@
     <ClInclude Include="InputPanel.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="MathsOperator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
   </ItemGroup>
 </Project>

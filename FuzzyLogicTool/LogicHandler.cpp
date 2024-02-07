@@ -87,6 +87,12 @@ void LogicHandler::Update() {
 		is_input_stage = true;
 		input_panel.SetText(new_operation.GetRuleVector());
 	}
+	if (is_input_stage){
+		input_panel.CheckForInputAdded();
+		if (input_panel.GetIsInputAdded()){
+			new_operation.PerformOperation(input_panel.GetHumanValues());
+		}
+	}
 }
 void LogicHandler::Render() {
 	if (!window_template.GetIsFinished())
@@ -118,6 +124,12 @@ void LogicHandler::HandleInput(InputManager input_manger, sf::Event e) {
 		help_panel.Input(input_manger);
 	}
 	else {
-		review_panel.Input(input_manger);
+		if (!review_panel.GetIsDonePressed()){
+			review_panel.Input(input_manger);
+		}
+		else {
+			input_panel.HandleInput(input_manger,e);
+		}
+		
 	}
 }

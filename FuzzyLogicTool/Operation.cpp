@@ -80,3 +80,15 @@ const FuzzySet Operation::GetData() {
 	fuzzy_set_template=rule_template.GetSetValues(whats_next, has_operator);
 	return fuzzy_set_template;
 }
+
+
+void Operation::PerformOperation(const std::vector<float>& defuzzy_values) {
+	std::vector<float> values=defuzzy_values;
+	int start_value = 0;
+	int end_value = 0;
+	for (int i = 0; i < rule_vector.size(); i++)	{
+		auto end_value =rule_vector[i].OperationWork(values);
+		values.erase(values.begin() + start_value, values.begin() + end_value);
+		start_value = 0;
+	}
+}

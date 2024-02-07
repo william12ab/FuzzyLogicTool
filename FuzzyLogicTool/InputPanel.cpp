@@ -7,9 +7,7 @@ InputPanel::InputPanel(const int& size_of_rule_vector, const int& size_of_total_
 	defuzzy_value_field.setFont(font);
 	defuzzy_value_field.setFillColor(sf::Color(0, 0, 0));
 	defuzzy_value_field.setCharacterSize(18);
-
-	
-	
+	is_input_addded = false;
 }
 
 void InputPanel::Render() {
@@ -22,7 +20,6 @@ void InputPanel::Render() {
 		window->draw(operator_text_fields[i]);
 	}
 	window->draw(defuzzy_value_field);
-
 }
 
 void InputPanel::SetText(const std::vector<Rule>& rule_vec) {
@@ -49,10 +46,9 @@ void InputPanel::SetText(const std::vector<Rule>& rule_vec) {
 		operator_text_fields[i].setCharacterSize(18);
 	}
 
-
-	
 	sf::Vector2f pos_=sf::Vector2f(50,50);
 	for (size_t i = 0; i < display_text_fields.size(); i++){
+		pos_.x = 50;
 		std::string diplsay_text = "Enter value for ";
 		diplsay_text.append(temp_names[i]);
 		diplsay_text.append(" : ");
@@ -76,6 +72,26 @@ void InputPanel::SetText(const std::vector<Rule>& rule_vec) {
 
 void InputPanel::HandleInput(InputManager input_manger, sf::Event e) {
 	for (size_t i = 0; i < input_fields.size(); i++) {
-		input_manger.HandleTextInput(input_fields[i], e, i);
+		input_manger.HandleTextInput(input_fields[i], e, 2);
 	}
+}
+
+void InputPanel::CheckForInputAdded() {
+	int counter = 0;
+	for (int i = 0; i < input_fields.size(); i++) {
+		if (input_fields[i].GetText() != "") {
+			counter++;
+		}
+	}
+	if (counter >= input_fields.size()) {
+		if (!is_input_addded){
+			is_input_addded = true;
+			for (size_t i = 0; i < input_fields.size(); i++) {
+				human_values.push_back(std::stof(input_fields[i].GetText()));
+			}
+		}
+		
+		
+	}
+
 }
