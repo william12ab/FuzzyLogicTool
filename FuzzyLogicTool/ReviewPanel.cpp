@@ -11,11 +11,9 @@ ReviewPanel::ReviewPanel(sf::RenderWindow* hwnd, const int& size_of_rule_vector,
 	for (int i = 0; i < rule_name_text.size(); i++){
 		rule_text_box[i].setFont(font);
 		rule_text_box[i].setFillColor(sf::Color(0, 0, 0));
-		
 		rule_text_box[i].setCharacterSize(18);
 		rule_name_text[i].setFont(font);
 		rule_name_text[i].setFillColor(sf::Color(0, 0, 0));
-		
 		rule_name_text[i].setCharacterSize(18);
 	}
 
@@ -30,6 +28,7 @@ ReviewPanel::ReviewPanel(sf::RenderWindow* hwnd, const int& size_of_rule_vector,
 	done_text.setFillColor(sf::Color(0, 0, 0));
 	done_text.setPosition(sf::Vector2f(600, 400));
 	done_text.setString("Done");
+	is_done_pressed = false;
 }
 
 void ReviewPanel::SetSizes(const int& size) {
@@ -90,5 +89,5 @@ void ReviewPanel::Render() {
 
 }
 void ReviewPanel::Input(InputManager input_manager) {
-
+	input_manager.ButtonBoolPress(done_button, is_done_pressed,0);
 }

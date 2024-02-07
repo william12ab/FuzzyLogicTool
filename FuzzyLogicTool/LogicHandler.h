@@ -3,6 +3,7 @@
 #include "Operation.h"
 #include "DescriptionInputs.h"
 #include "ReviewPanel.h"
+#include "InputPanel.h"
 class LogicHandler
 {
 public:
@@ -16,7 +17,9 @@ private:
 	Operation new_operation;
 	DescriptionInputs help_panel;
 	ReviewPanel review_panel;
+	InputPanel input_panel;
 	bool is_added;
 	bool is_review_created;
+	bool is_input_stage;
 };
 

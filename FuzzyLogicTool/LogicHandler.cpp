@@ -1,6 +1,6 @@
 #include "LogicHandler.h"
 #include <iostream>
-LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font) {
+LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font){
 	AddSetUI* temp = new AddSetUI(6, 7, window, false, false, true, font);
 	window_template = *temp;
 	
@@ -12,6 +12,12 @@ LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font) {
 	ReviewPanel* tempreview = new ReviewPanel(window,1,font);
 	review_panel= *tempreview;
 
+	InputPanel* tempinput = new InputPanel(1,1,window, font);
+	input_panel = *tempinput;
+
+
+	delete tempinput;
+	tempinput = NULL;
 	delete temp;
 	temp = NULL;
 	delete temphelp;
@@ -20,6 +26,7 @@ LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font) {
 	tempreview = NULL;
 
 	is_review_created = false;
+	is_input_stage = false;
 }
 void LogicHandler::Update() {
 	if (!window_template.GetIsFinished()) {
@@ -76,6 +83,10 @@ void LogicHandler::Update() {
 			review_panel.SetText(new_operation.GetRuleVector());
 		}
 	}
+	if (review_panel.GetIsDonePressed()&& !is_input_stage) {
+		is_input_stage = true;
+		input_panel.SetText(new_operation.GetRuleVector());
+	}
 }
 void LogicHandler::Render() {
 	if (!window_template.GetIsFinished())
@@ -92,12 +103,21 @@ void LogicHandler::Render() {
 		}
 	}
 	else {
-		review_panel.Render();
+		if (!review_panel.GetIsDonePressed()){
+			review_panel.Render();
+		}
+		else {
+			input_panel.Render();
+		}
+		
 	}
 }
 void LogicHandler::HandleInput(InputManager input_manger, sf::Event e) {
 	if (!window_template.GetIsFinished()){
 		window_template.HandleInput(input_manger, e);
 		help_panel.Input(input_manger);
+	}
+	else {
+		review_panel.Input(input_manger);
 	}
 }

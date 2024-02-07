@@ -13,6 +13,7 @@ public:
 
 	void SetText(const std::vector<Rule> &rule_vector);
 	void SetSizes(const int&size);
+	const bool GetIsDonePressed()const { return is_done_pressed; }
 private:
 	sf::RectangleShape done_button;
 	
@@ -21,5 +22,7 @@ private:
 	sf::Text done_text;
 	std::vector<sf::Text> rule_name_text;
 	std::vector<sf::Text> rule_text_box;
+
+	bool is_done_pressed;
 };
 
