@@ -74,7 +74,7 @@ void AddSetUI::Render() {
 	int loop_index = text_fields.size();
 	int loop_index_two = display_text_fields.size();
 	if (is_consequence) {
-		loop_index -= 1;
+		loop_index -= 2;
 		loop_index_two -= 1;
 	}
 	for (size_t  i = 0; i < loop_index; i++){
@@ -152,6 +152,7 @@ void AddSetUI::SetDisplayText() {
 	if (is_consequence){
 		text_fields[0].ChangePositions(sf::Vector2f(410, 200));
 		text_fields[1].ChangePositions(sf::Vector2f(590, 200));
+		
 	}
 	else {
 		text_fields[0].ChangePositions(sf::Vector2f(360, 200));
@@ -172,11 +173,14 @@ void AddSetUI::SetDisplayText() {
 		display_text_fields[0].setString("Add consequence: Then: ");
 		display_text_fields[1].setString(" is: ");
 		display_text_fields[1].setPosition(sf::Vector2f(560, 200));
+		display_text_fields[4].setString("");
 	}
 	else {
 		display_text_fields[0].setString("Add antecedent: If: ");
 		display_text_fields[1].setString(" is: ");
 		display_text_fields[1].setPosition(sf::Vector2f(520, 200));
+		display_text_fields[4].setString("Graph type: ");
+		display_text_fields[4].setPosition(sf::Vector2f(200, 350));
 	}
 	display_text_fields[0].setPosition(sf::Vector2f(200,200));
 	
@@ -184,8 +188,7 @@ void AddSetUI::SetDisplayText() {
 	display_text_fields[2].setPosition(sf::Vector2f(200, 250));
 	display_text_fields[3].setString("Max value is: ");
 	display_text_fields[3].setPosition(sf::Vector2f(200, 300));
-	display_text_fields[4].setString("Graph type: ");
-	display_text_fields[4].setPosition(sf::Vector2f(200, 350));
+
 	if (is_consequence){
 		display_text_fields[5].setString("Add new:");
 		display_text_fields[5].setPosition(sf::Vector2f(500, 400));
@@ -205,12 +208,16 @@ const std::string AddSetUI::GetInfoFromTextField(const int& text_index)const {
 bool AddSetUI::ShouldRenderButton() {
 	bool is_written = false;
 	int counter = 0;
-	for (int i = 0; i < 5; i++){
+	int loop_index = 5;
+	if (is_consequence)	{
+		loop_index--;
+	}
+	for (int i = 0; i < loop_index; i++){
 		if (text_fields[i].GetText()!=""){
 			counter++;
 		}
 	}
-	if (counter>=5){
+	if (counter>= loop_index){
 		is_written = true;
 	}
 	return is_written;

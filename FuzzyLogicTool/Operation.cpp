@@ -51,12 +51,11 @@ void Operation::AddSetData(const std::string & data, const int& index, const boo
 		fuzzy_set_template.SetMax(std::stoi(data));
 		break;
 	case 4:
-		fuzzy_set_template.SetGraphType(std::stoi(data));
 		if (is_consequence){
 			fuzzy_set_template.SetSetType(0);
 		}
 		else {
-			fuzzy_set_template.SetSetType(1);
+			fuzzy_set_template.SetGraphType(std::stoi(data));
 		}
 		break;
 		
