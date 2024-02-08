@@ -11,9 +11,9 @@ void DefuzzyCalculator::FindPoints(Operation new_operation) {
 	polygon_points.emplace_back(FindEdgePoint(first_point, peak, new_operation.GetRuleVector()[0].GetOperatorValue(), 0));
 	//point two
 
-	sf::Vector2f temp_last,temp_last2;
+	sf::Vector2f temp_last=first_point,temp_last2=peak;
 
-	if (new_operation.GetRuleVector().size() > 0) {
+	if (new_operation.GetRuleVector().size() >1) {
 		int index = 1;
 		if (new_operation.GetRuleVector().size() > 1) {
 			index = new_operation.GetRuleVector().size() - 1;
@@ -41,13 +41,14 @@ void DefuzzyCalculator::FindPoints(Operation new_operation) {
 		//find p7 and p8
 	}
 	auto point_seven = FindEdgePoint(temp_last, temp_last2, new_operation.GetRuleVector()[new_operation.GetRuleVector().size() - 1].GetOperatorValue(), 1);
-	auto point_eight = sf::Vector2f(new_operation.GetRuleVector()[new_operation.GetRuleVector().size() - 1].GetOperatorValue(), 0);
+	auto point_eight = sf::Vector2f(new_operation.GetRuleVector()[new_operation.GetRuleVector().size() - 1].GetConsequenceVector()[0].GetMax(), 0);
 	polygon_points.emplace_back(point_seven);
 	polygon_points.emplace_back(point_eight);
 }
 sf::Vector2f DefuzzyCalculator::FindPeak(const float& max_, const float& x_coord) {
 	auto max_p = max_;
 	auto x_value = max_p - x_coord;
+	x_value /= 2.f;
 	x_value = x_coord + x_value;
 	sf::Vector2f peak = sf::Vector2f(x_value, 1.f);
 	return peak;
@@ -61,7 +62,6 @@ sf::Vector2f DefuzzyCalculator::FindEdgePoint(const sf::Vector2f& first_point, c
 	}
 	float x = (implication_value - peak_point.y + (m * peak_point.x)) / m;
 	sf::Vector2f point = sf::Vector2f(x, implication_value);
-	polygon_points.emplace_back(point);
 	return point;
 }
 
@@ -86,4 +86,24 @@ bool DefuzzyCalculator::CheckForIntersection(const sf::Vector2f& point_one, cons
 	}
 	return is_intersect;
 
+}
+
+
+sf::Vector2f DefuzzyCalculator::FindDefuzzyValue() {
+	
+	float area = 0.0f;
+	float common_factor = 0.f;
+
+	sf::Vector2f centroid = sf::Vector2f(0.f, 0.f);
+	for (size_t i = 0; i < polygon_points.size(); i++) {
+		sf::Vector2f obj_one = polygon_points[i];
+		sf::Vector2f obj_two = polygon_points[(i + 1) % polygon_points.size()];
+		common_factor = (obj_one.x * obj_two.y) - (obj_two.x * obj_one.y);
+		area += common_factor;
+		centroid.x += (obj_one.x + obj_two.x) * common_factor;
+		centroid.y += (obj_one.y + obj_two.y) * common_factor;
+	}
+	area *= 0.5f;
+	centroid /= (6.f * area);
+	return centroid;
 }

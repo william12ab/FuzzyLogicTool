@@ -146,6 +146,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AddSetUI.cpp" />
+    <ClCompile Include="DefuzzyCalculator.cpp" />
     <ClCompile Include="DemoWindow.cpp" />
     <ClCompile Include="DescriptionInputs.cpp" />
     <ClCompile Include="FuzzyLogicTool.cpp" />
@@ -170,6 +171,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AddSetUI.h" />
+    <ClInclude Include="DefuzzyCalculator.h" />
     <ClInclude Include="DemoWindow.h" />
     <ClInclude Include="DescriptionInputs.h" />
     <ClInclude Include="FuzzySet.h" />

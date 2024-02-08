@@ -154,24 +154,3 @@ float GraphFunctionCalculator::GaussianFunction(const float& a, const float& b, 
 	float f = exp(to_power);
 	return f;
 }
-
-
-
-void GraphFunctionCalculator::Test() {
-	sf::Vector2f verts[6] = { sf::Vector2f(0,0), sf::Vector2f(1,0.3),sf::Vector2f(2,0.3),sf::Vector2f(4,0.5),sf::Vector2f(5,0.5),sf::Vector2f(7,0)};
-	float area = 0.0f;
-	float common_factor = 0.f;
-
-	sf::Vector2f centroid = sf::Vector2f(0.f,0.f);
-	for (size_t i = 0; i < 6; i++) {
-		sf::Vector2f obj_one = verts[i];
-		sf::Vector2f obj_two = verts[(i + 1) % 6];
-		common_factor = (obj_one.x * obj_two.y) - (obj_two.x * obj_one.y);
-		area += common_factor;
-		centroid.x += (obj_one.x + obj_two.x) * common_factor;
-		centroid.y += (obj_one.y + obj_two.y) * common_factor;
-	}
-	area *= 0.5f;
-	centroid /= (6.f * area);
-
-}

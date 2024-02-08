@@ -4,6 +4,7 @@
 #include "DescriptionInputs.h"
 #include "ReviewPanel.h"
 #include "InputPanel.h"
+#include "DefuzzyCalculator.h"
 class LogicHandler
 {
 public:

@@ -144,6 +144,7 @@ void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
 	input_manager.ButtonBoolPress(description_button, is_load_panel,0);
 
 	input_manager.IsTabPressed(text_fields[current_text_field],current_text_field,is_consequence);
+	//crashes here when current_text_field is 6
 }
 
 void AddSetUI::SetDisplayText() {

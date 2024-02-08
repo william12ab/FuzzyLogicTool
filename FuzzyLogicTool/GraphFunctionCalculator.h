@@ -15,9 +15,5 @@ public:
 	float GaussianFunction(const float& min, const float& max, const float& input_value);
 
 	sf::Vector2f StandardDeviation(const float& min, const float& max);
-	
-	void Test();
-
-
 };
 

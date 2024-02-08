@@ -87,6 +87,9 @@
     <ClCompile Include="MathsOperator.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DefuzzyCalculator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FuzzySet.h">
@@ -162,6 +165,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="MathsOperator.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DefuzzyCalculator.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
