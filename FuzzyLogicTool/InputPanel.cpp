@@ -103,4 +103,8 @@ void InputPanel::UpdateOperatorText() {
 		temp.append(std::to_string(operator_values[i]));
 		operator_text_fields[i].setString(temp);
 	}
+
+	std::string temp_string = defuzzy_value_field.getString();
+	temp_string.append(std::to_string(defuzzy_value));
+	defuzzy_value_field.setString(temp_string);
 }

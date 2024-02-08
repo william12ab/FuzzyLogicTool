@@ -123,6 +123,7 @@ void AddSetUI::SetPreviousItems(FuzzySet temp, const bool&is_con_e, const bool&i
 		}
 		is_go_back = false;
 	}
+	current_text_field = 0;
 }
 
 void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
@@ -227,6 +228,7 @@ void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_co
 	SetDisplayText();
 	rule_number_text.setPosition(sf::Vector2f(200, 50));
 	rule_number_text.setString("Rule: " + std::to_string(rule_number));
+	current_text_field = 0;
 }
 
 bool AddSetUI::GetHasOperator() {

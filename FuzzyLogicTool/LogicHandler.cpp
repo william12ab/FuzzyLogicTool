@@ -95,11 +95,13 @@ void LogicHandler::Update() {
 			for (int i = 0; i < new_operation.GetRuleVector().size(); i++){
 				input_panel.SetOperatorValues(new_operation.GetRuleVector()[i].GetOperatorValue());
 			}
-			input_panel.UpdateOperatorText();
 			DefuzzyCalculator g;
 			g.FindPoints(new_operation);
 			auto finalvalue=g.FindDefuzzyValue();
 			is_input_complete = true;
+			input_panel.SetDefuzzyValue(finalvalue.x);
+			input_panel.UpdateOperatorText();
+
 		}
 	}
 }

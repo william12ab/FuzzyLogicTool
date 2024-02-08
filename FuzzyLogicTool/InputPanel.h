@@ -19,6 +19,7 @@ public:
 	const std::vector<float> GetHumanValues() {return human_values;}
 
 	void SetOperatorValues(const float& value);
+	void SetDefuzzyValue(const float& value) { defuzzy_value = value; }
 	void UpdateOperatorText();
 private:
 
@@ -31,5 +32,6 @@ private:
 	bool is_input_addded;
 	std::vector<float> human_values;
 	std::vector<float> operator_values;
+	float defuzzy_value;
 };
 

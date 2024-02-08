@@ -11,6 +11,8 @@ public:
 	bool CheckForIntersection(const sf::Vector2f& point_one, const sf::Vector2f& point_two, const sf::Vector2f& point_three, const sf::Vector2f& point_four);
 
 	sf::Vector2f FindDefuzzyValue();
+
+
 private:
 
 	std::vector<sf::Vector2f> polygon_points;
