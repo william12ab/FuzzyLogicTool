@@ -32,10 +32,12 @@ const int Rule::OperationWork(const std::vector<float>& defuzzy_values) {
 		fuzzy_values.push_back(val);
 	}
 	if (antecedent_vector[0].GetOperatorValue()==1){
-		auto rule_fuzz_value = std::max_element(fuzzy_values.begin(), fuzzy_values.end());
+		auto temp = std::max_element(fuzzy_values.begin(), fuzzy_values.end());
+		rule_fuzzy_value = *temp;
 	}
 	else if (antecedent_vector[0].GetOperatorValue() == 2) {
-		auto rule_fuzzy_value=std::min_element(fuzzy_values.begin(), fuzzy_values.end());
+		auto temp=std::min_element(fuzzy_values.begin(), fuzzy_values.end());
+		rule_fuzzy_value = *temp;
 	}
 	else {
 		rule_fuzzy_value = fuzzy_values[0];
