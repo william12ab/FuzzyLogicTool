@@ -17,6 +17,9 @@ public:
 
 	const bool GetIsInputAdded() const { return is_input_addded;}
 	const std::vector<float> GetHumanValues() {return human_values;}
+
+	void SetOperatorValues(const float& value);
+	void UpdateOperatorText();
 private:
 
 	sf::RenderWindow* window;
@@ -27,6 +30,6 @@ private:
 
 	bool is_input_addded;
 	std::vector<float> human_values;
-
+	std::vector<float> operator_values;
 };
 

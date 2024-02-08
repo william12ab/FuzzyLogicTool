@@ -21,5 +21,7 @@ private:
 	bool is_added;
 	bool is_review_created;
 	bool is_input_stage;
+
+	bool is_input_complete;
 };
 

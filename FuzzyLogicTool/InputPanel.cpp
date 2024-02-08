@@ -56,14 +56,14 @@ void InputPanel::SetText(const std::vector<Rule>& rule_vec) {
 		display_text_fields[i].setPosition(sf::Vector2f(pos_));
 		pos_.x += 200;
 		input_fields[i].ChangePositions(sf::Vector2f(pos_));
-		pos_.y += 100;
+		pos_.y += 50;
 	}
 	pos_ = sf::Vector2f(500, 50);
 	for (size_t i = 0; i <  operator_text_fields.size(); i++){
-		std::string display_text = "Value after operator: ";
+		std::string display_text = "Rule Value\n after operator: ";
 		operator_text_fields[i].setString(display_text);
 		operator_text_fields[i].setPosition(sf::Vector2f(pos_));
-		pos_.y += 100;
+		pos_.y += 50;
 	}
 	defuzzy_value_field.setString("Defuzzy value: ");
 	defuzzy_value_field.setPosition(sf::Vector2f(500,500));
@@ -90,8 +90,17 @@ void InputPanel::CheckForInputAdded() {
 				human_values.push_back(std::stof(input_fields[i].GetText()));
 			}
 		}
-		
-		
 	}
+}
 
+void InputPanel::SetOperatorValues(const float& value) {
+	operator_values.emplace_back(value);
+}
+
+void InputPanel::UpdateOperatorText() {
+	for (int i = 0; i < operator_text_fields.size(); i++){
+		std::string temp= operator_text_fields[i].getString();
+		temp.append(std::to_string(operator_values[i]));
+		operator_text_fields[i].setString(temp);
+	}
 }

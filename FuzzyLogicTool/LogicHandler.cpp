@@ -27,6 +27,7 @@ LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font){
 
 	is_review_created = false;
 	is_input_stage = false;
+	is_input_complete = false;
 }
 void LogicHandler::Update() {
 	if (!window_template.GetIsFinished()) {
@@ -89,8 +90,13 @@ void LogicHandler::Update() {
 	}
 	if (is_input_stage){
 		input_panel.CheckForInputAdded();
-		if (input_panel.GetIsInputAdded()){
+		if (input_panel.GetIsInputAdded()&& !is_input_complete){
 			new_operation.PerformOperation(input_panel.GetHumanValues());
+			for (int i = 0; i < new_operation.GetRuleVector().size(); i++){
+				input_panel.SetOperatorValues(new_operation.GetRuleVector()[i].GetOperatorValue());
+			}
+			input_panel.UpdateOperatorText();
+			is_input_complete = true;
 		}
 	}
 }
