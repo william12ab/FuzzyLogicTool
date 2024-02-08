@@ -8,6 +8,20 @@ InputPanel::InputPanel(const int& size_of_rule_vector, const int& size_of_total_
 	defuzzy_value_field.setFillColor(sf::Color(0, 0, 0));
 	defuzzy_value_field.setCharacterSize(18);
 	is_input_addded = false;
+
+
+	compute_button.setSize(sf::Vector2f(80, 20));
+	compute_button.setPosition(500, 480);
+	compute_button.setFillColor(sf::Color::White);
+	compute_button.setOutlineColor(sf::Color::Black);
+	compute_button.setOutlineThickness(1.f);
+
+	compute_text.setFont(font);
+	compute_text.setFillColor(sf::Color(0, 0, 0));
+	compute_text.setCharacterSize(18);
+	compute_text.setString("Compute");
+	compute_text.setPosition(sf::Vector2f(500, 480));
+	is_done = false;
 }
 
 void InputPanel::Render() {
@@ -20,6 +34,8 @@ void InputPanel::Render() {
 		window->draw(operator_text_fields[i]);
 	}
 	window->draw(defuzzy_value_field);
+	window->draw(compute_button);
+	window->draw(compute_text);
 }
 
 void InputPanel::SetText(const std::vector<Rule>& rule_vec) {
@@ -74,23 +90,25 @@ void InputPanel::HandleInput(InputManager input_manger, sf::Event e) {
 	for (size_t i = 0; i < input_fields.size(); i++) {
 		input_manger.HandleTextInput(input_fields[i], e, 2);
 	}
+	input_manger.ButtonBoolPress(compute_button, is_input_addded, 0);
+
 }
 
 void InputPanel::CheckForInputAdded() {
-	int counter = 0;
-	for (int i = 0; i < input_fields.size(); i++) {
-		if (input_fields[i].GetText() != "") {
-			counter++;
-		}
-	}
-	if (counter >= input_fields.size()) {
-		if (!is_input_addded){
-			is_input_addded = true;
+	//int counter = 0;
+	//for (int i = 0; i < input_fields.size(); i++) {
+	//	if (input_fields[i].GetText() != "") {
+	//		counter++;
+	//	}
+	//}
+//	if (counter >= input_fields.size()) {
+		if (is_input_addded){
+			is_done = true;
 			for (size_t i = 0; i < input_fields.size(); i++) {
 				human_values.push_back(std::stof(input_fields[i].GetText()));
 			}
 		}
-	}
+	//}
 }
 
 void InputPanel::SetOperatorValues(const float& value) {

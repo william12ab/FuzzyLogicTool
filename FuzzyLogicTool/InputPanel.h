@@ -33,5 +33,9 @@ private:
 	std::vector<float> human_values;
 	std::vector<float> operator_values;
 	float defuzzy_value;
+
+	sf::RectangleShape compute_button;
+	sf::Text compute_text;
+	bool is_done;
 };
 
