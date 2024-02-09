@@ -53,8 +53,10 @@ void Operation::AddSetData(const std::string & data, const int& index, const boo
 	case 4:
 		if (is_consequence){
 			fuzzy_set_template.SetSetType(0);
+			fuzzy_set_template.SetGraphType(0);
 		}
 		else {
+			fuzzy_set_template.SetSetType(1);
 			fuzzy_set_template.SetGraphType(std::stoi(data));
 		}
 		break;
