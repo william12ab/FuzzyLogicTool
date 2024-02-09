@@ -62,8 +62,14 @@ void Operation::AddSetData(const std::string & data, const int& index, const boo
 		break;
 		
 	case 5:
-		if (has_operator) {
-			fuzzy_set_template.SetOperatorValue(std::stoi(data));
+		if (!is_consequence) {
+			if (data!=""){
+				fuzzy_set_template.SetOperatorValue(std::stoi(data));
+			}
+			else {
+				fuzzy_set_template.SetOperatorValue(0);
+			}
+			
 		}
 		break;
 	}
