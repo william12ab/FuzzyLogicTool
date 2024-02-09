@@ -93,3 +93,27 @@ void Operation::PerformOperation(const std::vector<float>& defuzzy_values) {
 		start_value = 0;
 	}
 }
+
+
+void swap(Rule* xp, Rule* yp) {
+	Rule temp = *xp;
+	*xp = *yp;
+	*yp = temp;
+}
+
+void Operation::SortPoints() {
+	std::vector<sf::Vector2f> points;
+	for (int i = 0; i < rule_vector.size(); i++) {
+		points.emplace_back(rule_vector[i].GetConsequenceVector()[0].GetMin(), 0);
+	}
+	int min_index = 0;
+	for (int i = 0; i < points.size() - 1; i++) {
+		min_index = i;
+		for (int j = i + 1; j < points.size(); j++)
+			if (points[j].x < points[min_index].x)
+				min_index = j;
+
+		if (min_index != i)
+			swap(&rule_vector[min_index], &rule_vector[i]);
+	}
+}

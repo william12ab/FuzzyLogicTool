@@ -1,6 +1,9 @@
 #include "DefuzzyCalculator.h"
 
 
+
+
+
 void DefuzzyCalculator::FindPoints(Operation new_operation) {
 	sf::Vector2f first_point = sf::Vector2f(new_operation.GetRuleVector()[0].GetConsequenceVector()[0].GetMin(), 0);
 	polygon_points.emplace_back(first_point);

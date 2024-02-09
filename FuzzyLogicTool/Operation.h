@@ -19,6 +19,8 @@ public:
 	void ClearRuleTemplate();
 
 	void PerformOperation(const std::vector<float> &defuzzy_values);
+
+	void SortPoints();
 private:
 	std::vector<Rule> rule_vector;
 
