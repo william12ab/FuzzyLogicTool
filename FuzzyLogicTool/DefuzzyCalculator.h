@@ -1,6 +1,7 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 #include "Operation.h"
+#include "MathsOperator.h"
 
 class DefuzzyCalculator
 {
