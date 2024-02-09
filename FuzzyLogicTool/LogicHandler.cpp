@@ -91,11 +91,11 @@ void LogicHandler::Update() {
 	if (is_input_stage){
 		input_panel.CheckForInputAdded();
 		if (input_panel.GetIsInputAdded()&& !is_input_complete){
-			new_operation.SortPoints();
 			new_operation.PerformOperation(input_panel.GetHumanValues());
 			for (int i = 0; i < new_operation.GetRuleVector().size(); i++){
 				input_panel.SetOperatorValues(new_operation.GetRuleVector()[i].GetOperatorValue());
 			}
+			new_operation.SortPoints();
 			DefuzzyCalculator g;
 			g.FindPoints(new_operation);
 			auto finalvalue=g.FindDefuzzyValue();
