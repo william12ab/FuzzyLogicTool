@@ -4,7 +4,7 @@ DescriptionInputs::DescriptionInputs():window(nullptr),is_go_back(false) {
 
 }
 
-DescriptionInputs::DescriptionInputs(const sf::Font& font, sf::RenderWindow* hwnd):window(hwnd),is_go_back(false) {
+DescriptionInputs::DescriptionInputs(const sf::Font& font, sf::RenderWindow* hwnd):window(hwnd),is_go_back(false){
 	back_text.setFont(font);
 	back_text.setFillColor(sf::Color(0, 0, 0));
 	back_text.setCharacterSize(18);
@@ -41,6 +41,7 @@ void DescriptionInputs::Render() {
 }
 void DescriptionInputs::Input(InputManager input_manager) {
 	input_manager.ButtonBoolPress(back_button, is_go_back,0);
+	
 }
 
 void DescriptionInputs::SetText() {

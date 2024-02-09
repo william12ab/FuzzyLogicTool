@@ -131,8 +131,12 @@ void LogicHandler::Render() {
 }
 void LogicHandler::HandleInput(InputManager input_manger, sf::Event e) {
 	if (!window_template.GetIsFinished()){
-		window_template.HandleInput(input_manger, e);
-		help_panel.Input(input_manger);
+		if (window_template.GetIsLoadPanel()){
+			help_panel.Input(input_manger);
+		}
+		else {
+			window_template.HandleInput(input_manger, e);
+		}
 	}
 	else {
 		if (!review_panel.GetIsDonePressed()){

@@ -28,6 +28,8 @@ private:
 	bool is_go_back;
 
 	GraphDisplay graph_slot;
+
+	bool is_panel_on;
 };
 
 
