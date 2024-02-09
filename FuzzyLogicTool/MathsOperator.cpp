@@ -70,3 +70,11 @@ bool MathsOperator::DoIntersect(const sf::Vector2f& p1, const sf::Vector2f& q1, 
 
 	return false; // Doesn't fall in any of the above cases 
 }
+
+
+bool MathsOperator::ccw(const sf::Vector2f& a, const sf::Vector2f& b, const sf::Vector2f& c) {
+	return (c.y - a.y) * (b.x - a.x) > (b.y - a.y) * (c.x - a.x);
+}
+bool MathsOperator::intersect(const sf::Vector2f& a, const sf::Vector2f& b, const sf::Vector2f& c, const sf::Vector2f& d) {
+	return ccw(a, c, d) != ccw(b, c, d) && ccw(a, b, c) != ccw(a, b, d);
+}

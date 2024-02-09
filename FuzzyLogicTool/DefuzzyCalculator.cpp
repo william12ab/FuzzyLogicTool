@@ -26,10 +26,10 @@ void DefuzzyCalculator::FindPoints(Operation new_operation) {
 			auto point_three = FindEdgePoint(first_point, peak, new_operation.GetRuleVector()[i].GetOperatorValue(), 1);
 			auto point_five = sf::Vector2f(new_operation.GetRuleVector()[i + 1].GetConsequenceVector()[0].GetMin(), 0);
 			auto new_peak = FindPeak(new_operation.GetRuleVector()[i+1].GetConsequenceVector()[0].GetMax(), point_five.x);
-			auto point_six = FindEdgePoint(point_five, new_peak, new_operation.GetRuleVector()[i].GetOperatorValue(), 0);
+			auto point_six = FindEdgePoint(point_five, new_peak, new_operation.GetRuleVector()[i+1].GetOperatorValue(), 0);
 
-			if (calculator.DoIntersect(peak, point_three, point_five, point_six)) {
-				CheckForIntersection(peak, point_three, point_five, point_six);
+			if (calculator.intersect(polygon_points[i+1], point_three, point_five, point_six)) {
+				CheckForIntersection(polygon_points[i + 1], point_three, point_five, point_six);
 				//addd p6 go to start of loop change bvlaues 
 				polygon_points.emplace_back(point_six);
 				first_point = point_six;
@@ -38,7 +38,7 @@ void DefuzzyCalculator::FindPoints(Operation new_operation) {
 			else {
 				polygon_points.emplace_back(point_three);
 				auto point_four = sf::Vector2f(new_operation.GetRuleVector()[i].GetConsequenceVector()[0].GetMax(), 0);
-				if (calculator.DoIntersect(point_three,point_four,point_five,point_six)){
+				if (calculator.intersect(point_three,point_four,point_five,point_six)){
 					CheckForIntersection(point_three, point_four, point_five, point_six);
 					//addd p6 go to start of loop change bvlaues 
 					polygon_points.emplace_back(point_six);
