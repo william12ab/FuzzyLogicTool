@@ -47,7 +47,7 @@ void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event
 			}
 			else if (text_object.GetTextSize() < text_object.GetMaxSize()) {
 				if (index > 1 && index <= 5) {
-					if (event.text.unicode >= 48 && event.text.unicode <= 57) {
+					if (event.text.unicode >= 46 && event.text.unicode <= 57) {
 						if (index == 4) {
 							if (event.text.unicode >= 46 && event.text.unicode <= 54) {
 								text_object.Addletter(event.text.unicode);
