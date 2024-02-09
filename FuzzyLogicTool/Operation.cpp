@@ -69,7 +69,6 @@ void Operation::AddSetData(const std::string & data, const int& index, const boo
 			else {
 				fuzzy_set_template.SetOperatorValue(0);
 			}
-			
 		}
 		break;
 	}

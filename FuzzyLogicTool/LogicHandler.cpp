@@ -123,6 +123,15 @@ void LogicHandler::Render() {
 	else {
 		if (!review_panel.GetIsDonePressed()){
 			review_panel.Render();
+			if (review_panel.GetIsLoadHelp()) {
+				help_panel.Render();
+				if (help_panel.GetIsGoBack()) {
+					review_panel.SetIsLoadHelp(false);
+				}
+			}
+			else {
+				help_panel.SetIsGoBack(false);
+			}
 		}
 		else {
 			input_panel.Render();
@@ -141,11 +150,15 @@ void LogicHandler::HandleInput(InputManager input_manger, sf::Event e) {
 	}
 	else {
 		if (!review_panel.GetIsDonePressed()){
-			review_panel.Input(input_manger);
+			if (review_panel.GetIsLoadHelp()) {
+				help_panel.Input(input_manger);
+			}
+			else {
+				review_panel.Input(input_manger);
+			}
 		}
 		else {
 			input_panel.HandleInput(input_manger,e);
 		}
-		
 	}
 }

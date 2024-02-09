@@ -11,9 +11,11 @@ public:
 	void Render();
 	void Input(InputManager input_manager);
 
+	void SetIsLoadHelp(bool b) { is_load_help = b; }
 	void SetText(const std::vector<Rule> &rule_vector);
 	void SetSizes(const int&size);
 	const bool GetIsDonePressed()const { return is_done_pressed; }
+	const bool GetIsLoadHelp()const { return is_load_help; }
 private:
 	sf::RectangleShape done_button;
 	
@@ -24,5 +26,9 @@ private:
 	std::vector<sf::Text> rule_text_box;
 
 	bool is_done_pressed;
+	sf::RectangleShape description_button;
+	sf::Text description_text;
+
+	bool is_load_help;
 };
 
