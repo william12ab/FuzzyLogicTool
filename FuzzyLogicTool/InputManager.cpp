@@ -120,5 +120,4 @@ void InputManager::IsTabPressed(TextFieldObject& text_object, int& current_index
 		}
 		is_tabbed = true;
 	}
-	std::cout << current_index << "\n";
 }

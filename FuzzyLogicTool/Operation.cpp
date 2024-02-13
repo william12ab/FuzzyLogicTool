@@ -106,6 +106,12 @@ void swap(Rule* xp, Rule* yp) {
 	*yp = temp;
 }
 
+void swap(sf::Vector2f* p1, sf::Vector2f* p2) {
+	sf::Vector2f temp = *p1;
+	*p1 = *p2;
+	*p2 = temp;
+}
+
 void Operation::SortPoints() {
 	std::vector<sf::Vector2f> points;
 	for (int i = 0; i < rule_vector.size(); i++) {
@@ -119,6 +125,8 @@ void Operation::SortPoints() {
 				min_index = j;
 
 		if (min_index != i)
+			swap(&points[min_index], &points[i]);
 			swap(&rule_vector[min_index], &rule_vector[i]);
+
 	}
 }
