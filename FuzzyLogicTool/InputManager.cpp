@@ -7,6 +7,7 @@ InputManager::InputManager(Input* in, sf::View* view, sf::RenderWindow* hwnd) {
 	view_ = view;
 	window = hwnd;
 	is_pressed = false;
+	is_done = false;
 }
 
 InputManager::~InputManager() {
@@ -73,21 +74,51 @@ void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event
 	}
 }
 
-void InputManager::IsTabPressed(TextFieldObject& text_object, int& current_index, const bool& is_consequence) {
+void InputManager::ChangeTabIndex(std::vector<TextFieldObject>& text_object, int& current_index, const bool& is_consequence, bool& is_tabbed) {
+	int limit = 6;
+	if (is_consequence) {
+		limit--;
+		limit--;
+	}
+	int counter = 0;
+	for (size_t i = 0; i < limit; i++) {
+		auto pos = sf::Vector2f(input->getMouseX(), input->getMouseY());
+		
+		if (text_object[i].ifContains(pos)) {
+			counter++;
+			if (!is_tabbed){
+				current_index = i+1;
+				if (current_index>=limit){
+					current_index = 0;
+				}
+			}
+		}		
+	}
+	if (counter == 1) {
+		is_tabbed = true;
+	}
+	else {
+		is_tabbed = false;
+	}
+}
+
+void InputManager::IsTabPressed(TextFieldObject& text_object, int& current_index, const bool& is_consequence, bool& is_tabbed) {
+	int limit = 6;
+	if (is_consequence) {
+		limit--;
+		limit--;
+	}
 	if (input->isKeyDown(sf::Keyboard::Tab)){
 		auto pos = text_object.GetShape().getPosition();
 		input->setMouseX(pos.x);
 		input->setMouseY(pos.y);
 		input->setKeyUp(sf::Keyboard::Tab);
-		
-		current_index++;
-		int limit = 6;
-		if (is_consequence){
-			limit--;
-		}
+	
+		current_index++;	
 		if (current_index== limit){
 			current_index = 0;
 		}
-		
+		is_tabbed = true;
 	}
+	std::cout << current_index << "\n";
 }

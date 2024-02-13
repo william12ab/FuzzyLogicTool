@@ -69,6 +69,7 @@ AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderW
 	rule_number_text.setCharacterSize(18);
 
 	current_text_field = 0;
+	is_tabbed = false;
 }
 void AddSetUI::Render() {
 	int loop_index = text_fields.size();
@@ -144,7 +145,8 @@ void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
 	}
 	input_manager.ButtonBoolPress(description_button, is_load_panel,0);
 
-	input_manager.IsTabPressed(text_fields[current_text_field],current_text_field,is_consequence);
+	input_manager.IsTabPressed(text_fields[current_text_field],current_text_field,is_consequence, is_tabbed);
+	input_manager.ChangeTabIndex(text_fields,current_text_field,is_consequence, is_tabbed);
 	//crashes here when current_text_field is 6
 }
 

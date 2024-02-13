@@ -62,5 +62,7 @@ private:
 	bool is_trigger_finished;
 
 	int current_text_field;
+
+	bool is_tabbed;
 };
 
