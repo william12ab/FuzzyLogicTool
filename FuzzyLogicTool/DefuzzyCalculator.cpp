@@ -55,43 +55,6 @@ void DefuzzyCalculator::FindPoints(Operation new_operation) {
 			temp_last = point_five;
 			temp_last2 = new_peak;
 		}
-
-
-	//if (new_operation.GetRuleVector().size() >1) {
-	//	int index = 1;
-	//	if (new_operation.GetRuleVector().size() > 1) {
-	//		index = new_operation.GetRuleVector().size() - 1;
-	//	}
-	//	for (size_t i = 0; i < index; i++) {
-	//		auto point_three = FindEdgePoint(first_point, peak, new_operation.GetRuleVector()[i].GetOperatorValue(), 1);
-	//		sf::Vector2f point_five = sf::Vector2f(new_operation.GetRuleVector()[i + 1].GetConsequenceVector()[0].GetMin(), 0);
-	//		peak = FindPeak(new_operation.GetRuleVector()[i + 1].GetConsequenceVector()[0].GetMax(), point_five.x);
-	//		//point six WRONG
-
-	//		if (calculator.DoIntersect(polygon_points[i + 1],point_three,point_five,peak)){
-	//			CheckForIntersection(polygon_points[i + 1], point_three, point_five, peak);
-	//		}
-	//		else {
-	//			polygon_points.emplace_back(point_three);
-	//			sf::Vector2f point_four = sf::Vector2f(new_operation.GetRuleVector()[i].GetConsequenceVector()[0].GetMax(), 0);
-
-	//			sf::Vector2f peak = FindPeak(new_operation.GetRuleVector()[i].GetConsequenceVector()[0].GetMax(), first_point.x);
-	//			auto temp_point = FindEdgePoint(point_four, peak, new_operation.GetRuleVector()[i+1].GetOperatorValue(), 0);
-	//			polygon_points.emplace_back(temp_point);
-
-	//			/*if (calculator.DoIntersect(point_three, point_four, point_five, peak)) {
-	//				CheckForIntersection(polygon_points[i + 1], point_three, point_five, peak);
-	//			}*/
-	//		}
-
-	//		auto point_six = FindEdgePoint(point_five, peak, new_operation.GetRuleVector()[i + 1].GetOperatorValue(), 0);
-	//		polygon_points.emplace_back(point_six);
-	//		first_point = point_five;
-	//		//at here need to change first point and peak to new values
-	//		temp_last = point_five;
-	//		temp_last2 = peak;
-	//	}
-		//find p7 and p8
 	}
 	auto point_seven = FindEdgePoint(temp_last, temp_last2, new_operation.GetRuleVector()[new_operation.GetRuleVector().size() - 1].GetOperatorValue(), 1);
 	auto point_eight = sf::Vector2f(new_operation.GetRuleVector()[new_operation.GetRuleVector().size() - 1].GetConsequenceVector()[0].GetMax(), 0);
