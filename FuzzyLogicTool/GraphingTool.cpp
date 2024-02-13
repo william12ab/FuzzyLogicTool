@@ -4,6 +4,7 @@
 
 void GraphingTool::CreatePoints(const int& index, const int& min, const int& max) {
 	m_vertices.resize(100 * 100);
+	
 	sf::Vector2i size(100, 100);
 	for (int y = 0; y < size.y; y++) {
 		for (int x = 0; x < size.x; x++) {

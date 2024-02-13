@@ -92,6 +92,7 @@ int main() {
 		//render
 		window.clear(sf::Color(255, 255, 255));
 		program_runner.Render();
+
 		ImGui::SFML::Render(window);
 		window.display();
 	}

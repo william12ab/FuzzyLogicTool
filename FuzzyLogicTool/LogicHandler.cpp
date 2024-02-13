@@ -101,7 +101,7 @@ void LogicHandler::Update() {
 			auto finalvalue=g.FindDefuzzyValue();
 			is_input_complete = true;
 			input_panel.SetDefuzzyValue(finalvalue.x);
-			input_panel.UpdateOperatorText();
+			input_panel.UpdateOperatorText(g.GetPoints());
 
 		}
 	}
@@ -135,6 +135,7 @@ void LogicHandler::Render() {
 		}
 		else {
 			input_panel.Render();
+
 		}
 		
 	}

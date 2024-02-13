@@ -3,6 +3,7 @@
 #include "TextFieldObject.h"
 #include "InputManager.h"
 #include "Operation.h"
+#include "FinalGraphTool.h"
 
 class InputPanel
 {
@@ -20,7 +21,7 @@ public:
 
 	void SetOperatorValues(const float& value);
 	void SetDefuzzyValue(const float& value) { defuzzy_value = value; }
-	void UpdateOperatorText();
+	void UpdateOperatorText(const std::vector<sf::Vector2f> &points);
 private:
 
 	sf::RenderWindow* window;
@@ -37,5 +38,8 @@ private:
 	sf::RectangleShape compute_button;
 	sf::Text compute_text;
 	bool is_done;
+
+	FinalGraphTool graph_image;
+	bool is_image_created;
 };
 

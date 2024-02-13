@@ -22,6 +22,7 @@ InputPanel::InputPanel(const int& size_of_rule_vector, const int& size_of_total_
 	compute_text.setString("Compute");
 	compute_text.setPosition(sf::Vector2f(500, 480));
 	is_done = false;
+	is_image_created = false;
 }
 
 void InputPanel::Render() {
@@ -36,6 +37,10 @@ void InputPanel::Render() {
 	window->draw(defuzzy_value_field);
 	window->draw(compute_button);
 	window->draw(compute_text);
+	if (is_image_created){
+		window->draw(graph_image);
+	}
+	
 }
 
 void InputPanel::SetText(const std::vector<Rule>& rule_vec) {
@@ -84,6 +89,7 @@ void InputPanel::SetText(const std::vector<Rule>& rule_vec) {
 	defuzzy_value_field.setString("Defuzzy value: ");
 	defuzzy_value_field.setPosition(sf::Vector2f(500, 500));
 	temp_names.clear();
+
 }
 
 void InputPanel::HandleInput(InputManager input_manger, sf::Event e) {
@@ -106,7 +112,7 @@ void InputPanel::SetOperatorValues(const float& value) {
 	operator_values.emplace_back(value);
 }
 
-void InputPanel::UpdateOperatorText() {
+void InputPanel::UpdateOperatorText(const std::vector<sf::Vector2f>& points_) {
 	for (int i = 0; i < operator_text_fields.size(); i++) {
 		std::string temp = operator_text_fields[i].getString();
 		temp.append(std::to_string(operator_values[i]));
@@ -116,4 +122,9 @@ void InputPanel::UpdateOperatorText() {
 	std::string temp_string = defuzzy_value_field.getString();
 	temp_string.append(std::to_string(defuzzy_value));
 	defuzzy_value_field.setString(temp_string);
+
+
+	graph_image.AddPoints(points_);
+	graph_image.setPosition(0, 0);
+	is_image_created = true;
 }

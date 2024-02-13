@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "Operation.h"
 #include "MathsOperator.h"
+#include "FinalGraphTool.h"
 
 class DefuzzyCalculator
 {
@@ -13,9 +14,11 @@ public:
 
 	sf::Vector2f FindDefuzzyValue();
 
+	const std::vector<sf::Vector2f> GetPoints() const{ return polygon_points; }
 
 private:
 
 	std::vector<sf::Vector2f> polygon_points;
+	
 };
 
