@@ -125,6 +125,6 @@ void InputPanel::UpdateOperatorText(const std::vector<sf::Vector2f>& points_) {
 
 
 	graph_image.AddPoints(points_);
-	graph_image.setPosition(0, 0);
+	graph_image.setPosition(50, 500);
 	is_image_created = true;
 }
