@@ -23,6 +23,8 @@ private:
 	sf::Text back_text;
 	sf::Text description_text;
 	
+	std::vector<sf::Text> graph_names_text;
+
 	sf::RenderWindow* window;
 
 	bool is_go_back;
