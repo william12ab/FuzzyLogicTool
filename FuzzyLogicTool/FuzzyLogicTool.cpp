@@ -26,16 +26,6 @@ int main() {
 	InputManager input_manager(&input, &view_, &window);
 	LogicHandler program_runner(&window,font);
 	bool is_added=false;
-
-
-
-	MathsOperator masd;
-	sf::Vector2f a(sf::Vector2f(11.f,0.8f));
-	sf::Vector2f b(sf::Vector2f(15.f,0.f));
-	sf::Vector2f c(sf::Vector2f(10.f,0.f));
-	sf::Vector2f d(sf::Vector2f(12.f,0.4f));
-	auto asda=masd.intersect(a,b,c,d);
-
 	while (window.isOpen()) {
 		while (window.pollEvent(event)) {
 			ui->ProcessWindow(event);
