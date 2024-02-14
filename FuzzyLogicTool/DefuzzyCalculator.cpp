@@ -99,10 +99,7 @@ bool DefuzzyCalculator::CheckForIntersection(const sf::Vector2f& point_one, cons
 	return is_intersect;
 
 }
-
-
 sf::Vector2f DefuzzyCalculator::FindDefuzzyValue() {
-	
 	float area = 0.0f;
 	float common_factor = 0.f;
 

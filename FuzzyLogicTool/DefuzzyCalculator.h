@@ -14,6 +14,7 @@ public:
 
 	sf::Vector2f FindDefuzzyValue();
 
+
 	const std::vector<sf::Vector2f> GetPoints() const{ return polygon_points; }
 
 private:
