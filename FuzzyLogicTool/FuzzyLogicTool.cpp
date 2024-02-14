@@ -1,7 +1,6 @@
 #include <iostream>
 #include "DemoWindow.h"
-#include "imgui/imgui.h"
-#include "imgui/imgui-SFML.h"
+#include "ImguiHandler.h"
 #include <stdio.h>
 #include "Input.h"
 #include <SFML/Graphics.hpp>
@@ -16,7 +15,8 @@
 int main() {
 	sf::RenderWindow window(sf::VideoMode(800, 600), "title");
 	sf::Event event;
-	ImGui::SFML::Init(window);
+	ImguiHandler* ui = new ImguiHandler(&window);
+	ui->Init();
 	sf::Clock delta_clock;
 	Input input;
 	sf::View view_;
@@ -38,7 +38,7 @@ int main() {
 
 	while (window.isOpen()) {
 		while (window.pollEvent(event)) {
-			ImGui::SFML::ProcessEvent(event);
+			ui->ProcessWindow(event);
 			switch (event.type) {
 			case sf::Event::Closed:
 				window.close();
@@ -80,24 +80,19 @@ int main() {
 			}
 		}
 		//input
-
 		program_runner.HandleInput(input_manager, event);
-
 		//update
-		ImGui::SFML::Update(window, delta_clock.restart());
-		ImGui::Begin("Options");
-
-		ImGui::End();
+		ui->CallUpdate(delta_clock);
 		program_runner.Update();
 		//render
 		window.clear(sf::Color(255, 255, 255));
 		program_runner.Render();
-
-		ImGui::SFML::Render(window);
+		ui->Render();
 		window.display();
 	}
-
-	ImGui::SFML::Shutdown();
+	ui->ShutDownImgui();
+	delete ui;
+	ui = NULL;
 	return 0;
 }
 

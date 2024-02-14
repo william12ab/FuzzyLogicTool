@@ -93,6 +93,9 @@
     <ClCompile Include="FinalGraphTool.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ImguiHandler.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="FuzzySet.h">
@@ -174,6 +177,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="FinalGraphTool.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImguiHandler.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

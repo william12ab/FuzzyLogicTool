@@ -166,14 +166,12 @@ bool Operation::ValidateData(const bool& is_cons, const int& counter_) {
 	}
 	else {
 		if (rule_template.GetSizeOfAntecedent() > 0) {
-			if (counter_==1)
-			{
-				AddUp(counter, rule_template.GetAntecedentVector()[counter_]);
+			if (counter_==1){
+				AddUp(counter, rule_template.GetAntecedentVector()[0]);
 			}
 			else {
 				AddUp(counter, rule_template.GetAntecedentVector().back());
 			}
-			
 		}
 	}
 	if (counter == index) {

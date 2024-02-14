@@ -155,6 +155,7 @@
     <ClCompile Include="GraphDisplay.cpp" />
     <ClCompile Include="GraphFunctionCalculator.cpp" />
     <ClCompile Include="GraphingTool.cpp" />
+    <ClCompile Include="ImguiHandler.cpp" />
     <ClCompile Include="imgui\imgui-SFML.cpp" />
     <ClCompile Include="imgui\imgui.cpp" />
     <ClCompile Include="imgui\imgui_draw.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="GraphDisplay.h" />
     <ClInclude Include="GraphFunctionCalculator.h" />
     <ClInclude Include="GraphingTool.h" />
+    <ClInclude Include="ImguiHandler.h" />
     <ClInclude Include="imgui\imconfig-SFML.h" />
     <ClInclude Include="imgui\imconfig.h" />
     <ClInclude Include="imgui\imgui-SFML.h" />
