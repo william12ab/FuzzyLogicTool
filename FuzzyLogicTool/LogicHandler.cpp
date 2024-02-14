@@ -28,13 +28,15 @@ LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font){
 	is_review_created = false;
 	is_input_stage = false;
 	is_input_complete = false;
+
+	current_display_index = 0;
 }
 void LogicHandler::Update() {
 	if (!window_template.GetIsFinished()) {
 		window_template.Update();
 		//displaying old info page
 		if (window_template.GetIsGoBack()) {
-			auto temp = new_operation.GetData();
+			auto temp = new_operation.GetData(current_display_index);
 
 			if (temp.GetSetType() == 0) {
 				//is consequence
@@ -60,7 +62,10 @@ void LogicHandler::Update() {
 			for (int i = 0; i < loop_size; i++) {
 				new_operation.AddSetData(window_template.GetInfoFromTextField(i), i, window_template.GetHasOperator(), window_template.GetIsConsequence());
 			}
-			new_operation.AddRule(window_template.GetIsConsequence());
+			if (!window_template.GetIsConsequence()){
+				current_display_index++;
+			}
+			new_operation.AddRule(window_template.GetIsConsequence(),current_display_index);
 			if (window_template.GetIsTriggerIsFinish()) {
 				window_template.SetIsFinished(true);
 			}
@@ -73,6 +78,7 @@ void LogicHandler::Update() {
 				}
 				else {
 					window_template.ChangeWindowAppearance(false, false, new_operation.GetSizeVector());//is antecedent, NEW RULE
+					current_display_index=0;
 					window_template.SetIsOperationDone(false);
 				}
 			}

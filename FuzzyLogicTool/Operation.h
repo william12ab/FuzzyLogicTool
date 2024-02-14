@@ -6,13 +6,13 @@ class Operation
 public:
 	Operation();
 	~Operation();
-	void AddRule(const bool& is_consequence);
+	void AddRule(const bool& is_consequence, int&counter_);
 	void AddSetData(const std::string &data, const int &index,const bool& has_operator, const bool& is_consequence);
 
 	
 	const std::vector<Rule> GetRuleVector() const { return rule_vector; }
 
-	const FuzzySet GetData();
+	const FuzzySet GetData(int& counter_);
 	const int GetSizeVector() { return rule_vector.size(); }
 	Rule GetRuleTemplate() { return rule_template; }
 
@@ -23,7 +23,7 @@ public:
 
 	void SortPoints();
 
-	bool ValidateData(const bool& is_cons);
+	bool ValidateData(const bool& is_cons, const int& counter_);
 	void AddUp(int& counter, const FuzzySet& temp_set);
 private:
 	std::vector<Rule> rule_vector;

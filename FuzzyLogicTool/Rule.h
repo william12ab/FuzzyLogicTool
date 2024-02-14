@@ -9,7 +9,7 @@ public:
 	void AddConsequence(FuzzySet consequence);
 	void ClearVectors();
 
-	const FuzzySet GetSetValues(const bool& is_consequence, const bool& has_operator);
+	const FuzzySet GetSetValues(const bool& is_consequence, const bool& has_operator,int&counter_);
 	const int GetSizeOfAntecedent() { return antecedent_vector.size(); }
 	
 	const std::vector<FuzzySet> GetAntecedentVector() const{ return antecedent_vector; }

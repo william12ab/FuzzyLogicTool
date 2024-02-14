@@ -24,5 +24,7 @@ private:
 	bool is_input_stage;
 
 	bool is_input_complete;
+
+	int current_display_index;
 };
 

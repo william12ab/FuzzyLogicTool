@@ -10,14 +10,14 @@ Operation::~Operation() {
 
 }
 
-void Operation::AddRule(const bool& is_consequence) {
+void Operation::AddRule(const bool& is_consequence, int& counter_) {
 	if (!is_consequence) {
-		if (!ValidateData(false)) {
+		if (!ValidateData(false,counter_)) {
 			rule_template.AddAntecedent(fuzzy_set_template);
 		}
 	}
 	else {
-		if (!ValidateData(true)) {
+		if (!ValidateData(true, counter_)) {
 			rule_template.AddConsequence(fuzzy_set_template);
 			rule_vector.push_back(rule_template);
 			ClearRuleTemplate();
@@ -78,16 +78,15 @@ void Operation::AddSetData(const std::string& data, const int& index, const bool
 	}
 }
 
-const FuzzySet Operation::GetData() {
+const FuzzySet Operation::GetData(int& counter_) {
 	bool whats_next = true;//false is antecedent
 	bool has_operator = false;
 	if (rule_vector.size() > 0) {
-
 	}
 	else {
 		whats_next = false;
 	}
-	fuzzy_set_template = rule_template.GetSetValues(whats_next, has_operator);
+	fuzzy_set_template = rule_template.GetSetValues(whats_next, has_operator,counter_);
 	return fuzzy_set_template;
 }
 
@@ -154,7 +153,7 @@ void Operation::AddUp(int& counter, const FuzzySet& temp_set) {
 	}
 }
 
-bool Operation::ValidateData(const bool& is_cons) {
+bool Operation::ValidateData(const bool& is_cons, const int& counter_) {
 	bool is_duplicate = false;
 
 	int index = 6;
@@ -167,7 +166,14 @@ bool Operation::ValidateData(const bool& is_cons) {
 	}
 	else {
 		if (rule_template.GetSizeOfAntecedent() > 0) {
-			AddUp(counter, rule_template.GetAntecedentVector().back());
+			if (counter_==1)
+			{
+				AddUp(counter, rule_template.GetAntecedentVector()[counter_]);
+			}
+			else {
+				AddUp(counter, rule_template.GetAntecedentVector().back());
+			}
+			
 		}
 	}
 	if (counter == index) {
