@@ -41,5 +41,9 @@ private:
 
 	FinalGraphTool graph_image;
 	bool is_image_created;
+
+	sf::Text graph_text;
+
+	std::string cons_name;
 };
 

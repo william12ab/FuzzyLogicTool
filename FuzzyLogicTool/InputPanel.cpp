@@ -23,6 +23,12 @@ InputPanel::InputPanel(const int& size_of_rule_vector, const int& size_of_total_
 	compute_text.setPosition(sf::Vector2f(500, 480));
 	is_done = false;
 	is_image_created = false;
+
+	graph_text.setFont(font);
+	graph_text.setFillColor(sf::Color(0, 0, 0));
+	graph_text.setCharacterSize(18);
+	graph_text.setPosition(sf::Vector2f(500, 480));
+	cons_name = "";
 }
 
 void InputPanel::Render() {
@@ -39,6 +45,7 @@ void InputPanel::Render() {
 	window->draw(compute_text);
 	if (is_image_created){
 		window->draw(graph_image);
+		window->draw(graph_text);
 	}
 	
 }
@@ -90,6 +97,8 @@ void InputPanel::SetText(const std::vector<Rule>& rule_vec) {
 	defuzzy_value_field.setPosition(sf::Vector2f(500, 500));
 	temp_names.clear();
 
+	cons_name.append(rule_vec[0].GetConsequenceVector()[0].GetxName());
+
 }
 
 void InputPanel::HandleInput(InputManager input_manger, sf::Event e) {
@@ -127,4 +136,6 @@ void InputPanel::UpdateOperatorText(const std::vector<sf::Vector2f>& points_) {
 	graph_image.AddPoints(points_);
 	graph_image.setPosition(50, 500);
 	is_image_created = true;
+	graph_text.setString(cons_name);
+	graph_text.setPosition(70, 500);
 }

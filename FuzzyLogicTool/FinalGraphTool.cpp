@@ -35,5 +35,6 @@ std::vector<sf::Vector2f> FinalGraphTool::ChangeRange(const std::vector<sf::Vect
 	for (size_t i = 0; i < new_points.size(); i++){
 		new_points[i] = sf::Vector2f(temp_x[i], points_[i].y);
 	}
-	
+	return new_points;
+
 }
