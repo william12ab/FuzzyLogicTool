@@ -10,12 +10,12 @@ void Rule::AddConsequence(FuzzySet consequence) {
 const FuzzySet Rule::GetSetValues(const bool& is_consequence, const bool& has_operator){
 	if (is_consequence){
 		auto to_return = consequence_vector.back();	
-		consequence_vector.pop_back();
+		//consequence_vector.pop_back();
 		return to_return;
 	}
 	else {
 		auto to_return = antecedent_vector.back();
-		antecedent_vector.pop_back();
+		//antecedent_vector.pop_back();
 		return to_return;
 	}
 }

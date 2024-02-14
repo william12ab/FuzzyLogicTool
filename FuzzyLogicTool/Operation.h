@@ -22,6 +22,9 @@ public:
 	void PerformOperation(const std::vector<float> &defuzzy_values);
 
 	void SortPoints();
+
+	bool ValidateData(const bool& is_cons);
+	void AddUp(int& counter, const FuzzySet& temp_set);
 private:
 	std::vector<Rule> rule_vector;
 
