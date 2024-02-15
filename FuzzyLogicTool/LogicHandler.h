@@ -12,6 +12,9 @@ public:
 	void Update();
 	void Render();
 	void HandleInput(InputManager input_manger, sf::Event e);
+	const Operation GetOperationInfo() const { return new_operation; }
+	const std::vector<sf::Vector2f> GetPolyPoints()const;
+
 private:
 	std::vector< AddSetUI> set_windows;
 	AddSetUI window_template;
@@ -26,5 +29,6 @@ private:
 	bool is_input_complete;
 
 	int current_display_index;
+	std::vector<sf::Vector2f> poly_points;
 };
 

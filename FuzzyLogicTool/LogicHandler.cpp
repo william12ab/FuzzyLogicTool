@@ -108,12 +108,12 @@ void LogicHandler::Update() {
 			is_input_complete = true;
 			input_panel.SetDefuzzyValue(finalvalue.x);
 			input_panel.UpdateOperatorText(g.GetPoints());
+			poly_points=g.GetPoints();
 		}
 	}
 }
 void LogicHandler::Render() {
-	if (!window_template.GetIsFinished())
-	{
+	if (!window_template.GetIsFinished()){
 		window_template.Render();
 		if (window_template.GetIsLoadPanel()) {
 			help_panel.Render();
@@ -140,9 +140,7 @@ void LogicHandler::Render() {
 		}
 		else {
 			input_panel.Render();
-
-		}
-		
+		}	
 	}
 }
 void LogicHandler::HandleInput(InputManager input_manger, sf::Event e) {
@@ -167,4 +165,11 @@ void LogicHandler::HandleInput(InputManager input_manger, sf::Event e) {
 			input_panel.HandleInput(input_manger,e);
 		}
 	}
+}
+
+const std::vector<sf::Vector2f> LogicHandler::GetPolyPoints() const{
+	if (poly_points.size()>0){
+		return poly_points;
+	}
+	return std::vector<sf::Vector2f>();
 }

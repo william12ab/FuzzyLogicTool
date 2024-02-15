@@ -34,25 +34,19 @@ int main() {
 				window.close();
 				break;
 			case sf::Event::Resized:
-				//window.setView();
 				break;
 			case sf::Event::KeyPressed:
-				// update input class
 				input.setKeyDown(event.key.code);
 				break;
 			case sf::Event::KeyReleased:
-				//update input class
 				input.setKeyUp(event.key.code);
 				break;
 			case sf::Event::MouseMoved:
-				//update input class
 				input.setMousePosition(event.mouseMove.x, event.mouseMove.y);
 				break;
 			case sf::Event::MouseButtonPressed:
 				if (event.mouseButton.button == sf::Mouse::Left) {
-					//update input class
 					input.setMouseLDown(true);
-					//std::cout<<"true\n";
 				}
 				else if (event.mouseButton.button == sf::Mouse::Right) {
 					input.setMouseRDown(true);
@@ -60,7 +54,6 @@ int main() {
 				break;
 			case sf::Event::MouseButtonReleased:
 				if (event.mouseButton.button == sf::Mouse::Left) {
-					//update input class
 					input.setMouseLDown(false);
 				}
 				else if (event.mouseButton.button == sf::Mouse::Right) {
@@ -72,7 +65,7 @@ int main() {
 		//input
 		program_runner.HandleInput(input_manager, event);
 		//update
-		ui->CallUpdate(delta_clock);
+		ui->CallUpdate(delta_clock,program_runner.GetOperationInfo(),program_runner.GetPolyPoints());
 		program_runner.Update();
 		//render
 		window.clear(sf::Color(255, 255, 255));
