@@ -1,16 +1,19 @@
 #include "FinalGraphTool.h"
 
 void FinalGraphTool::AddPoints(const std::vector<sf::Vector2f>& points_) {
-	m_vertices.setPrimitiveType(sf::LineStrip);
+	m_vertices.setPrimitiveType(sf::Lines);
 	
-	m_vertices.resize(points_.size() );
 
 	auto new_points = ChangeRange(points_);
-	for (size_t i = 0; i < new_points.size(); i++){
-		m_vertices[i].color = sf::Color::Black;
-		m_vertices[i].position = sf::Vector2f(new_points[i].x*10.f, new_points[i].y*-100.f);
+	for (size_t i = 0; i < points_.size()-1; i++){
+		m_vertices.append(sf::Vertex(sf::Vector2f(new_points[i].x * 10.f, new_points[i].y * -100.f), sf::Color::Black));
+		m_vertices.append(sf::Vertex(sf::Vector2f(new_points[i+1].x * 10.f, new_points[i+1].y * -100.f), sf::Color::Black));
 	}
 	
+	m_vertices.append(sf::Vertex(sf::Vector2f(0,0), sf::Color::Black));
+	m_vertices.append(sf::Vertex(sf::Vector2f(10.f*10.f, 0), sf::Color::Black));
+	m_vertices.append(sf::Vertex(sf::Vector2f(0, 0), sf::Color::Black));
+	m_vertices.append(sf::Vertex(sf::Vector2f(0, -10.*100.f), sf::Color::Black));
 }
 
 std::vector<sf::Vector2f> FinalGraphTool::ChangeRange(const std::vector<sf::Vector2f>& points_) {
