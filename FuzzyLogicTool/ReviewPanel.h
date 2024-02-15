@@ -16,6 +16,7 @@ public:
 	void SetSizes(const int&size);
 	const bool GetIsDonePressed()const { return is_done_pressed; }
 	const bool GetIsLoadHelp()const { return is_load_help; }
+	void SetEditButtons(const std::vector<Rule>& rule_vector);
 private:
 	sf::RectangleShape done_button;
 	
@@ -30,5 +31,7 @@ private:
 	sf::Text description_text;
 
 	bool is_load_help;
+	std::vector<sf::RectangleShape> edit_buttons;
+	std::vector<bool> is_edit_pressed;
 };
 

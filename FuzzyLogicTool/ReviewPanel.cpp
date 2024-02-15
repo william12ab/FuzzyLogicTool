@@ -1,4 +1,5 @@
 #include "ReviewPanel.h"
+#include <iostream>
 
 
 ReviewPanel::ReviewPanel():window(nullptr) {
@@ -40,6 +41,9 @@ ReviewPanel::ReviewPanel(sf::RenderWindow* hwnd, const int& size_of_rule_vector,
 	description_button.setFillColor(sf::Color::White);
 	description_button.setOutlineColor(sf::Color::Black);
 	description_button.setOutlineThickness(1.f);
+
+	
+
 }
 
 void ReviewPanel::SetSizes(const int& size) {
@@ -99,6 +103,7 @@ void ReviewPanel::SetText(const std::vector<Rule>& rule_vector) {
 		rule_text_box[i].setPosition(sf::Vector2f(150, y_pos));
 		y_pos += 100;
 	}
+	SetEditButtons(rule_vector);
 }
 
 void ReviewPanel::Render() {
@@ -111,8 +116,36 @@ void ReviewPanel::Render() {
 	window->draw(description_button);
 	window->draw(description_text);
 
+	for (size_t i = 0; i < edit_buttons.size(); i++){
+		window->draw(edit_buttons[i]);
+	}
 }
 void ReviewPanel::Input(InputManager input_manager) {
 	input_manager.ButtonBoolPress(done_button, is_done_pressed,0);
 	input_manager.ButtonBoolPress(description_button, is_load_help, 0);
+
+	for (size_t i = 0; i < edit_buttons.size(); i++){
+		bool temp_b = is_edit_pressed[i];
+		input_manager.ButtonBoolPress(edit_buttons[i], temp_b, 0);
+		is_edit_pressed[i] = temp_b;
+		if (is_edit_pressed[i]){
+			std::cout << i << "\n";
+		}
+	}
+	
+}
+
+void ReviewPanel::SetEditButtons(const std::vector<Rule>& rule_vector) {
+	int y_size = 100.f;
+	for (size_t i = 0; i < rule_vector.size(); i++){
+		sf::RectangleShape temp_button;
+		temp_button.setSize(sf::Vector2f(20, 20));
+		temp_button.setPosition(20.f, y_size);
+		temp_button.setFillColor(sf::Color::White);
+		temp_button.setOutlineColor(sf::Color::Black);
+		temp_button.setOutlineThickness(1.f);
+		edit_buttons.emplace_back(temp_button);
+		y_size += 100.f;
+		is_edit_pressed.emplace_back(false);
+	}
 }

@@ -13,7 +13,7 @@ void FinalGraphTool::AddPoints(const std::vector<sf::Vector2f>& points_) {
 	m_vertices.append(sf::Vertex(sf::Vector2f(0,0), sf::Color::Black));
 	m_vertices.append(sf::Vertex(sf::Vector2f(10.f*10.f, 0), sf::Color::Black));
 	m_vertices.append(sf::Vertex(sf::Vector2f(0, 0), sf::Color::Black));
-	m_vertices.append(sf::Vertex(sf::Vector2f(0, -10.*100.f), sf::Color::Black));
+	m_vertices.append(sf::Vertex(sf::Vector2f(0, -10.*10.f), sf::Color::Black));
 }
 
 std::vector<sf::Vector2f> FinalGraphTool::ChangeRange(const std::vector<sf::Vector2f>& points_) {
@@ -39,5 +39,4 @@ std::vector<sf::Vector2f> FinalGraphTool::ChangeRange(const std::vector<sf::Vect
 		new_points[i] = sf::Vector2f(temp_x[i], points_[i].y);
 	}
 	return new_points;
-
 }
