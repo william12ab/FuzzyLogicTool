@@ -20,7 +20,7 @@ public:
 
 	const std::vector<bool> GetEdit()const {return is_edit_pressed; }
 
-	bool SetEditBool(bool b, const int& index) { is_edit_pressed[index] = b; }
+	void SetEditBool(bool b, const int& index) { is_edit_pressed[index] = b; }
 private:
 	sf::RectangleShape done_button;
 	

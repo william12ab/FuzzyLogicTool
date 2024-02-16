@@ -121,7 +121,9 @@ void LogicHandler::Update() {
 		if (review_panel.GetEdit()[i]) {
 			//bring up temp addsetui with that rule data, validate that data when its finished and then either discard or change
 			review_panel.SetEditBool(false,i);
-
+			edit_panel.SetInfo(new_operation.GetRuleVector()[i].GetAntecedentVector().size());
+			edit_panel.SetInfo(new_operation.GetRuleVector()[i]);
+			edit_panel.SetIsEditDisplay(true);
 		}
 	}
 }
@@ -140,7 +142,6 @@ void LogicHandler::Render() {
 	}
 	else {
 		if (!review_panel.GetIsDonePressed()){
-			review_panel.Render();
 			if (review_panel.GetIsLoadHelp()) {
 				help_panel.Render();
 				if (help_panel.GetIsGoBack()) {
@@ -148,13 +149,20 @@ void LogicHandler::Render() {
 				}
 			}
 			else {
-				help_panel.SetIsGoBack(false);
+				if (edit_panel.GetIsEditDisplay()) {
+					edit_panel.Render();
+				}
+				else {
+					help_panel.SetIsGoBack(false);
+					review_panel.Render();
+				}
 			}
 		}
 		else {
 			input_panel.Render();
 		}	
 	}
+	
 }
 void LogicHandler::HandleInput(InputManager input_manger, sf::Event e) {
 	if (!window_template.GetIsFinished()){

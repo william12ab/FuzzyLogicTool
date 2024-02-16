@@ -5,6 +5,7 @@
 class EditPanel
 {
 public:
+	EditPanel();
 	EditPanel(sf::RenderWindow* hwnd, const sf::Font& font);
 	void Render();
 	void Input(InputManager input_manager);
@@ -14,10 +15,12 @@ public:
 	void SetAntecedentInfo(const FuzzySet&vals,int& index);
 	void SetAntecedentNumericalInfo(const FuzzySet& vals, int& index);
 	void SetNumericalInput(const int& ant_size);
+	void SetIsEditDisplay(bool b) { is_edit_diplay = b; }
 
 	void SetIsLoadHelp(bool b) { is_load_help = b; }
 	const bool GetIsLoadHelp()const { return is_load_help; }
 	const bool GetIsDonePressed()const { return is_done_pressed; }
+	const bool GetIsEditDisplay()const { return is_edit_diplay; }
 
 private:
 	sf::RenderWindow* window;
@@ -32,6 +35,8 @@ private:
 
 	std::vector<sf::Text> display_text_field;
 	std::vector<TextFieldObject> input_text_fields;
+
+	bool is_edit_diplay;
 
 
 };

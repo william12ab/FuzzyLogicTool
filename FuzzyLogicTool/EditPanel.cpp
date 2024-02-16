@@ -1,7 +1,10 @@
 #include "EditPanel.h"
 
+EditPanel::EditPanel() {
 
-EditPanel::EditPanel(sf::RenderWindow* hwnd, const sf::Font& font):window(hwnd){
+}
+
+EditPanel::EditPanel(sf::RenderWindow* hwnd, const sf::Font& font):window(hwnd),is_edit_diplay(false){
 	is_done_pressed = false;
 	is_load_help = false;
 
