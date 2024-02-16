@@ -41,9 +41,6 @@ ReviewPanel::ReviewPanel(sf::RenderWindow* hwnd, const int& size_of_rule_vector,
 	description_button.setFillColor(sf::Color::White);
 	description_button.setOutlineColor(sf::Color::Black);
 	description_button.setOutlineThickness(1.f);
-
-	
-
 }
 
 void ReviewPanel::SetSizes(const int& size) {
@@ -129,10 +126,8 @@ void ReviewPanel::Input(InputManager input_manager) {
 		input_manager.ButtonBoolPress(edit_buttons[i], temp_b, 0);
 		is_edit_pressed[i] = temp_b;
 		if (is_edit_pressed[i]){
-			std::cout << i << "\n";
 		}
 	}
-	
 }
 
 void ReviewPanel::SetEditButtons(const std::vector<Rule>& rule_vector) {

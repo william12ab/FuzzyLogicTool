@@ -111,6 +111,14 @@ void LogicHandler::Update() {
 			poly_points=g.GetPoints();
 		}
 	}
+
+
+	for (size_t i = 0; i < review_panel.GetEdit().size(); i++){
+		if (review_panel.GetEdit()[i]) {
+			//bring up temp addsetui with that rule data, validate that data when its finished and then either discard or change
+
+		}
+	}
 }
 void LogicHandler::Render() {
 	if (!window_template.GetIsFinished()){

@@ -17,6 +17,8 @@ public:
 	const bool GetIsDonePressed()const { return is_done_pressed; }
 	const bool GetIsLoadHelp()const { return is_load_help; }
 	void SetEditButtons(const std::vector<Rule>& rule_vector);
+
+	const std::vector<bool> GetEdit()const {return is_edit_pressed; }
 private:
 	sf::RectangleShape done_button;
 	

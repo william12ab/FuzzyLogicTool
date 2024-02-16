@@ -149,6 +149,7 @@
     <ClCompile Include="DefuzzyCalculator.cpp" />
     <ClCompile Include="DemoWindow.cpp" />
     <ClCompile Include="DescriptionInputs.cpp" />
+    <ClCompile Include="EditPanel.cpp" />
     <ClCompile Include="FinalGraphTool.cpp" />
     <ClCompile Include="FuzzyLogicTool.cpp" />
     <ClCompile Include="FuzzySet.cpp" />
@@ -176,6 +177,7 @@
     <ClInclude Include="DefuzzyCalculator.h" />
     <ClInclude Include="DemoWindow.h" />
     <ClInclude Include="DescriptionInputs.h" />
+    <ClInclude Include="EditPanel.h" />
     <ClInclude Include="FinalGraphTool.h" />
     <ClInclude Include="FuzzySet.h" />
     <ClInclude Include="GraphDisplay.h" />
