@@ -39,8 +39,8 @@ void EditPanel::Input(InputManager input_manager) {
 	input_manager.ButtonBoolPress(description_button, is_load_help, 0);
 }
 
-void EditPanel::SetInfo(const Rule& rule_obj) {
-	display_text_field.resize(3 + rule_obj.GetAntecedentVector().size() - 1);
+void EditPanel::SetInfo(const int& ant_size) {
+	display_text_field.resize(3 + ant_size - 1);
 	std::string arr[3] = { "If ", "is ", "then " };
 	auto temp_f=description_text.getFont();
 	float x_pos = 50;
@@ -70,18 +70,21 @@ void EditPanel::SetInfo(const Rule& rule_obj) {
 		}
 		display_text_field[i].setCharacterSize(18);
 	}
+
+	SetInputObj(ant_size);
+	SetNumericalInput(ant_size);
 }
 
-void EditPanel::SetInputObj(const Rule& rule_obj) {
+void EditPanel::SetInputObj(const int& ant_size) {
 	auto temp_f = description_text.getFont();
-	int size_ = (rule_obj.GetAntecedentVector().size() * 3) + 2;
+	int size_ = (ant_size * 3) + 2;//graph name, axis name, operator(*antecedent size) + graph name, axis name for conseqeunce
 	int x_pos = 100;
 	int y_pos = 150;
 	int loc_counter = 0;
 	for (int i = 0; i < size_; i++) {
 		input_text_fields.emplace_back(TextFieldObject(20, sf::Vector2f(x_pos, y_pos), *temp_f));
 		x_pos += 200;
-		if (i==2){
+		if (loc_counter ==2){
 			y_pos += 100;
 			loc_counter = 0;
 		}
@@ -89,6 +92,54 @@ void EditPanel::SetInputObj(const Rule& rule_obj) {
 	}
 }
 
-void EditPanel::SetNumericalInput(const Rule& rule_obj) {
+void EditPanel::SetNumericalInput(const int& ant_size) {
+	auto temp_f = description_text.getFont();
+	int size_ = (ant_size * 3) + 2;//min max, graph value* antecedent size + min max for coonsequence
+	float x_pos = 100;
+	float y_pos = 400;
+	int loc_counter = 0;
+	for (size_t i = 0; i < size_; i++){
+		input_text_fields.emplace_back(TextFieldObject(20, sf::Vector2f(x_pos, y_pos), *temp_f));
+		y_pos += 100;
+		if (loc_counter == 2) {
+			loc_counter = 0;
+			x_pos += 200;
+		}
+		loc_counter++;
+	}
+}
 
+void EditPanel::SetAntecedentInfo(const FuzzySet& set_val,int&index) {
+	
+	input_text_fields[index].SetPrevious(set_val.GetxName());
+	index++;
+	input_text_fields[index].SetPrevious(set_val.GetGraphName());
+	index++;
+	if (set_val.GetOperatorValue() == 1) {
+		input_text_fields[index].SetPrevious("1");//or
+	}
+	else if (set_val.GetOperatorValue() == 2) {
+		input_text_fields[index].SetPrevious("2");//and
+	}
+	else {
+		input_text_fields[index].SetPrevious("3");//blank
+	}
+	index++;
+}
+
+void EditPanel::SetInfo(const Rule& rule_vec) {
+	//set the input panels with the rule info 
+	int has_op =rule_vec.GetAntecedentVector()[0].GetOperatorValue();//if not 0 then operator
+	int size_antecedent = rule_vec.GetAntecedentVector().size();
+	int loc_counter = 0;
+	for (size_t i = 0; i < size_antecedent; i++){
+		SetAntecedentInfo(rule_vec.GetAntecedentVector()[i], loc_counter);
+	}
+	input_text_fields[loc_counter].SetPrevious(rule_vec.GetConsequenceVector()[0].GetxName());
+	loc_counter++;
+	input_text_fields[loc_counter].SetPrevious(rule_vec.GetConsequenceVector()[0].GetGraphName());
+	loc_counter++;
+	//sets written inputs
+
+	//numerical inputs
 }
