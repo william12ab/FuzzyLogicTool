@@ -51,35 +51,57 @@ void EditPanel::Input(InputManager input_manager) {
 }
 
 void EditPanel::SetInfo(const int& ant_size) {
-	display_text_field.resize(3 + ant_size - 1);
+	display_text_field.resize(4+(ant_size-1));
 	std::string arr[3] = { "If ", "is ", "then " };
 	auto temp_f=description_text.getFont();
 	float x_pos = 50;
-	float y_pos = 150;
+	float y_pos = 75;
+	int local_index = 0;
 	for (size_t i = 0; i < display_text_field.size(); i++){
 		display_text_field[i].setFont(*temp_f);
 		display_text_field[i].setFillColor(sf::Color(0, 0, 0));
-		display_text_field[i].setPosition(sf::Vector2f(x_pos, y_pos));
-		if (display_text_field.size()>3){
+
+		if (display_text_field.size()>5){
 			if (i >= 3 && i < display_text_field.size()) {
 				display_text_field[i].setString(arr[1]);//displays is
 				x_pos = 50;
 			}
 			else if (i < 3) {
 				display_text_field[i].setString(arr[i]);//diplays if/is
-				y_pos += 100;
+				y_pos += 50;
 				x_pos += 200;
 			}
 			else {
 				display_text_field[i].setString(arr[2]);//displays then
-				y_pos += 100;
+				y_pos += 50;
 				x_pos = 50;
 			}
 		}
 		else {
-			display_text_field[i].setString(arr[i]);
+			if (local_index ==1) {
+				display_text_field[i].setString(arr[1]);//diplays if/is
+				x_pos += 200;
+				local_index++;
+			}
+			else if(local_index>1){
+				display_text_field[i].setString(arr[2]);//displays then
+				//y_pos += 50;
+				x_pos += 400;
+				local_index = 1;
+			}
+			if (local_index == 0) {
+				display_text_field[i].setString(arr[0]);
+				local_index++;
+			}
+			display_text_field[i].setPosition(sf::Vector2f(x_pos, y_pos));
+			if (display_text_field[i].getString()==arr[2]){
+				y_pos += 50;
+				x_pos = 50;
+			}
 		}
 		display_text_field[i].setCharacterSize(18);
+		
+		
 	}
 
 	SetInputObj(ant_size);
@@ -89,15 +111,16 @@ void EditPanel::SetInfo(const int& ant_size) {
 void EditPanel::SetInputObj(const int& ant_size) {
 	auto temp_f = description_text.getFont();
 	int size_ = (ant_size * 3) + 2;//graph name, axis name, operator(*antecedent size) + graph name, axis name for conseqeunce
-	int x_pos = 100;
-	int y_pos = 150;
+	int x_pos = 90;
+	int y_pos = 75;
 	int loc_counter = 0;
 	for (int i = 0; i < size_; i++) {
 		input_text_fields.emplace_back(TextFieldObject(20, sf::Vector2f(x_pos, y_pos), *temp_f));
 		x_pos += 200;
 		if (loc_counter ==2){
-			y_pos += 100;
+			y_pos += 50;
 			loc_counter = 0;
+			x_pos = 90;
 		}
 		loc_counter++;
 	}
@@ -111,10 +134,11 @@ void EditPanel::SetNumericalInput(const int& ant_size) {
 	int loc_counter = 0;
 	for (size_t i = 0; i < size_; i++){
 		input_text_fields.emplace_back(TextFieldObject(20, sf::Vector2f(x_pos, y_pos), *temp_f));
-		y_pos += 100;
+		y_pos += 50;
 		if (loc_counter == 2) {
 			loc_counter = 0;
 			x_pos += 200;
+			y_pos = 400;
 		}
 		loc_counter++;
 	}
@@ -133,7 +157,7 @@ void EditPanel::SetAntecedentInfo(const FuzzySet& set_val,int&index) {
 		input_text_fields[index].SetPrevious("2");//and
 	}
 	else {
-		input_text_fields[index].SetPrevious("3");//blank
+		input_text_fields[index].SetPrevious("0");//blank
 	}
 	index++;
 }
