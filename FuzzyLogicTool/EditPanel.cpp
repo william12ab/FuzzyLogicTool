@@ -56,37 +56,52 @@ void EditPanel::SetInfo(const int& ant_size) {
 	auto temp_f=description_text.getFont();
 	float x_pos = 50;
 	float y_pos = 75;
+	float x_add = 200;
 	int local_index = 0;
 	for (size_t i = 0; i < display_text_field.size(); i++){
 		display_text_field[i].setFont(*temp_f);
 		display_text_field[i].setFillColor(sf::Color(0, 0, 0));
 
-		if (display_text_field.size()>5){
-			if (i >= 3 && i < display_text_field.size()) {
-				display_text_field[i].setString(arr[1]);//displays is
-				x_pos = 50;
+		if (display_text_field.size()>4){
+			if (local_index == 1) {
+				display_text_field[i].setString(arr[1]);//diplays is
+				
+				if (i==display_text_field.size()-2){
+					local_index = 2;
+				}
+				if (i>1){
+					y_pos += 50;
+				}
+				else {
+					x_pos += x_add;
+				}
 			}
-			else if (i < 3) {
-				display_text_field[i].setString(arr[i]);//diplays if/is
-				y_pos += 50;
-				x_pos += 200;
-			}
-			else {
+			else if (local_index > 1) {
 				display_text_field[i].setString(arr[2]);//displays then
+				y_pos -= 50;
+				x_pos += (x_add*2);
+				local_index = 1;
+			}
+			if (local_index == 0) {
+				display_text_field[i].setString(arr[0]);
+				local_index++;
+			}
+			display_text_field[i].setPosition(sf::Vector2f(x_pos, y_pos));
+			if (display_text_field[i].getString() == arr[2]) {
 				y_pos += 50;
 				x_pos = 50;
 			}
 		}
 		else {
 			if (local_index ==1) {
-				display_text_field[i].setString(arr[1]);//diplays if/is
-				x_pos += 200;
+				display_text_field[i].setString(arr[1]);//displays is
+				x_pos += x_add;
 				local_index++;
 			}
 			else if(local_index>1){
 				display_text_field[i].setString(arr[2]);//displays then
 				//y_pos += 50;
-				x_pos += 400;
+				x_pos += (x_add * 2);
 				local_index = 1;
 			}
 			if (local_index == 0) {
@@ -114,33 +129,36 @@ void EditPanel::SetInputObj(const int& ant_size) {
 	int x_pos = 90;
 	int y_pos = 75;
 	int loc_counter = 0;
+	float x_add = 175;
 	for (int i = 0; i < size_; i++) {
 		input_text_fields.emplace_back(TextFieldObject(20, sf::Vector2f(x_pos, y_pos), *temp_f));
-		x_pos += 200;
-		if (loc_counter ==2){
+		x_pos += x_add;
+		loc_counter++;
+		if (loc_counter ==3){
 			y_pos += 50;
 			loc_counter = 0;
 			x_pos = 90;
 		}
-		loc_counter++;
+
 	}
 }
 
 void EditPanel::SetNumericalInput(const int& ant_size) {
 	auto temp_f = description_text.getFont();
 	int size_ = (ant_size * 3) + 2;//min max, graph value* antecedent size + min max for coonsequence
-	float x_pos = 100;
+	float x_pos = 50;
 	float y_pos = 400;
 	int loc_counter = 0;
 	for (size_t i = 0; i < size_; i++){
 		input_text_fields.emplace_back(TextFieldObject(20, sf::Vector2f(x_pos, y_pos), *temp_f));
 		y_pos += 50;
-		if (loc_counter == 2) {
+		loc_counter++;
+		if (loc_counter == 3) {
 			loc_counter = 0;
-			x_pos += 200;
+			x_pos += 175;
 			y_pos = 400;
 		}
-		loc_counter++;
+		
 	}
 }
 
