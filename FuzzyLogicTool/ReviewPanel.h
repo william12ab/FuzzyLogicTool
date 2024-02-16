@@ -19,6 +19,8 @@ public:
 	void SetEditButtons(const std::vector<Rule>& rule_vector);
 
 	const std::vector<bool> GetEdit()const {return is_edit_pressed; }
+
+	bool SetEditBool(bool b, const int& index) { is_edit_pressed[index] = b; }
 private:
 	sf::RectangleShape done_button;
 	

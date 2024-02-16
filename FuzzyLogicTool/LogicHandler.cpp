@@ -15,7 +15,11 @@ LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font){
 	InputPanel* tempinput = new InputPanel(1,1,window, font);
 	input_panel = *tempinput;
 
+	EditPanel* tempedit = new EditPanel(window, font);
+	edit_panel = *tempedit;
 
+	delete tempedit;
+	tempedit = NULL;
 	delete tempinput;
 	tempinput = NULL;
 	delete temp;
@@ -116,6 +120,7 @@ void LogicHandler::Update() {
 	for (size_t i = 0; i < review_panel.GetEdit().size(); i++){
 		if (review_panel.GetEdit()[i]) {
 			//bring up temp addsetui with that rule data, validate that data when its finished and then either discard or change
+			review_panel.SetEditBool(false,i);
 
 		}
 	}

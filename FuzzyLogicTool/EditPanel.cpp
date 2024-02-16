@@ -1,7 +1,7 @@
 #include "EditPanel.h"
 
 
-EditPanel::EditPanel(sf::RenderWindow* hwnd, const int& size_of_rule_vector, const sf::Font& font):window(hwnd){
+EditPanel::EditPanel(sf::RenderWindow* hwnd, const sf::Font& font):window(hwnd){
 	is_done_pressed = false;
 	is_load_help = false;
 
@@ -33,6 +33,14 @@ void EditPanel::Render() {
 	window->draw(done_text);
 	window->draw(description_button);
 	window->draw(description_text);
+
+	for (size_t i = 0; i < display_text_field.size(); i++){
+		window->draw(display_text_field[i]);
+	}
+	for (size_t i = 0; i < input_text_fields.size(); i++) {
+		window->draw(input_text_fields[i].GetShape());
+		window->draw(input_text_fields[i].GetTextField());
+	}
 }
 void EditPanel::Input(InputManager input_manager) {
 	input_manager.ButtonBoolPress(done_button, is_done_pressed, 0);
@@ -126,6 +134,14 @@ void EditPanel::SetAntecedentInfo(const FuzzySet& set_val,int&index) {
 	}
 	index++;
 }
+void EditPanel::SetAntecedentNumericalInfo(const FuzzySet& vals, int& index) {
+	input_text_fields[index].SetPrevious(std::to_string(vals.GetMin()));
+	index++;
+	input_text_fields[index].SetPrevious(std::to_string(vals.GetMax()));
+	index++;
+	input_text_fields[index].SetPrevious(std::to_string(vals.GetGraphType()));
+	index++;
+}
 
 void EditPanel::SetInfo(const Rule& rule_vec) {
 	//set the input panels with the rule info 
@@ -142,4 +158,11 @@ void EditPanel::SetInfo(const Rule& rule_vec) {
 	//sets written inputs
 
 	//numerical inputs
+	for (size_t i = 0; i < size_antecedent; i++){
+		SetAntecedentNumericalInfo(rule_vec.GetAntecedentVector()[i], loc_counter);
+	}
+	input_text_fields[loc_counter].SetPrevious(std::to_string(rule_vec.GetConsequenceVector()[0].GetMin()));
+	loc_counter++;
+	input_text_fields[loc_counter].SetPrevious(std::to_string(rule_vec.GetConsequenceVector()[0].GetMax()));
+	loc_counter++;
 }

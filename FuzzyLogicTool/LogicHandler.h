@@ -5,6 +5,7 @@
 #include "ReviewPanel.h"
 #include "InputPanel.h"
 #include "DefuzzyCalculator.h"
+#include "EditPanel.h"
 class LogicHandler
 {
 public:
@@ -22,6 +23,7 @@ private:
 	DescriptionInputs help_panel;
 	ReviewPanel review_panel;
 	InputPanel input_panel;
+	EditPanel edit_panel;
 	bool is_added;
 	bool is_review_created;
 	bool is_input_stage;
@@ -30,5 +32,7 @@ private:
 
 	int current_display_index;
 	std::vector<sf::Vector2f> poly_points;
+
+
 };
 

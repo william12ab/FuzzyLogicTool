@@ -5,14 +5,14 @@
 class EditPanel
 {
 public:
-	EditPanel(sf::RenderWindow* hwnd, const int& size_of_rule_vector, const sf::Font& font);
+	EditPanel(sf::RenderWindow* hwnd, const sf::Font& font);
 	void Render();
 	void Input(InputManager input_manager);
 	void SetInfo(const int& ant_size);
 	void SetInputObj(const int& ant_size);
 	void SetInfo(const Rule& rule_vec);
 	void SetAntecedentInfo(const FuzzySet&vals,int& index);
-
+	void SetAntecedentNumericalInfo(const FuzzySet& vals, int& index);
 	void SetNumericalInput(const int& ant_size);
 
 	void SetIsLoadHelp(bool b) { is_load_help = b; }
