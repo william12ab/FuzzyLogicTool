@@ -9,7 +9,7 @@ EditPanel::EditPanel(sf::RenderWindow* hwnd, const sf::Font& font):window(hwnd),
 	is_load_help = false;
 
 	done_button.setSize(sf::Vector2f(55, 20));
-	done_button.setPosition(600, 400);
+	done_button.setPosition(600, 500);
 	done_button.setFillColor(sf::Color::White);
 	done_button.setOutlineColor(sf::Color::Black);
 	done_button.setOutlineThickness(1.f);
@@ -17,7 +17,7 @@ EditPanel::EditPanel(sf::RenderWindow* hwnd, const sf::Font& font):window(hwnd),
 	done_text.setCharacterSize(18);
 	done_text.setFont(font);
 	done_text.setFillColor(sf::Color(0, 0, 0));
-	done_text.setPosition(sf::Vector2f(600, 400));
+	done_text.setPosition(sf::Vector2f(600, 500));
 	done_text.setString("Done");
 
 	description_text.setFont(font);
