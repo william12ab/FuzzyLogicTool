@@ -112,7 +112,10 @@ sf::Vector2f DefuzzyCalculator::FindDefuzzyValue() {
 		centroid.x += (obj_one.x + obj_two.x) * common_factor;
 		centroid.y += (obj_one.y + obj_two.y) * common_factor;
 	}
-	area *= 0.5f;
-	centroid /= (6.f * area);
+	if (centroid.x!=0.f&&centroid.y!=0.f){
+		area *= 0.5f;
+		centroid /= (6.f * area);
+	}
+	
 	return centroid;
 }

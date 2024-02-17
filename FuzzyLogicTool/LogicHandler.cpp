@@ -179,7 +179,12 @@ void LogicHandler::HandleInput(InputManager input_manger, sf::Event e) {
 				help_panel.Input(input_manger);
 			}
 			else {
-				review_panel.Input(input_manger);
+				if (edit_panel.GetIsEditDisplay()){
+					edit_panel.Input(input_manger);
+				}
+				else{
+					review_panel.Input(input_manger);
+				}
 			}
 		}
 		else {
