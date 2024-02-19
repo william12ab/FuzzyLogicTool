@@ -115,6 +115,10 @@ void swap(sf::Vector2f* p1, sf::Vector2f* p2) {
 	*p2 = temp;
 }
 
+void Operation::ReplaceData(Rule temp_info, const int& rule_index) {
+	swap(&temp_info, &rule_vector[rule_index]);
+}
+
 void Operation::SortPoints() {
 	std::vector<sf::Vector2f> points;
 	for (int i = 0; i < rule_vector.size(); i++) {

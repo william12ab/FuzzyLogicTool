@@ -128,9 +128,13 @@ void LogicHandler::Update() {
 		}
 	}
 	if (edit_panel.GetIsDonePressed()) {
+		Rule temp_rule;
 		edit_panel.SetIsDone(false);
 		edit_panel.SetIsEditDisplay(false);
-		edit_panel.CompareInfo(new_operation.GetRuleVector()[index]);
+		if (edit_panel.CompareInfo(new_operation.GetRuleVector()[index], temp_rule)){
+			new_operation.ReplaceData(temp_rule, index);
+		}
+		
 	}
 }
 void LogicHandler::Render() {
@@ -204,7 +208,7 @@ void LogicHandler::HandleInput(InputManager input_manger, sf::Event e) {
 					help_panel.Input(input_manger);
 				}
 				else {
-					edit_panel.Input(input_manger);
+					edit_panel.Input(input_manger,e);
 				}
 			}
 		}

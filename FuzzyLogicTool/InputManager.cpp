@@ -31,6 +31,30 @@ void InputManager::ButtonBoolPress(sf::RectangleShape& rect_shape, bool& is_move
 	}
 }
 
+void InputManager::HandleTextInput(TextFieldObject& text_object, sf::Event event) {
+	text_object.SetFocus(false);
+	auto pos = sf::Vector2f(input->getMouseX(), input->getMouseY());
+
+	if (text_object.ifContains(sf::Vector2f(pos))) {
+		text_object.SetFocus(true);
+	}
+	if (text_object.GetFocus()) {
+		if (event.type != sf::Event::TextEntered) {
+			text_object.SetIsTextAdded(false);
+		}
+		else if (!text_object.GetIsTextAdded()) {
+			if (event.text.unicode == 8) {
+				text_object.SubtractKey();
+			}
+			else if (text_object.GetTextSize() < text_object.GetMaxSize()) {
+				text_object.Addletter(event.text.unicode);
+			}
+			text_object.SetIsTextAdded(true);
+			text_object.SetText();
+		}
+	}
+}
+
 void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event, const int& index) {
 	text_object.SetFocus(false);
 	auto pos = sf::Vector2f(input->getMouseX(), input->getMouseY());

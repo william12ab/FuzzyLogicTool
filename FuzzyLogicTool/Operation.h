@@ -25,6 +25,8 @@ public:
 
 	bool ValidateData(const bool& is_cons, const int& counter_);
 	void AddUp(int& counter, const FuzzySet& temp_set);
+
+	void ReplaceData(Rule temp_info, const int& rule_index);
 private:
 	std::vector<Rule> rule_vector;
 

@@ -45,9 +45,12 @@ void EditPanel::Render() {
 		window->draw(input_text_fields[i].GetTextField());
 	}
 }
-void EditPanel::Input(InputManager input_manager) {
+void EditPanel::Input(InputManager input_manager,sf::Event e) {
 	input_manager.ButtonBoolPress(done_button, is_done_pressed, 0);
 	input_manager.ButtonBoolPress(description_button, is_load_help, 0);
+	for (size_t i = 0; i < input_text_fields.size(); i++) {
+		input_manager.HandleTextInput(input_text_fields[i], e);
+	}
 }
 
 void EditPanel::SetInfo(const int& ant_size) {
@@ -115,10 +118,7 @@ void EditPanel::SetInfo(const int& ant_size) {
 			}
 		}
 		display_text_field[i].setCharacterSize(18);
-		
-		
 	}
-
 	SetInputObj(ant_size);
 	SetNumericalInput(ant_size);
 }
@@ -139,7 +139,6 @@ void EditPanel::SetInputObj(const int& ant_size) {
 			loc_counter = 0;
 			x_pos = 90;
 		}
-
 	}
 }
 
@@ -158,7 +157,6 @@ void EditPanel::SetNumericalInput(const int& ant_size) {
 			x_pos += 175;
 			y_pos = 400;
 		}
-		
 	}
 }
 
@@ -174,7 +172,7 @@ void EditPanel::SetAntecedentInfo(const FuzzySet& set_val,int&index) {
 		input_text_fields[index].SetPrevious("2");//and
 	}
 	else {
-		input_text_fields[index].SetPrevious("0");//blank
+		input_text_fields[index].SetPrevious("not editable");//blank
 	}
 	index++;
 }
@@ -211,33 +209,48 @@ void EditPanel::SetInfo(const Rule& rule_vec) {
 	loc_counter++;
 }
 
-
-
-bool EditPanel::CompareInfo(const Rule& temp_rule) {
-
+bool EditPanel::CompareInfo(const Rule& temp_rule, Rule& temp_holder) {
 	int size_antecedent = temp_rule.GetAntecedentVector().size();
 	bool is_different = false;
 	int local_counter = 0;
+	int antecedent_index=0;
+	std::vector<FuzzySet> temp_set;
+	
 	for (local_counter = 0; local_counter < size_antecedent; local_counter+=8){
-		if (input_text_fields[local_counter].GetText()!=temp_rule.GetAntecedentVector()[local_counter].GetxName()){
+		temp_set.emplace_back();
+		temp_set.back().SetSetType(1);
+		temp_set[antecedent_index].SetXAxisName(input_text_fields[local_counter].GetText());
+		temp_set[antecedent_index].SetXAxisName(input_text_fields[local_counter + 1].GetText());
+		temp_set[antecedent_index].SetOperatorValue(std::stof(input_text_fields[local_counter + 2].GetText()));
+		temp_set[antecedent_index].SetMin(std::stof(input_text_fields[local_counter + 5].GetText()));
+		temp_set[antecedent_index].SetMax(std::stof(input_text_fields[local_counter + 6].GetText()));
+		temp_set[antecedent_index].SetGraphType(std::stof(input_text_fields[local_counter + 7].GetText()));
+		if (input_text_fields[local_counter].GetText()!=temp_rule.GetAntecedentVector()[antecedent_index].GetxName()){
 			is_different = true;
 		}
-		if (input_text_fields[local_counter +1].GetText() != temp_rule.GetAntecedentVector()[local_counter].GetGraphName()) {
+		if (input_text_fields[local_counter +1].GetText() != temp_rule.GetAntecedentVector()[antecedent_index].GetGraphName()) {
 			is_different = true;
 		}
-		if (input_text_fields[local_counter + 2].GetText() != std::to_string(temp_rule.GetAntecedentVector()[local_counter].GetOperatorValue())) {
+		if (input_text_fields[local_counter + 2].GetText() != std::to_string(temp_rule.GetAntecedentVector()[antecedent_index].GetOperatorValue())) {
 			is_different = true;
 		}
-		if (input_text_fields[local_counter + 5].GetText() != std::to_string(temp_rule.GetAntecedentVector()[local_counter].GetMin())) {
+		if (input_text_fields[local_counter + 5].GetText() != std::to_string(temp_rule.GetAntecedentVector()[antecedent_index].GetMin())) {
 			is_different = true;
 		}
-		if (input_text_fields[local_counter + 6].GetText() != std::to_string(temp_rule.GetAntecedentVector()[local_counter].GetMax())) {
+		if (input_text_fields[local_counter + 6].GetText() != std::to_string(temp_rule.GetAntecedentVector()[antecedent_index].GetMax())) {
 			is_different = true;
 		}
-		if (input_text_fields[local_counter + 7].GetText() != std::to_string(temp_rule.GetAntecedentVector()[local_counter].GetGraphType())) {
+		if (input_text_fields[local_counter + 7].GetText() != std::to_string(temp_rule.GetAntecedentVector()[antecedent_index].GetGraphType())) {
 			is_different = true;
 		}
+		antecedent_index++;
 	}
+	temp_set.emplace_back();
+	temp_set.back().SetSetType(0);
+	temp_set[temp_set.size() - 1].SetXAxisName(input_text_fields[(3 * size_antecedent)].GetText());
+	temp_set[temp_set.size() - 1].SetGraphName(input_text_fields[(3 * size_antecedent) + 1].GetText());
+	temp_set[temp_set.size() - 1].SetMin(std::stof(input_text_fields[local_counter].GetText()));
+	temp_set[temp_set.size() - 1].SetMax(std::stof(input_text_fields[local_counter + 1].GetText()));
 	if (input_text_fields[(3*size_antecedent)].GetText() != temp_rule.GetConsequenceVector()[0].GetxName()) {
 		is_different = true;
 	}
@@ -250,6 +263,11 @@ bool EditPanel::CompareInfo(const Rule& temp_rule) {
 	if (input_text_fields[local_counter+1].GetText() != std::to_string(temp_rule.GetConsequenceVector()[0].GetMax())) {
 		is_different = true;
 	}
-
+	if (is_different){
+		for (size_t i = 0; i < antecedent_index; i++){
+			temp_holder.AddAntecedent(temp_set[i]);
+		}
+		temp_holder.AddConsequence(temp_set.back());
+	}
 	return is_different;
 }
