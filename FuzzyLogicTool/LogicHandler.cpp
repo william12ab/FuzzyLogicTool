@@ -29,10 +29,11 @@ LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font) {
 	delete tempreview;
 	tempreview = NULL;
 
+	is_gone_back = false;
 	is_review_created = false;
 	is_input_stage = false;
 	is_input_complete = false;
-
+	is_data_need_validate = false;
 	current_display_index = 0;
 }
 void LogicHandler::Update() {
@@ -56,6 +57,8 @@ void LogicHandler::Update() {
 				window_template.SetIsConsequence(false);
 			}
 			window_template.SetPreviousItems(temp, window_template.GetIsConsequence(), window_template.GetIsSecond(), new_operation.GetSizeVector());
+			is_data_need_validate = true; 
+			is_gone_back = true;
 		}
 		//displaying new info page
 		if (window_template.GetIsMoveOne() || window_template.GetIsTriggerIsFinish()) {
@@ -69,12 +72,34 @@ void LogicHandler::Update() {
 			if (!window_template.GetIsConsequence()) {
 				current_display_index++;
 			}
-			new_operation.AddRule(window_template.GetIsConsequence(), current_display_index);
+			new_operation.AddRule(window_template.GetIsConsequence(), current_display_index,is_data_need_validate);
+			is_data_need_validate = false;
 			if (window_template.GetIsTriggerIsFinish()) {
 				window_template.SetIsFinished(true);
 			}
 			else {
-				if (window_template.GetHasOperator()) {
+				if (is_gone_back){
+					current_display_index++;
+					is_data_need_validate = true;
+					auto temp = new_operation.GetData(current_display_index);
+
+					if (temp.GetSetType() == 0) {
+						//is consequence
+						window_template.SetIsSecond(true);
+					}
+					else {
+						if (new_operation.GetRuleTemplate().GetSizeOfAntecedent() > 0) {
+							window_template.SetIsSecond(true);
+						}
+						else {
+							window_template.SetIsSecond(false);
+						}
+						window_template.SetIsConsequence(false);
+					}
+					window_template.SetPreviousItems(temp, window_template.GetIsConsequence(), window_template.GetIsSecond(), new_operation.GetSizeVector());
+					is_gone_back = false;
+				}
+				else if (window_template.GetHasOperator()) {
 					window_template.ChangeWindowAppearance(true, false, new_operation.GetSizeVector());//is second antecedent
 				}
 				else if (!window_template.GetIsOperationDone()) {

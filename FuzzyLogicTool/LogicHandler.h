@@ -34,5 +34,8 @@ private:
 	std::vector<sf::Vector2f> poly_points;
 
 
+	bool is_data_need_validate;
+	bool is_gone_back;
+
 };
 

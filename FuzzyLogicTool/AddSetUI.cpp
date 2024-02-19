@@ -112,7 +112,7 @@ void AddSetUI::Update() {
 }
 
 void AddSetUI::SetPreviousItems(FuzzySet temp, const bool&is_con_e, const bool&is_second_e, const int& rule_number) {
-	if (is_go_back){
+//	if (is_go_back){
 		ChangeWindowAppearance(is_second_e,is_con_e, rule_number);
 		text_fields[0].SetPrevious(temp.GetxName());
 		text_fields[1].SetPrevious(temp.GetGraphName());
@@ -122,8 +122,8 @@ void AddSetUI::SetPreviousItems(FuzzySet temp, const bool&is_con_e, const bool&i
 		if (!is_con_e){
 			text_fields[5].SetPrevious(std::to_string(temp.GetOperatorValue()));
 		}
-		is_go_back = false;
-	}
+		//is_go_back = false;
+	//}
 	current_text_field = 0;
 }
 

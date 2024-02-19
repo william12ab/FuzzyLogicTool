@@ -9,13 +9,17 @@ Operation::~Operation() {
 	}
 }
 
-void Operation::AddRule(const bool& is_consequence, int& counter_) {
+void Operation::AddRule(const bool& is_consequence, int& counter_, const bool& is_validate) {
+	bool is_validated = false;
 	if (!is_consequence) {
 		if (rule_template.GetSizeOfAntecedent() == 0){
 			rule_template.AddAntecedent(fuzzy_set_template);
 		}
-		else if(!ValidateData(false,counter_)) {
+		else if(!ValidateData(false,counter_)&&is_validate) {
 			rule_template.ChangeInAntecedent();
+			rule_template.AddAntecedent(fuzzy_set_template);
+		}
+		else if (!is_validate){
 			rule_template.AddAntecedent(fuzzy_set_template);
 		}
 	}

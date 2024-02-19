@@ -6,7 +6,7 @@ class Operation
 public:
 	Operation();
 	~Operation();
-	void AddRule(const bool& is_consequence, int&counter_);
+	void AddRule(const bool& is_consequence, int&counter_,const bool& is_validate);
 	void AddSetData(const std::string &data, const int &index,const bool& has_operator, const bool& is_consequence);
 
 	
