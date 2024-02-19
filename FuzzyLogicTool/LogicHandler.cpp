@@ -133,6 +133,7 @@ void LogicHandler::Update() {
 		edit_panel.SetIsEditDisplay(false);
 		if (edit_panel.CompareInfo(new_operation.GetRuleVector()[index], temp_rule)){
 			new_operation.ReplaceData(temp_rule, index);
+			is_review_created = false;
 		}
 	}
 }
