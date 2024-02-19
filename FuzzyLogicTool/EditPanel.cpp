@@ -163,7 +163,6 @@ void EditPanel::SetNumericalInput(const int& ant_size) {
 }
 
 void EditPanel::SetAntecedentInfo(const FuzzySet& set_val,int&index) {
-	
 	input_text_fields[index].SetPrevious(set_val.GetxName());
 	index++;
 	input_text_fields[index].SetPrevious(set_val.GetGraphName());
@@ -210,4 +209,47 @@ void EditPanel::SetInfo(const Rule& rule_vec) {
 	loc_counter++;
 	input_text_fields[loc_counter].SetPrevious(std::to_string(rule_vec.GetConsequenceVector()[0].GetMax()));
 	loc_counter++;
+}
+
+
+
+bool EditPanel::CompareInfo(const Rule& temp_rule) {
+
+	int size_antecedent = temp_rule.GetAntecedentVector().size();
+	bool is_different = false;
+	int local_counter = 0;
+	for (local_counter = 0; local_counter < size_antecedent; local_counter+=8){
+		if (input_text_fields[local_counter].GetText()!=temp_rule.GetAntecedentVector()[local_counter].GetxName()){
+			is_different = true;
+		}
+		if (input_text_fields[local_counter +1].GetText() != temp_rule.GetAntecedentVector()[local_counter].GetGraphName()) {
+			is_different = true;
+		}
+		if (input_text_fields[local_counter + 2].GetText() != std::to_string(temp_rule.GetAntecedentVector()[local_counter].GetOperatorValue())) {
+			is_different = true;
+		}
+		if (input_text_fields[local_counter + 5].GetText() != std::to_string(temp_rule.GetAntecedentVector()[local_counter].GetMin())) {
+			is_different = true;
+		}
+		if (input_text_fields[local_counter + 6].GetText() != std::to_string(temp_rule.GetAntecedentVector()[local_counter].GetMax())) {
+			is_different = true;
+		}
+		if (input_text_fields[local_counter + 7].GetText() != std::to_string(temp_rule.GetAntecedentVector()[local_counter].GetGraphType())) {
+			is_different = true;
+		}
+	}
+	if (input_text_fields[(3*size_antecedent)].GetText() != temp_rule.GetConsequenceVector()[0].GetxName()) {
+		is_different = true;
+	}
+	if (input_text_fields[(3 * size_antecedent) +1].GetText() != temp_rule.GetConsequenceVector()[0].GetGraphName()) {
+		is_different = true;
+	}
+	if (input_text_fields[local_counter].GetText() != std::to_string(temp_rule.GetConsequenceVector()[0].GetMin())) {
+		is_different = true;
+	}
+	if (input_text_fields[local_counter+1].GetText() != std::to_string(temp_rule.GetConsequenceVector()[0].GetMax())) {
+		is_different = true;
+	}
+
+	return is_different;
 }

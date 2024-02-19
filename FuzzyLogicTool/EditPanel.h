@@ -18,6 +18,7 @@ public:
 
 	void SetIsEditDisplay(bool b) { is_edit_diplay = b; }
 	void SetIsDone(bool b) { is_done_pressed = b; }
+	bool CompareInfo(const Rule& temp_rule);
 
 	void SetIsLoadHelp(bool b) { is_load_help = b; }
 	const bool GetIsLoadHelp()const { return is_load_help; }

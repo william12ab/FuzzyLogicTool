@@ -116,7 +116,7 @@ void LogicHandler::Update() {
 		}
 	}
 
-
+	int index = 0;
 	for (size_t i = 0; i < review_panel.GetEdit().size(); i++) {
 		if (review_panel.GetEdit()[i]) {
 			//bring up temp addsetui with that rule data, validate that data when its finished and then either discard or change
@@ -124,12 +124,13 @@ void LogicHandler::Update() {
 			edit_panel.SetInfo(new_operation.GetRuleVector()[i].GetAntecedentVector().size());
 			edit_panel.SetInfo(new_operation.GetRuleVector()[i]);
 			edit_panel.SetIsEditDisplay(true);
+			index = i;
 		}
 	}
 	if (edit_panel.GetIsDonePressed()) {
 		edit_panel.SetIsDone(false);
 		edit_panel.SetIsEditDisplay(false);
-
+		edit_panel.CompareInfo(new_operation.GetRuleVector()[index]);
 	}
 }
 void LogicHandler::Render() {
