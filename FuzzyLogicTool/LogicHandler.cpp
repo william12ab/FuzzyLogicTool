@@ -134,7 +134,6 @@ void LogicHandler::Update() {
 		if (edit_panel.CompareInfo(new_operation.GetRuleVector()[index], temp_rule)){
 			new_operation.ReplaceData(temp_rule, index);
 		}
-		
 	}
 }
 void LogicHandler::Render() {

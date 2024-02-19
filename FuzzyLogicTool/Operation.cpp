@@ -12,12 +12,16 @@ Operation::~Operation() {
 
 void Operation::AddRule(const bool& is_consequence, int& counter_) {
 	if (!is_consequence) {
-		if (!ValidateData(false,counter_)) {
+		if (rule_template.GetSizeOfAntecedent() == 0){
+			rule_template.AddAntecedent(fuzzy_set_template);
+		}
+		else if(!ValidateData(false,counter_)) {
+			rule_template.ChangeInAntecedent();
 			rule_template.AddAntecedent(fuzzy_set_template);
 		}
 	}
 	else {
-		if (!ValidateData(true, counter_)) {
+		if (ValidateData(true, counter_)) {
 			rule_template.AddConsequence(fuzzy_set_template);
 			rule_vector.push_back(rule_template);
 			ClearRuleTemplate();
