@@ -15,7 +15,9 @@ public:
 	void SetAntecedentInfo(const FuzzySet&vals,int& index);
 	void SetAntecedentNumericalInfo(const FuzzySet& vals, int& index);
 	void SetNumericalInput(const int& ant_size);
+
 	void SetIsEditDisplay(bool b) { is_edit_diplay = b; }
+	void SetIsDone(bool b) { is_done_pressed = b; }
 
 	void SetIsLoadHelp(bool b) { is_load_help = b; }
 	const bool GetIsLoadHelp()const { return is_load_help; }

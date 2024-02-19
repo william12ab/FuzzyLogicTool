@@ -1,18 +1,18 @@
 #include "LogicHandler.h"
 #include <iostream>
-LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font){
+LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font) {
 	AddSetUI* temp = new AddSetUI(6, 7, window, false, false, true, font);
 	window_template = *temp;
-	
+
 	window_template.SetDisplayText();
 	is_added = false;
-	DescriptionInputs *temphelp = new DescriptionInputs(font, window);
+	DescriptionInputs* temphelp = new DescriptionInputs(font, window);
 	help_panel = *temphelp;
 
-	ReviewPanel* tempreview = new ReviewPanel(window,1,font);
-	review_panel= *tempreview;
+	ReviewPanel* tempreview = new ReviewPanel(window, 1, font);
+	review_panel = *tempreview;
 
-	InputPanel* tempinput = new InputPanel(1,1,window, font);
+	InputPanel* tempinput = new InputPanel(1, 1, window, font);
 	input_panel = *tempinput;
 
 	EditPanel* tempedit = new EditPanel(window, font);
@@ -58,7 +58,7 @@ void LogicHandler::Update() {
 			window_template.SetPreviousItems(temp, window_template.GetIsConsequence(), window_template.GetIsSecond(), new_operation.GetSizeVector());
 		}
 		//displaying new info page
-		if (window_template.GetIsMoveOne()|| window_template.GetIsTriggerIsFinish()) {
+		if (window_template.GetIsMoveOne() || window_template.GetIsTriggerIsFinish()) {
 			int loop_size = 6;
 			if (window_template.GetIsConsequence()) {
 				loop_size = 5;
@@ -66,10 +66,10 @@ void LogicHandler::Update() {
 			for (int i = 0; i < loop_size; i++) {
 				new_operation.AddSetData(window_template.GetInfoFromTextField(i), i, window_template.GetHasOperator(), window_template.GetIsConsequence());
 			}
-			if (!window_template.GetIsConsequence()){
+			if (!window_template.GetIsConsequence()) {
 				current_display_index++;
 			}
-			new_operation.AddRule(window_template.GetIsConsequence(),current_display_index);
+			new_operation.AddRule(window_template.GetIsConsequence(), current_display_index);
 			if (window_template.GetIsTriggerIsFinish()) {
 				window_template.SetIsFinished(true);
 			}
@@ -82,54 +82,58 @@ void LogicHandler::Update() {
 				}
 				else {
 					window_template.ChangeWindowAppearance(false, false, new_operation.GetSizeVector());//is antecedent, NEW RULE
-					current_display_index=0;
+					current_display_index = 0;
 					window_template.SetIsOperationDone(false);
 				}
 			}
 		}
 	}
 	else {
-		if (!is_review_created){
+		if (!is_review_created) {
 			is_review_created = true;
 			review_panel.SetText(new_operation.GetRuleVector());
 		}
 	}
-	if (review_panel.GetIsDonePressed()&& !is_input_stage) {
+	if (review_panel.GetIsDonePressed() && !is_input_stage) {
 		is_input_stage = true;
 		input_panel.SetText(new_operation.GetRuleVector());
 	}
-	if (is_input_stage){
+	if (is_input_stage) {
 		input_panel.CheckForInputAdded();
-		if (input_panel.GetIsInputAdded()&& !is_input_complete){
+		if (input_panel.GetIsInputAdded() && !is_input_complete) {
 			new_operation.PerformOperation(input_panel.GetHumanValues());
-			for (int i = 0; i < new_operation.GetRuleVector().size(); i++){
+			for (int i = 0; i < new_operation.GetRuleVector().size(); i++) {
 				input_panel.SetOperatorValues(new_operation.GetRuleVector()[i].GetOperatorValue());
 			}
 			new_operation.SortPoints();
 			DefuzzyCalculator g;
 			g.FindPoints(new_operation);
-			auto finalvalue=g.FindDefuzzyValue();
+			auto finalvalue = g.FindDefuzzyValue();
 			is_input_complete = true;
 			input_panel.SetDefuzzyValue(finalvalue.x);
 			input_panel.UpdateOperatorText(g.GetPoints());
-			poly_points=g.GetPoints();
+			poly_points = g.GetPoints();
 		}
 	}
 
 
-	for (size_t i = 0; i < review_panel.GetEdit().size(); i++){
+	for (size_t i = 0; i < review_panel.GetEdit().size(); i++) {
 		if (review_panel.GetEdit()[i]) {
 			//bring up temp addsetui with that rule data, validate that data when its finished and then either discard or change
-			review_panel.SetEditBool(false,i);
+			review_panel.SetEditBool(false, i);
 			edit_panel.SetInfo(new_operation.GetRuleVector()[i].GetAntecedentVector().size());
 			edit_panel.SetInfo(new_operation.GetRuleVector()[i]);
 			edit_panel.SetIsEditDisplay(true);
 		}
 	}
+	if (edit_panel.GetIsDonePressed()) {
+		edit_panel.SetIsDone(false);
+		edit_panel.SetIsEditDisplay(false);
+
+	}
 }
 void LogicHandler::Render() {
-	if (!window_template.GetIsFinished()){
-		window_template.Render();
+	if (!window_template.GetIsFinished()) {
 		if (window_template.GetIsLoadPanel()) {
 			help_panel.Render();
 			if (help_panel.GetIsGoBack()) {
@@ -137,36 +141,47 @@ void LogicHandler::Render() {
 			}
 		}
 		else {
+			window_template.Render();
 			help_panel.SetIsGoBack(false);
 		}
 	}
 	else {
-		if (!review_panel.GetIsDonePressed()){
-			if (review_panel.GetIsLoadHelp()) {
-				help_panel.Render();
-				if (help_panel.GetIsGoBack()) {
-					review_panel.SetIsLoadHelp(false);
+		if (!review_panel.GetIsDonePressed()) {
+			if (!edit_panel.GetIsEditDisplay()) {
+				if (review_panel.GetIsLoadHelp()) {
+					help_panel.Render();
+					if (help_panel.GetIsGoBack()) {
+						review_panel.SetIsLoadHelp(false);
+					}
+				}
+				else {
+					review_panel.Render();
+					help_panel.SetIsGoBack(false);
 				}
 			}
 			else {
 				if (edit_panel.GetIsEditDisplay()) {
-					edit_panel.Render();
-				}
-				else {
-					help_panel.SetIsGoBack(false);
-					review_panel.Render();
+					if (edit_panel.GetIsLoadHelp()) {
+						help_panel.Render();
+						if (help_panel.GetIsGoBack()) {
+							edit_panel.SetIsLoadHelp(false);
+						}
+					}
+					else {
+						edit_panel.Render();
+						help_panel.SetIsGoBack(false);
+					}
 				}
 			}
 		}
 		else {
 			input_panel.Render();
-		}	
+		}
 	}
-	
 }
 void LogicHandler::HandleInput(InputManager input_manger, sf::Event e) {
-	if (!window_template.GetIsFinished()){
-		if (window_template.GetIsLoadPanel()){
+	if (!window_template.GetIsFinished()) {
+		if (window_template.GetIsLoadPanel()) {
 			help_panel.Input(input_manger);
 		}
 		else {
@@ -174,27 +189,32 @@ void LogicHandler::HandleInput(InputManager input_manger, sf::Event e) {
 		}
 	}
 	else {
-		if (!review_panel.GetIsDonePressed()){
-			if (review_panel.GetIsLoadHelp()) {
-				help_panel.Input(input_manger);
-			}
-			else {
-				if (edit_panel.GetIsEditDisplay()){
-					edit_panel.Input(input_manger);
+		if (!review_panel.GetIsDonePressed()) {
+			if (!edit_panel.GetIsEditDisplay()) {
+				if (review_panel.GetIsLoadHelp()) {
+					help_panel.Input(input_manger);
 				}
-				else{
+				else {
 					review_panel.Input(input_manger);
+				}
+			}
+			else if (edit_panel.GetIsEditDisplay()) {
+				if (edit_panel.GetIsLoadHelp()) {
+					help_panel.Input(input_manger);
+				}
+				else {
+					edit_panel.Input(input_manger);
 				}
 			}
 		}
 		else {
-			input_panel.HandleInput(input_manger,e);
+			input_panel.HandleInput(input_manger, e);
 		}
 	}
 }
 
-const std::vector<sf::Vector2f> LogicHandler::GetPolyPoints() const{
-	if (poly_points.size()>0){
+const std::vector<sf::Vector2f> LogicHandler::GetPolyPoints() const {
+	if (poly_points.size() > 0) {
 		return poly_points;
 	}
 	return std::vector<sf::Vector2f>();
