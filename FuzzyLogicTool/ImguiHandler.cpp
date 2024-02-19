@@ -40,10 +40,12 @@ void ImguiHandler::InfoToDisplay(const Operation& info, const std::vector<sf::Ve
 				s.append(std::to_string(info.GetRuleVector()[i].GetAntecedentVector()[j].GetGraphType()));
 				s.append("\nOperator: ");
 				s.append(std::to_string(info.GetRuleVector()[i].GetAntecedentVector()[j].GetOperatorValue()));
-				ImGui::TextWrapped("%s", s.c_str());
+				ImGui::TextWrapped("\n%s", s.c_str());
+				s.clear();
+				s.append("\n");
 			}
 			s.clear();
-			s.append("Then ");
+			s.append("\nThen ");
 			s.append(info.GetRuleVector()[i].GetConsequenceVector()[0].GetxName());
 			s.append(" is ");
 			s.append(info.GetRuleVector()[i].GetConsequenceVector()[0].GetGraphName());

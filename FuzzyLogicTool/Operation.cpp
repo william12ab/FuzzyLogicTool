@@ -1,7 +1,6 @@
 #include "Operation.h"
 
 Operation::Operation() {
-
 }
 Operation::~Operation() {
 	if (rule_vector.size() > 0) {
@@ -10,7 +9,6 @@ Operation::~Operation() {
 }
 
 void Operation::AddRule(const bool& is_consequence, int& counter_, const bool& is_validate) {
-	bool is_validated = false;
 	if (!is_consequence) {
 		if (rule_template.GetSizeOfAntecedent() == 0){
 			rule_template.AddAntecedent(fuzzy_set_template);
