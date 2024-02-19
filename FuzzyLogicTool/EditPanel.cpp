@@ -30,6 +30,7 @@ EditPanel::EditPanel(sf::RenderWindow* hwnd, const sf::Font& font):window(hwnd),
 	description_button.setFillColor(sf::Color::White);
 	description_button.setOutlineColor(sf::Color::Black);
 	description_button.setOutlineThickness(1.f);
+	is_created = false;
 }
 void EditPanel::Render() {
 	window->draw(done_button);
@@ -53,74 +54,90 @@ void EditPanel::Input(InputManager input_manager,sf::Event e) {
 	}
 }
 
-void EditPanel::SetInfo(const int& ant_size) {
-	display_text_field.resize(4+(ant_size-1));
-	std::string arr[3] = { "If ", "is ", "then " };
-	auto temp_f=description_text.getFont();
-	float x_pos = 50;
-	float y_pos = 75;
-	float x_add = 200;
-	int local_index = 0;
-	for (size_t i = 0; i < display_text_field.size(); i++){
-		display_text_field[i].setFont(*temp_f);
-		display_text_field[i].setFillColor(sf::Color(0, 0, 0));
+void EditPanel::Reset() {
+	//need to clear all structs
+	is_done_pressed = false;
+	is_load_help = false;
+	display_text_field.clear();
+	input_text_fields.clear();
+	is_created = false;
+	is_edit_diplay = false;
+}
 
-		if (display_text_field.size()>4){
-			if (local_index == 1) {
-				display_text_field[i].setString(arr[1]);//diplays is
-				
-				if (i==display_text_field.size()-2){
-					local_index = 2;
+void EditPanel::SetInfo(const int& ant_size) {
+	if (!is_created) {
+		auto temp_f = description_text.getFont();
+		display_text_field.resize(4 + (ant_size - 1));
+		for (size_t i = 0; i < display_text_field.size(); i++) {
+			display_text_field[i].setFont(*temp_f);
+		}
+		is_created = true;
+		SetInputObj(ant_size);
+		SetNumericalInput(ant_size);
+		std::string arr[3] = { "If ", "is ", "then " };
+
+		float x_pos = 50;
+		float y_pos = 75;
+		float x_add = 200;
+		int local_index = 0;
+		for (size_t i = 0; i < display_text_field.size(); i++) {
+			display_text_field[i].setFillColor(sf::Color(0, 0, 0));
+
+			if (display_text_field.size() > 4) {
+				if (local_index == 1) {
+					display_text_field[i].setString(arr[1]);//diplays is
+
+					if (i == display_text_field.size() - 2) {
+						local_index = 2;
+					}
+					if (i > 1) {
+						y_pos += 50;
+					}
+					else {
+						x_pos += x_add;
+					}
 				}
-				if (i>1){
+				else if (local_index > 1) {
+					display_text_field[i].setString(arr[2]);//displays then
+					y_pos -= 50;
+					x_pos += (x_add * 2);
+					local_index = 1;
+				}
+				if (local_index == 0) {
+					display_text_field[i].setString(arr[0]);
+					local_index++;
+				}
+				display_text_field[i].setPosition(sf::Vector2f(x_pos, y_pos));
+				if (display_text_field[i].getString() == arr[2]) {
 					y_pos += 50;
+					x_pos = 50;
 				}
-				else {
+			}
+			else {
+				if (local_index == 1) {
+					display_text_field[i].setString(arr[1]);//displays is
 					x_pos += x_add;
+					local_index++;
+				}
+				else if (local_index > 1) {
+					display_text_field[i].setString(arr[2]);//displays then
+					//y_pos += 50;
+					x_pos += (x_add * 2);
+					local_index = 1;
+				}
+				if (local_index == 0) {
+					display_text_field[i].setString(arr[0]);
+					local_index++;
+				}
+				display_text_field[i].setPosition(sf::Vector2f(x_pos, y_pos));
+				if (display_text_field[i].getString() == arr[2]) {
+					y_pos += 50;
+					x_pos = 50;
 				}
 			}
-			else if (local_index > 1) {
-				display_text_field[i].setString(arr[2]);//displays then
-				y_pos -= 50;
-				x_pos += (x_add*2);
-				local_index = 1;
-			}
-			if (local_index == 0) {
-				display_text_field[i].setString(arr[0]);
-				local_index++;
-			}
-			display_text_field[i].setPosition(sf::Vector2f(x_pos, y_pos));
-			if (display_text_field[i].getString() == arr[2]) {
-				y_pos += 50;
-				x_pos = 50;
-			}
+			display_text_field[i].setCharacterSize(18);
 		}
-		else {
-			if (local_index ==1) {
-				display_text_field[i].setString(arr[1]);//displays is
-				x_pos += x_add;
-				local_index++;
-			}
-			else if(local_index>1){
-				display_text_field[i].setString(arr[2]);//displays then
-				//y_pos += 50;
-				x_pos += (x_add * 2);
-				local_index = 1;
-			}
-			if (local_index == 0) {
-				display_text_field[i].setString(arr[0]);
-				local_index++;
-			}
-			display_text_field[i].setPosition(sf::Vector2f(x_pos, y_pos));
-			if (display_text_field[i].getString()==arr[2]){
-				y_pos += 50;
-				x_pos = 50;
-			}
-		}
-		display_text_field[i].setCharacterSize(18);
 	}
-	SetInputObj(ant_size);
-	SetNumericalInput(ant_size);
 }
 
 void EditPanel::SetInputObj(const int& ant_size) {

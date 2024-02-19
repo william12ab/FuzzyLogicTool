@@ -135,6 +135,7 @@ void LogicHandler::Update() {
 			new_operation.ReplaceData(temp_rule, index);
 			is_review_created = false;
 		}
+		edit_panel.Reset();
 	}
 }
 void LogicHandler::Render() {

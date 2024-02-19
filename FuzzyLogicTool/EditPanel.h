@@ -26,6 +26,8 @@ public:
 	const bool GetIsEditDisplay()const { return is_edit_diplay; }
 
 
+	void Reset();
+
 private:
 	sf::RenderWindow* window;
 	sf::RectangleShape done_button;
@@ -41,5 +43,7 @@ private:
 	std::vector<TextFieldObject> input_text_fields;
 
 	bool is_edit_diplay;	
+
+	bool is_created;
 };
 
