@@ -16,6 +16,8 @@ public:
 	const Operation GetOperationInfo() const { return new_operation; }
 	const std::vector<sf::Vector2f> GetPolyPoints()const;
 
+
+	void DisplayOld();
 private:
 	std::vector< AddSetUI> set_windows;
 	AddSetUI window_template;

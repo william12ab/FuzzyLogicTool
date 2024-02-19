@@ -36,27 +36,33 @@ LogicHandler::LogicHandler(sf::RenderWindow* window, const sf::Font& font) {
 	is_data_need_validate = false;
 	current_display_index = 0;
 }
+
+void LogicHandler::DisplayOld() {
+	is_data_need_validate = true;
+	auto temp = new_operation.GetData(current_display_index);
+
+	if (temp.GetSetType() == 0) {
+		//is consequence
+		window_template.SetIsSecond(true);
+	}
+	else {
+		if (new_operation.GetRuleTemplate().GetSizeOfAntecedent() > 0) {
+			window_template.SetIsSecond(true);
+		}
+		else {
+			window_template.SetIsSecond(false);
+		}
+		window_template.SetIsConsequence(false);
+	}
+	window_template.SetPreviousItems(temp, window_template.GetIsConsequence(), window_template.GetIsSecond(), new_operation.GetSizeVector());
+}
+
 void LogicHandler::Update() {
 	if (!window_template.GetIsFinished()) {
 		window_template.Update();
 		//displaying old info page
 		if (window_template.GetIsGoBack()) {
-			auto temp = new_operation.GetData(current_display_index);
-
-			if (temp.GetSetType() == 0) {
-				//is consequence
-				window_template.SetIsSecond(true);
-			}
-			else {
-				if (new_operation.GetRuleTemplate().GetSizeOfAntecedent() > 0) {
-					window_template.SetIsSecond(true);
-				}
-				else {
-					window_template.SetIsSecond(false);
-				}
-				window_template.SetIsConsequence(false);
-			}
-			window_template.SetPreviousItems(temp, window_template.GetIsConsequence(), window_template.GetIsSecond(), new_operation.GetSizeVector());
+			DisplayOld();
 			is_data_need_validate = true; 
 			is_gone_back = true;
 		}
@@ -81,22 +87,7 @@ void LogicHandler::Update() {
 				if (is_gone_back){
 					current_display_index++;
 					is_data_need_validate = true;
-					auto temp = new_operation.GetData(current_display_index);
-
-					if (temp.GetSetType() == 0) {
-						//is consequence
-						window_template.SetIsSecond(true);
-					}
-					else {
-						if (new_operation.GetRuleTemplate().GetSizeOfAntecedent() > 0) {
-							window_template.SetIsSecond(true);
-						}
-						else {
-							window_template.SetIsSecond(false);
-						}
-						window_template.SetIsConsequence(false);
-					}
-					window_template.SetPreviousItems(temp, window_template.GetIsConsequence(), window_template.GetIsSecond(), new_operation.GetSizeVector());
+					DisplayOld();
 					is_gone_back = false;
 				}
 				else if (window_template.GetHasOperator()) {
