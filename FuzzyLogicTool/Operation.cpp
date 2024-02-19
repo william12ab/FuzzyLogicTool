@@ -7,7 +7,6 @@ Operation::~Operation() {
 	if (rule_vector.size() > 0) {
 		rule_vector.clear();
 	}
-
 }
 
 void Operation::AddRule(const bool& is_consequence, int& counter_) {
@@ -21,7 +20,7 @@ void Operation::AddRule(const bool& is_consequence, int& counter_) {
 		}
 	}
 	else {
-		if (ValidateData(true, counter_)) {
+		if (!ValidateData(true, counter_)) {
 			rule_template.AddConsequence(fuzzy_set_template);
 			rule_vector.push_back(rule_template);
 			ClearRuleTemplate();

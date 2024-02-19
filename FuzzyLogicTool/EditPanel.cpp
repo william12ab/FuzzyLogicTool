@@ -221,7 +221,13 @@ bool EditPanel::CompareInfo(const Rule& temp_rule, Rule& temp_holder) {
 		temp_set.back().SetSetType(1);
 		temp_set[antecedent_index].SetXAxisName(input_text_fields[local_counter].GetText());
 		temp_set[antecedent_index].SetXAxisName(input_text_fields[local_counter + 1].GetText());
-		temp_set[antecedent_index].SetOperatorValue(std::stof(input_text_fields[local_counter + 2].GetText()));
+		if (input_text_fields[local_counter + 2].GetText()!="not editable"){
+			temp_set[antecedent_index].SetOperatorValue(std::stof(input_text_fields[local_counter + 2].GetText()));
+		}
+		else {
+			temp_set[antecedent_index].SetOperatorValue(0);
+		}
+		
 		temp_set[antecedent_index].SetMin(std::stof(input_text_fields[local_counter + 5].GetText()));
 		temp_set[antecedent_index].SetMax(std::stof(input_text_fields[local_counter + 6].GetText()));
 		temp_set[antecedent_index].SetGraphType(std::stof(input_text_fields[local_counter + 7].GetText()));
