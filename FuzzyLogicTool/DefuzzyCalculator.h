@@ -13,7 +13,8 @@ public:
 	bool CheckForIntersection(const sf::Vector2f& point_one, const sf::Vector2f& point_two, const sf::Vector2f& point_three, const sf::Vector2f& point_four);
 
 	sf::Vector2f FindDefuzzyValue();
-
+	sf::Vector2f FindMinDeFuzzyValue();
+	sf::Vector2f FindMaxDefuzzyValue();
 
 	const std::vector<sf::Vector2f> GetPoints() const{ return polygon_points; }
 
