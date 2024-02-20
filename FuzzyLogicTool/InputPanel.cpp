@@ -75,14 +75,11 @@ void InputPanel::ClearValues() {
 		input_fields[i].ClearText();
 	}
 	for (int i = 0; i < operator_text_fields.size(); i++) {
-		std::string temp = operator_text_fields[i].getString();
-		temp.append(std::to_string(operator_values[i]));
-		operator_text_fields[i].setString(temp);
+		std::string display_text = "Rule Value\n after operator: ";
+		operator_text_fields[i].setString(display_text);
 	}
 
-	std::string temp_string = defuzzy_value_field.getString();
-	temp_string.append(std::to_string(defuzzy_value));
-	defuzzy_value_field.setString(temp_string);
+	defuzzy_value_field.setString("Defuzzy value: ");
 }
 
 void InputPanel::SetText(const std::vector<Rule>& rule_vec) {

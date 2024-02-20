@@ -54,6 +54,11 @@ void ImguiHandler::InfoToDisplay(const Operation& info, const std::vector<sf::Ve
 			s.append("\nMax: ");
 			s.append(std::to_string(info.GetRuleVector()[i].GetConsequenceVector()[0].GetMax()));
 			ImGui::TextWrapped("%s", s.c_str());
+			s.clear();
+			s.append("Fuzzy Value: ");
+			s.append(std::to_string(info.GetRuleVector()[i].GetOperatorValue()));
+			ImGui::TextWrapped("%s", s.c_str());
+			s.clear();
 		}
 	}
 	if (ImGui::CollapsingHeader("Polygon Points")){
@@ -65,6 +70,7 @@ void ImguiHandler::InfoToDisplay(const Operation& info, const std::vector<sf::Ve
 			ImGui::TextWrapped("%s",s.c_str());
 		}
 	}
+
 }
 
 void ImguiHandler::ShutDownImgui() {

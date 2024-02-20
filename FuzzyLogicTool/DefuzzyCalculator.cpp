@@ -116,6 +116,9 @@ sf::Vector2f DefuzzyCalculator::FindDefuzzyValue() {
 		area *= 0.5f;
 		centroid /= (6.f * area);
 	}
+	else {
+		centroid.x = polygon_points[0].x;
+	}
 	
 	return centroid;
 }
