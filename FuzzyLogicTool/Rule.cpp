@@ -30,6 +30,10 @@ void Rule::ClearVectors() {
 	consequence_vector.clear();
 }
 
+void Rule::ClearValues() {
+	fuzzy_values.clear();
+	rule_fuzzy_value = 0.f;
+}
 const int Rule::OperationWork(const std::vector<float>& defuzzy_values) {
 	int index = 0;
 	for (size_t i = 0; i < antecedent_vector.size(); i++){

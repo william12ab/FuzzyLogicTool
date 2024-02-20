@@ -29,6 +29,18 @@ InputPanel::InputPanel(const int& size_of_rule_vector, const int& size_of_total_
 	graph_text.setCharacterSize(18);
 	graph_text.setPosition(sf::Vector2f(500, 480));
 	cons_name = "";
+
+	clear_text.setFont(font);
+	clear_text.setFillColor(sf::Color(0, 0, 0));
+	clear_text.setCharacterSize(18);
+	clear_text.setString("Clear");
+	clear_text.setPosition(sf::Vector2f(500, 520));
+
+	clear_button.setSize(sf::Vector2f(80, 20));
+	clear_button.setPosition(500, 520);
+	clear_button.setFillColor(sf::Color::White);
+	clear_button.setOutlineColor(sf::Color::Black);
+	clear_button.setOutlineThickness(1.f);
 }
 
 void InputPanel::Render() {
@@ -47,7 +59,30 @@ void InputPanel::Render() {
 		window->draw(graph_image);
 		window->draw(graph_text);
 	}
-	
+	window->draw(clear_button);
+	window->draw(clear_text);
+	is_clear_button = false;
+}
+
+void InputPanel::ClearValues() {
+	is_input_addded=false;
+	human_values.clear();
+	operator_values.clear();
+	defuzzy_value = 0.f;
+	is_image_created = false;
+	is_done = false;
+	for (size_t i = 0; i < input_fields.size(); i++){
+		input_fields[i].ClearText();
+	}
+	for (int i = 0; i < operator_text_fields.size(); i++) {
+		std::string temp = operator_text_fields[i].getString();
+		temp.append(std::to_string(operator_values[i]));
+		operator_text_fields[i].setString(temp);
+	}
+
+	std::string temp_string = defuzzy_value_field.getString();
+	temp_string.append(std::to_string(defuzzy_value));
+	defuzzy_value_field.setString(temp_string);
 }
 
 void InputPanel::SetText(const std::vector<Rule>& rule_vec) {
@@ -106,6 +141,7 @@ void InputPanel::HandleInput(InputManager input_manger, sf::Event e) {
 		input_manger.HandleTextInput(input_fields[i], e, 2);
 	}
 	input_manger.ButtonBoolPress(compute_button, is_input_addded, 0);
+	input_manger.ButtonBoolPress(clear_button, is_clear_button, 0);
 }
 
 void InputPanel::CheckForInputAdded() {

@@ -22,6 +22,10 @@ public:
 	void SetOperatorValues(const float& value);
 	void SetDefuzzyValue(const float& value) { defuzzy_value = value; }
 	void UpdateOperatorText(const std::vector<sf::Vector2f> &points);
+
+	void ClearValues();
+	const bool GetIsClear()const { return is_clear_button; }
+	void SetIsClear(bool b) { is_clear_button = b; }
 private:
 
 	sf::RenderWindow* window;
@@ -45,5 +49,11 @@ private:
 	sf::Text graph_text;
 
 	std::string cons_name;
+
+
+	sf::Text clear_text;
+	sf::RectangleShape clear_button;
+
+	bool is_clear_button;
 };
 

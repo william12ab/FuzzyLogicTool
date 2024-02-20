@@ -18,7 +18,7 @@ public:
 	const int OperationWork(const std::vector<float> &defuzzy_values);
 
 	void ChangeInAntecedent() { antecedent_vector.pop_back(); }
-
+	void ClearValues();
 
 	const float GetOperatorValue() const { return rule_fuzzy_value; }
 private:

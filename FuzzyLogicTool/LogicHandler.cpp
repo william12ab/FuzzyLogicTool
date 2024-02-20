@@ -130,6 +130,12 @@ void LogicHandler::Update() {
 			input_panel.UpdateOperatorText(g.GetPoints());
 			poly_points = g.GetPoints();
 		}
+		if (input_panel.GetIsClear()){
+			input_panel.SetIsClear(false);
+			input_panel.ClearValues();
+			is_input_complete = false;
+			new_operation.ClearOperationValues();
+		}
 	}
 
 	int index = 0;

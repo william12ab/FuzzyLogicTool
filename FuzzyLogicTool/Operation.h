@@ -27,6 +27,8 @@ public:
 	void AddUp(int& counter, const FuzzySet& temp_set);
 
 	void ReplaceData(Rule temp_info, const int& rule_index);
+
+	void ClearOperationValues();
 private:
 	std::vector<Rule> rule_vector;
 

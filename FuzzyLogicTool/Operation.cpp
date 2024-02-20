@@ -35,6 +35,13 @@ void Operation::ClearRuleTemplate() {
 	rule_template.ClearVectors();
 }
 
+void Operation::ClearOperationValues() {
+	for (size_t i = 0; i < rule_vector.size(); i++)
+	{
+		rule_vector[i].ClearValues();
+	}
+}
+
 void Operation::ClearTemplate() {
 	fuzzy_set_template.SetGraphName("");
 	fuzzy_set_template.SetXAxisName("");
