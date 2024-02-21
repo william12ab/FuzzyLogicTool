@@ -40,3 +40,7 @@ std::vector<sf::Vector2f> FinalGraphTool::ChangeRange(const std::vector<sf::Vect
 	}
 	return new_points;
 }
+
+void FinalGraphTool::ClearGraph() {
+	m_vertices.clear();
+}

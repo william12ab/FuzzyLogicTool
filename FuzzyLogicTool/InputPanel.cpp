@@ -80,6 +80,7 @@ void InputPanel::ClearValues() {
 	}
 
 	defuzzy_value_field.setString("Defuzzy value: ");
+	graph_image.ClearGraph();
 }
 
 void InputPanel::SetText(const std::vector<Rule>& rule_vec) {
