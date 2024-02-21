@@ -195,3 +195,22 @@ bool Operation::ValidateData(const bool& is_cons, const int& counter_) {
 	}
 	return is_duplicate;
 }
+
+
+bool Operation::IsMinOrMax(const std::vector<float>& defuzzy_values) {
+	bool to_return = false;
+	auto compare_min = defuzzy_values[0] - rule_vector[0].GetAntecedentVector()[0].GetMin();
+	if (compare_min <0){
+		compare_min *= -1;
+	}
+	auto compare_max = defuzzy_values[0] - rule_vector[0].GetAntecedentVector()[0].GetMax();
+	if (compare_max < 0) {
+		compare_max *= -1;
+	}
+	if (compare_min<compare_max){
+	}
+	else {
+		to_return = true;
+	}
+	return to_return;
+}

@@ -124,7 +124,19 @@ void LogicHandler::Update() {
 			new_operation.SortPoints();
 			DefuzzyCalculator g;
 			g.FindPoints(new_operation);
-			auto finalvalue = g.FindDefuzzyValue();
+			sf::Vector2f finalvalue;
+			if (new_operation.GetRuleVector().size()>1){
+				finalvalue= g.FindDefuzzyValue();
+			}
+			else {
+				if (new_operation.IsMinOrMax(input_panel.GetHumanValues())){
+					finalvalue = g.FindMinDeFuzzyValue();
+				}
+				else {
+					finalvalue = g.FindMaxDefuzzyValue();
+				}
+			}
+			
 			is_input_complete = true;
 			input_panel.SetDefuzzyValue(finalvalue.x);
 			input_panel.UpdateOperatorText(g.GetPoints());

@@ -10,7 +10,6 @@ void Rule::AddConsequence(FuzzySet consequence) {
 const FuzzySet Rule::GetSetValues(const bool& is_consequence, const bool& has_operator, int& counter_){
 	if (is_consequence){
 		auto to_return = consequence_vector.back();	
-		//consequence_vector.pop_back();
 		return to_return;
 	}
 	else {
@@ -18,9 +17,6 @@ const FuzzySet Rule::GetSetValues(const bool& is_consequence, const bool& has_op
 			counter_--;
 		}
 		auto to_return = antecedent_vector.at(counter_);
-
-		//auto to_return = antecedent_vector.back();
-		//antecedent_vector.pop_back();
 		return to_return;
 	}
 }
