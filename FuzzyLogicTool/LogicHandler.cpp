@@ -115,6 +115,10 @@ void LogicHandler::Update() {
 		input_panel.SetText(new_operation.GetRuleVector());
 	}
 	if (is_input_stage) {
+		if (new_operation.GetRuleVector().size()==1){
+			input_panel.SetIsOneRule(true);
+		}
+		
 		input_panel.CheckForInputAdded();
 		if (input_panel.GetIsInputAdded() && !is_input_complete) {
 			new_operation.PerformOperation(input_panel.GetHumanValues());
@@ -129,11 +133,11 @@ void LogicHandler::Update() {
 				finalvalue= g.FindDefuzzyValue();
 			}
 			else {
-				if (new_operation.IsMinOrMax(input_panel.GetHumanValues())){
-					finalvalue = g.FindMinDeFuzzyValue();
+				if (input_panel.GetIsMax()){
+					finalvalue = g.FindMaxDefuzzyValue();
 				}
 				else {
-					finalvalue = g.FindMaxDefuzzyValue();
+					finalvalue = g.FindMinDeFuzzyValue();
 				}
 			}
 			

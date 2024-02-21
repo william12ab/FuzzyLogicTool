@@ -27,6 +27,9 @@ public:
 	const bool GetIsClear()const { return is_clear_button; }
 	void SetIsClear(bool b) { is_clear_button = b; }
 	void SetIsOneRule(bool b) { is_one_rule = b; }
+
+	const bool GetIsMax()const { return is_max; }
+	
 private:
 
 	sf::RenderWindow* window;

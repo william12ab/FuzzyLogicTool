@@ -51,7 +51,7 @@ InputPanel::InputPanel(const int& size_of_rule_vector, const int& size_of_total_
 	compute_text.setPosition(sf::Vector2f(500, 480));
 	is_done = false;
 	is_one_rule = false;
-	is_min = flase;
+	is_min = false;
 	is_max = true;
 	is_image_created = false;
 
@@ -106,6 +106,8 @@ void InputPanel::Render() {
 
 void InputPanel::ClearValues() {
 	is_input_addded=false;
+	is_max = false;
+	is_min = false;
 	human_values.clear();
 	operator_values.clear();
 	defuzzy_value = 0.f;
@@ -191,6 +193,9 @@ void InputPanel::HandleInput(InputManager input_manger, sf::Event e) {
 }
 
 void InputPanel::CheckForInputAdded() {
+	if (is_max||is_min){
+		is_input_addded = true;
+	}
 	if (is_input_addded) {
 		is_done = true;
 		for (size_t i = 0; i < input_fields.size(); i++) {
