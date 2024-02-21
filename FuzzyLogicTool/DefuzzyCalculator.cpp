@@ -138,7 +138,7 @@ sf::Vector2f DefuzzyCalculator::FindMinDeFuzzyValue() {
 
 sf::Vector2f DefuzzyCalculator::FindMaxDefuzzyValue() {
 	sf::Vector2f return_value;
-	for (size_t i = (polygon_points.size()-1); i >-1; i--) {
+	for (size_t i = (polygon_points.size()-1); i >0; i--) {
 		if (polygon_points[i].y > 0) {
 			return_value = polygon_points[i];
 			return return_value;

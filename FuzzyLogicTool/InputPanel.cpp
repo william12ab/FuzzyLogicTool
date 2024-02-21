@@ -10,6 +10,34 @@ InputPanel::InputPanel(const int& size_of_rule_vector, const int& size_of_total_
 	is_input_addded = false;
 
 
+	min_button.setSize(sf::Vector2f(80, 20));
+	min_button.setPosition(500, 450);
+	min_button.setFillColor(sf::Color::White);
+	min_button.setOutlineColor(sf::Color::Black);
+	min_button.setOutlineThickness(1.f);
+	max_button.setSize(sf::Vector2f(80, 20));
+	max_button.setPosition(500, 420);
+	max_button.setFillColor(sf::Color::White);
+	max_button.setOutlineColor(sf::Color::Black);
+	max_button.setOutlineThickness(1.f);
+	min_text.setFont(font);
+	min_text.setFillColor(sf::Color(0, 0, 0));
+	min_text.setCharacterSize(18);
+	min_text.setString("Use Min");
+	min_text.setPosition(sf::Vector2f(500, 450));
+	max_text.setFont(font);
+	max_text.setFillColor(sf::Color(0, 0, 0));
+	max_text.setCharacterSize(18);
+	max_text.setString("Use Max");
+	max_text.setPosition(sf::Vector2f(500, 480));
+
+
+	compute_text.setFont(font);
+	compute_text.setFillColor(sf::Color(0, 0, 0));
+	compute_text.setCharacterSize(18);
+	compute_text.setString("Compute");
+	compute_text.setPosition(sf::Vector2f(500, 480));
+
 	compute_button.setSize(sf::Vector2f(80, 20));
 	compute_button.setPosition(500, 480);
 	compute_button.setFillColor(sf::Color::White);
@@ -22,6 +50,9 @@ InputPanel::InputPanel(const int& size_of_rule_vector, const int& size_of_total_
 	compute_text.setString("Compute");
 	compute_text.setPosition(sf::Vector2f(500, 480));
 	is_done = false;
+	is_one_rule = false;
+	is_min = flase;
+	is_max = true;
 	is_image_created = false;
 
 	graph_text.setFont(font);
@@ -53,8 +84,17 @@ void InputPanel::Render() {
 		window->draw(operator_text_fields[i]);
 	}
 	window->draw(defuzzy_value_field);
-	window->draw(compute_button);
-	window->draw(compute_text);
+	if (is_one_rule){
+		window->draw(min_button);
+		window->draw(max_button);
+		window->draw(max_text);
+		window->draw(min_text);
+	}
+	else {
+		window->draw(compute_button);
+		window->draw(compute_text);
+	}
+	
 	if (is_image_created){
 		window->draw(graph_image);
 		window->draw(graph_text);
@@ -138,7 +178,15 @@ void InputPanel::HandleInput(InputManager input_manger, sf::Event e) {
 	for (size_t i = 0; i < input_fields.size(); i++) {
 		input_manger.HandleTextInput(input_fields[i], e, 2);
 	}
-	input_manger.ButtonBoolPress(compute_button, is_input_addded, 0);
+	if (is_one_rule){
+		input_manger.ButtonBoolPress(max_button, is_max, 0);
+		input_manger.ButtonBoolPress(min_button, is_min, 0);
+	}
+	else {
+		input_manger.ButtonBoolPress(compute_button, is_input_addded, 0);
+	}
+	
+	
 	input_manger.ButtonBoolPress(clear_button, is_clear_button, 0);
 }
 

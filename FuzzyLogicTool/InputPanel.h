@@ -26,6 +26,7 @@ public:
 	void ClearValues();
 	const bool GetIsClear()const { return is_clear_button; }
 	void SetIsClear(bool b) { is_clear_button = b; }
+	void SetIsOneRule(bool b) { is_one_rule = b; }
 private:
 
 	sf::RenderWindow* window;
@@ -55,5 +56,13 @@ private:
 	sf::RectangleShape clear_button;
 
 	bool is_clear_button;
+
+	sf::Text min_text;
+	sf::RectangleShape min_button;
+	sf::Text max_text;
+	sf::RectangleShape max_button;
+	bool is_one_rule;
+	bool is_min;
+	bool is_max;
 };
 
