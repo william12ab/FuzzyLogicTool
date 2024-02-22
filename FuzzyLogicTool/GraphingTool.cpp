@@ -41,28 +41,34 @@ float GraphingTool::GetPoint(const int& index,const int& min,const int&max, cons
 	float temp_y=0.0f;
 	switch (index)
 	{
-	case 0:
+	case 0: {
 		float mid = (min + max) / 2.f;
-		temp_y = g.TriangularFunction(min, max, x,mid);
+		temp_y = g.TriangularFunction(min, max, x, mid);
 		break;
-	case 1:
-		temp_y = g.ZFunction(min, max, x);
-		break;
-	case 2:
+	}
+	case 1:{temp_y = g.ZFunction(min, max, x);
+		break; 
+	}	
+	case 2:{
 		temp_y = g.SFunction(min, max, x);
-		break;
-	case 3:
+		break; 
+	}
+	case 3:{
 		temp_y = g.SmoothSFunction(min, max, x);
-		break;
-	case 4:
+		break; 
+	}
+	case 4:{
 		temp_y = g.SmoothZFunction(min, max, x);
-		break;
-	case 5:
+		break; 
+	}
+	case 5: {
 		temp_y = g.TrapezoidalFunction(min, max, x);
 		break;
-	case 6:
+	}
+	case 6:{
 		temp_y = g.GaussianFunction(min, max, x);
-		break;
+		break; 
+	}
 	}
 	return temp_y;
 }

@@ -76,7 +76,7 @@ void AddSetUI::Render() {
 	int loop_index = text_fields.size();
 	int loop_index_two = display_text_fields.size();
 	if (is_consequence) {
-		loop_index -= 2;
+		loop_index -= 1;
 		loop_index_two -= 1;
 	}
 	for (size_t i = 0; i < loop_index; i++) {
@@ -111,8 +111,10 @@ void AddSetUI::Update() {
 		}
 	}
 	if (text_fields[4].GetText() == "0"&& !is_triangle_set) {
-		IsTriangle();
-		is_triangle_set = true;
+		if (!is_consequence){
+			IsTriangle();
+			is_triangle_set = true;
+		}
 	}
 }
 
@@ -122,13 +124,19 @@ void AddSetUI::SetPreviousItems(FuzzySet temp, const bool& is_con_e, const bool&
 	text_fields[1].SetPrevious(temp.GetGraphName());
 	text_fields[2].SetPrevious(std::to_string(temp.GetMin()));
 	text_fields[3].SetPrevious(std::to_string(temp.GetMax()));
-	text_fields[4].SetPrevious(std::to_string(temp.GetGraphType()));
 	if (!is_con_e) {
+		text_fields[4].SetPrevious(std::to_string(temp.GetGraphType()));
 		text_fields[5].SetPrevious(std::to_string(temp.GetOperatorValue()));
 	}
+	else {
+		text_fields[4].SetPrevious(std::to_string(temp.GetPeakValue()));
+	}
 	if (text_fields[4].GetText() == "0"){
-		IsTriangle();
-		is_triangle_set = true;
+		if (!is_con_e){
+			IsTriangle();
+			is_triangle_set = true;
+		}
+		
 	}
 	current_text_field = 0;
 }
@@ -156,30 +164,23 @@ void AddSetUI::HandleInput(InputManager input_manager, sf::Event e) {
 }
 
 void AddSetUI::SetDisplayText() {
-	if (is_consequence) {
-		text_fields[0].ChangePositions(sf::Vector2f(410, 200));
-		text_fields[1].ChangePositions(sf::Vector2f(590, 200));
-	}
-	else {
-		text_fields[0].ChangePositions(sf::Vector2f(360, 200));
-		text_fields[1].ChangePositions(sf::Vector2f(550, 200));
-	}
-
 	text_fields[2].ChangePositions(sf::Vector2f(320, 250));
 	text_fields[3].ChangePositions(sf::Vector2f(320, 300));
 	text_fields[4].ChangePositions(sf::Vector2f(320, 350));
 
-	if (is_operator) {
-		text_fields[5].ChangePositions(sf::Vector2f(320, 400));
-		display_text_fields[6].setString("Operator: ");
-		display_text_fields[6].setPosition(sf::Vector2f(200, 400));
-	}
-
 	if (is_consequence) {
+
+		text_fields[0].ChangePositions(sf::Vector2f(410, 200));
+		text_fields[1].ChangePositions(sf::Vector2f(590, 200));
 		display_text_fields[0].setString("Add consequence: Then: ");
 		display_text_fields[1].setString(" is: ");
 		display_text_fields[1].setPosition(sf::Vector2f(560, 200));
-		display_text_fields[4].setString("");
+		display_text_fields[4].setString("Peak:");
+		display_text_fields[4].setPosition(sf::Vector2f(200, 350));
+		text_fields[5].ChangePositions(sf::Vector2f(320, 400));
+
+		display_text_fields[5].setString("Add new:");
+		display_text_fields[5].setPosition(sf::Vector2f(500, 400));
 	}
 	else {
 		display_text_fields[0].setString("Add antecedent: If: ");
@@ -187,6 +188,16 @@ void AddSetUI::SetDisplayText() {
 		display_text_fields[1].setPosition(sf::Vector2f(520, 200));
 		display_text_fields[4].setString("Graph type: ");
 		display_text_fields[4].setPosition(sf::Vector2f(200, 350));
+
+		text_fields[0].ChangePositions(sf::Vector2f(360, 200));
+		text_fields[1].ChangePositions(sf::Vector2f(550, 200));
+
+		text_fields[5].ChangePositions(sf::Vector2f(320, 400));
+		display_text_fields[6].setString("Operator: ");
+		display_text_fields[6].setPosition(sf::Vector2f(200, 400));
+
+		display_text_fields[5].setString("Done:");
+		display_text_fields[5].setPosition(sf::Vector2f(550, 400));
 	}
 	display_text_fields[0].setPosition(sf::Vector2f(200, 200));
 
@@ -194,15 +205,6 @@ void AddSetUI::SetDisplayText() {
 	display_text_fields[2].setPosition(sf::Vector2f(200, 250));
 	display_text_fields[3].setString("Max value is: ");
 	display_text_fields[3].setPosition(sf::Vector2f(200, 300));
-
-	if (is_consequence) {
-		display_text_fields[5].setString("Add new:");
-		display_text_fields[5].setPosition(sf::Vector2f(500, 400));
-	}
-	else {
-		display_text_fields[5].setString("Done:");
-		display_text_fields[5].setPosition(sf::Vector2f(550, 400));
-	}
 	back_text.setString("Back");
 	back_text.setPosition(sf::Vector2f(50, 50));
 }
@@ -233,6 +235,10 @@ void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_co
 	is_second = is_second_e;
 	is_consequence = is_consequence_e;
 	is_move_on = false;
+	if (is_triangle_set){
+		text_fields.pop_back();
+		display_text_fields.pop_back();
+	}
 	is_triangle_set = false;
 	has_operator = false;
 	is_operator = !is_consequence_e;
@@ -243,6 +249,7 @@ void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_co
 	rule_number_text.setPosition(sf::Vector2f(200, 50));
 	rule_number_text.setString("Rule: " + std::to_string(rule_number));
 	current_text_field = 0;
+	
 }
 
 bool AddSetUI::GetHasOperator() {
