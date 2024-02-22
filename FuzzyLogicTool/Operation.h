@@ -31,6 +31,8 @@ public:
 	void ClearOperationValues();
 
 	bool IsMinOrMax(const std::vector<float>& defuzzy_values);
+
+	bool IsOperatorChange();
 private:
 	std::vector<Rule> rule_vector;
 

@@ -14,7 +14,9 @@ void Operation::AddRule(const bool& is_consequence, int& counter_, const bool& i
 			rule_template.AddAntecedent(fuzzy_set_template);
 		}
 		else if(!ValidateData(false,counter_)&&is_validate) {
-			rule_template.ChangeInAntecedent();
+			if (!IsOperatorChange()){
+				rule_template.ChangeInAntecedent();
+			}
 			rule_template.AddAntecedent(fuzzy_set_template);
 		}
 		else if (!is_validate){
@@ -30,14 +32,31 @@ void Operation::AddRule(const bool& is_consequence, int& counter_, const bool& i
 	}
 	ClearTemplate();
 }
+
+bool Operation::IsOperatorChange() {
+	if (rule_template.GetAntecedentVector().size() > 1) {
+		int back_pos = rule_template.GetAntecedentVector().size() - 2;
+		bool to_return = false;
+		if (fuzzy_set_template.GetOperatorValue() == 0 && rule_template.GetAntecedentVector()[back_pos].GetOperatorValue() != 0) {
+			//pop back back and one after
+			rule_template.ChangeInAntecedent();
+			rule_template.ChangeInAntecedent();
+			to_return = true;
+		}
+		return to_return;
+	}
+	else {
+		return false;
+	}
+}
+
 void Operation::ClearRuleTemplate() {
 	ClearTemplate();
 	rule_template.ClearVectors();
 }
 
 void Operation::ClearOperationValues() {
-	for (size_t i = 0; i < rule_vector.size(); i++)
-	{
+	for (size_t i = 0; i < rule_vector.size(); i++){
 		rule_vector[i].ClearValues();
 	}
 }
