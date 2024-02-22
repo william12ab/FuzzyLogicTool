@@ -3,6 +3,7 @@
 class FuzzySet
 {
 public:
+	FuzzySet();
 	void SetMin(float m) { fuzzy_set.min = m; }
 	void SetMax(float m) { fuzzy_set.max = m; }
 	void SetXAxisName(std::string n) { fuzzy_set.x_axis_name = n; }
