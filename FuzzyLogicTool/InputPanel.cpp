@@ -29,7 +29,7 @@ InputPanel::InputPanel(const int& size_of_rule_vector, const int& size_of_total_
 	max_text.setFillColor(sf::Color(0, 0, 0));
 	max_text.setCharacterSize(18);
 	max_text.setString("Use Max");
-	max_text.setPosition(sf::Vector2f(500, 480));
+	max_text.setPosition(sf::Vector2f(500, 420));
 
 
 	compute_text.setFont(font);
@@ -52,7 +52,7 @@ InputPanel::InputPanel(const int& size_of_rule_vector, const int& size_of_total_
 	is_done = false;
 	is_one_rule = false;
 	is_min = false;
-	is_max = true;
+	is_max = false;
 	is_image_created = false;
 
 	graph_text.setFont(font);
