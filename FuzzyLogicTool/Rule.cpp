@@ -16,8 +16,15 @@ const FuzzySet Rule::GetSetValues(const bool& is_consequence, const bool& has_op
 		if (counter_ > 0) {
 			counter_--;
 		}
-		auto to_return = antecedent_vector.at(counter_);
-		return to_return;
+		if (antecedent_vector.size()>counter_){
+			auto to_return = antecedent_vector.at(counter_);
+			return to_return;
+		}
+		else {
+			FuzzySet s;
+			return s;
+		}
+		//crashes here when going from ant(0)to ant(1)
 	}
 }
 

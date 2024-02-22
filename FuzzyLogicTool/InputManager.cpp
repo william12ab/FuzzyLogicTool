@@ -95,7 +95,6 @@ void InputManager::ChangeTabIndex(std::vector<TextFieldObject>& text_object, int
 	int limit = 6;
 	if (is_consequence) {
 		limit--;
-		limit--;
 	}
 	int counter = 0;
 	for (size_t i = 0; i < limit; i++) {
