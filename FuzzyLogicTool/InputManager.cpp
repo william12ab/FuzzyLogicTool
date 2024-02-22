@@ -71,16 +71,9 @@ void InputManager::HandleTextInput(TextFieldObject &text_object, sf::Event event
 				text_object.SubtractKey();
 			}
 			else if (text_object.GetTextSize() < text_object.GetMaxSize()) {
-				if (index > 1 && index <= 5) {
+				if (index > 1 && index <= 6) {
 					if (event.text.unicode >= 46 && event.text.unicode <= 57) {
-						if (index == 4) {
-							if (event.text.unicode >= 46 && event.text.unicode <= 54) {
-								text_object.Addletter(event.text.unicode);
-							}
-						}
-						else {
-							text_object.Addletter(event.text.unicode);
-						}
+						text_object.Addletter(event.text.unicode);
 					}
 				}
 				if (index>=0&& index<=1){

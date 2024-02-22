@@ -70,6 +70,7 @@ void Operation::AddSetData(const std::string& data, const int& index, const bool
 		if (is_consequence) {
 			fuzzy_set_template.SetSetType(0);
 			fuzzy_set_template.SetGraphType(0);
+			fuzzy_set_template.SetPeakValue(std::stof(data));
 		}
 		else {
 			fuzzy_set_template.SetSetType(1);

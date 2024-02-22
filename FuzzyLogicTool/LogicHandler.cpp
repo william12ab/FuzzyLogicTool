@@ -69,6 +69,9 @@ void LogicHandler::Update() {
 		//displaying new info page
 		if (window_template.GetIsMoveOne() || window_template.GetIsTriggerIsFinish()) {
 			int loop_size = 6;
+			if (window_template.GetInfoFromTextField(4)=="0"){
+				loop_size = 7;
+			}
 			if (window_template.GetIsConsequence()) {
 				loop_size = 5;
 			}
@@ -127,8 +130,8 @@ void LogicHandler::Update() {
 			}
 			new_operation.SortPoints();
 			DefuzzyCalculator g;
-			g.FindPoints(new_operation);
 			sf::Vector2f finalvalue;
+			g.FindPoints(new_operation);
 			if (new_operation.GetRuleVector().size()>1){
 				finalvalue= g.FindDefuzzyValue();
 			}
