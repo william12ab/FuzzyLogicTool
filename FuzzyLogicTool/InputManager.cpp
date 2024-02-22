@@ -122,7 +122,6 @@ void InputManager::IsTabPressed(TextFieldObject& text_object, int& current_index
 	int limit = 6;
 	if (is_consequence) {
 		limit--;
-		limit--;
 	}
 	if (input->isKeyDown(sf::Keyboard::Tab)){
 		auto pos = text_object.GetShape().getPosition();

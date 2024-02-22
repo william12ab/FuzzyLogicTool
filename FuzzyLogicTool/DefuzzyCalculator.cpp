@@ -5,7 +5,9 @@ void DefuzzyCalculator::FindPoints(Operation new_operation) {
 	polygon_points.emplace_back(first_point);
 	//point one
 
-	sf::Vector2f peak = FindPeak(new_operation.GetRuleVector()[0].GetConsequenceVector()[0].GetMax(), first_point.x);
+	//sf::Vector2f peak = FindPeak(new_operation.GetRuleVector()[0].GetConsequenceVector()[0].GetMax(), first_point.x);
+	sf::Vector2f peak = sf::Vector2f(new_operation.GetRuleVector()[0].GetConsequenceVector()[0].GetPeakValue(), 1.f);
+
 
 	polygon_points.emplace_back(FindEdgePoint(first_point, peak, new_operation.GetRuleVector()[0].GetOperatorValue(), 0));
 	//point two
@@ -21,7 +23,8 @@ void DefuzzyCalculator::FindPoints(Operation new_operation) {
 		for (size_t i = 0; i < index; i++) {
 			auto point_three = FindEdgePoint(first_point, peak, new_operation.GetRuleVector()[i].GetOperatorValue(), 1);
 			auto point_five = sf::Vector2f(new_operation.GetRuleVector()[i + 1].GetConsequenceVector()[0].GetMin(), 0);
-			auto new_peak = FindPeak(new_operation.GetRuleVector()[i+1].GetConsequenceVector()[0].GetMax(), point_five.x);
+			//auto new_peak = FindPeak(new_operation.GetRuleVector()[i+1].GetConsequenceVector()[0].GetMax(), point_five.x);
+			auto new_peak = sf::Vector2f(new_operation.GetRuleVector()[i + 1].GetConsequenceVector()[0].GetPeakValue(), 1.0f);
 			auto point_six = FindEdgePoint(point_five, new_peak, new_operation.GetRuleVector()[i+1].GetOperatorValue(), 0);
 
 			if (calculator.intersect(polygon_points[i+1], point_three, point_five, point_six)) {
