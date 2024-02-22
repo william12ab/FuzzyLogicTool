@@ -116,6 +116,11 @@ void AddSetUI::Update() {
 			is_triangle_set = true;
 		}
 	}
+	if (is_triangle_set&& text_fields[4].GetText() != "0") {
+		text_fields.pop_back();
+		display_text_fields.pop_back();
+		is_triangle_set = false;
+	}
 }
 
 void AddSetUI::SetPreviousItems(FuzzySet temp, const bool& is_con_e, const bool& is_second_e, const int& rule_number) {
@@ -136,7 +141,6 @@ void AddSetUI::SetPreviousItems(FuzzySet temp, const bool& is_con_e, const bool&
 			IsTriangle();
 			is_triangle_set = true;
 		}
-		
 	}
 	current_text_field = 0;
 }
