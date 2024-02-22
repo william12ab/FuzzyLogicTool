@@ -7,7 +7,7 @@ class TextFieldObject
 public:
     TextFieldObject(unsigned int maxChars, sf::Vector2f pos, const sf::Font &f_) :
         m_size(maxChars),
-        m_rect(sf::Vector2f(150, 20)), // 15 pixels per char, 20 pixels height, you can tweak
+        m_rect(sf::Vector2f(120, 20)), 
         m_hasfocus(false)
     {
         m_rect.setOutlineThickness(1.f);

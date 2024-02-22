@@ -11,6 +11,7 @@ public:
 	void SetSetType(int p) { fuzzy_set.set_type = p; }
 	void SetOperatorValue(int p) { fuzzy_set.operator_value = p; }
 	void SetFuzzyValue(float p) { fuzzy_set.fuzzy_value=p; }
+	void SetPeakValue(float p) { fuzzy_set.peak_value = p; }
 
 	float GetMin() { return fuzzy_set.min; }
 	float GetMax() { return fuzzy_set.max; }
@@ -29,6 +30,7 @@ public:
 	const int GetSetType() const { return fuzzy_set.set_type; }
 	const int GetOperatorValue() const { return fuzzy_set.operator_value; }
 	const float GetFuzzyValue() const { return fuzzy_set.fuzzy_value; }
+	const float GetPeakValue() const { return fuzzy_set.peak_value; }
 
 private:
 	struct set{
@@ -40,6 +42,7 @@ private:
 		int set_type;
 		int operator_value;
 		float fuzzy_value;
+		float peak_value;
 	}fuzzy_set;
 	
 };

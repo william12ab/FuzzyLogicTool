@@ -4,7 +4,7 @@
 class GraphFunctionCalculator
 {
 public:
-	float TriangularFunction(const float& min, const float& max, const float& input_value);
+	float TriangularFunction(const float& min, const float& max, const float& input_value, const float& peak);
 
 	float ZFunction(const float& min, const float& max, const float& input_value);
 	float SmoothZFunction(const float& min, const float& max, const float& input_value);

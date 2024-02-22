@@ -61,10 +61,10 @@ void Operation::AddSetData(const std::string& data, const int& index, const bool
 		fuzzy_set_template.SetGraphName(data);
 		break;
 	case 2:
-		fuzzy_set_template.SetMin(std::stoi(data));
+		fuzzy_set_template.SetMin(std::stof(data));
 		break;
 	case 3:
-		fuzzy_set_template.SetMax(std::stoi(data));
+		fuzzy_set_template.SetMax(std::stof(data));
 		break;
 	case 4:
 		if (is_consequence) {
@@ -73,20 +73,24 @@ void Operation::AddSetData(const std::string& data, const int& index, const bool
 		}
 		else {
 			fuzzy_set_template.SetSetType(1);
-			fuzzy_set_template.SetGraphType(std::stoi(data));
+			fuzzy_set_template.SetGraphType(std::stof(data));
 		}
 		break;
 
 	case 5:
 		if (!is_consequence) {
 			if (data != "") {
-				fuzzy_set_template.SetOperatorValue(std::stoi(data));
+				fuzzy_set_template.SetOperatorValue(std::stof(data));
 			}
 			else {
 				fuzzy_set_template.SetOperatorValue(0);
 			}
 		}
 		break;
+	case 6:
+		if (!is_consequence){
+			fuzzy_set_template.SetPeakValue(std::stof(data));
+		}
 	}
 }
 

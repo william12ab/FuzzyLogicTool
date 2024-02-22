@@ -5,7 +5,7 @@ float MathsOperator::CalculateFuzzyValue(const FuzzySet& set_, const float& huma
 	switch (set_.GetGraphType())
 	{
 	case 0:
-		temp_y = calculator.TriangularFunction(set_.GetMin(), set_.GetMax(), human_input);
+		temp_y = calculator.TriangularFunction(set_.GetMin(), set_.GetMax(), human_input,set_.GetPeakValue());
 		break;
 	case 1:
 		temp_y = calculator.ZFunction(set_.GetMin(), set_.GetMax(), human_input);

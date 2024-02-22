@@ -23,6 +23,7 @@ public:
 	void ChangeWindowAppearance(const bool& is_second_e, const bool& is_consequence_e, const int& rule_number);
 	void SetPreviousItems(FuzzySet temp, const bool& is_con_e, const bool& is_second_e, const int& rule_number);
 	bool ShouldRenderButton();
+	void IsTriangle();
 
 	bool GetIsLoadPanel() { return is_load_panel; }
 	bool GetIsMoveOne() {return is_move_on;}
@@ -60,6 +61,7 @@ private:
 	bool is_operation_done;
 	bool is_finished;
 	bool is_trigger_finished;
+	bool is_triangle_set;
 
 	int current_text_field;
 

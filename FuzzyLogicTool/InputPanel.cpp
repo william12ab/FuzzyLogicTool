@@ -120,7 +120,6 @@ void InputPanel::ClearValues() {
 		std::string display_text = "Rule Value\n after operator: ";
 		operator_text_fields[i].setString(display_text);
 	}
-
 	defuzzy_value_field.setString("Defuzzy value: ");
 	graph_image.ClearGraph();
 }

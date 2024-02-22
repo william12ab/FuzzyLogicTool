@@ -2,28 +2,28 @@
 #include <iostream>
 
 
-AddSetUI::AddSetUI() :is_consequence(false), is_move_on(false), is_second(false), is_operator(true), window(nullptr), has_operator(false), is_go_back(false), is_finished(false),is_load_panel(false),is_operation_done(false) {
+AddSetUI::AddSetUI() :is_consequence(false), is_move_on(false), is_second(false), is_operator(true), window(nullptr), has_operator(false), is_go_back(false), is_finished(false), is_load_panel(false), is_operation_done(false) {
 }
 AddSetUI::~AddSetUI() {
 
 }
-AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator, const sf::Font& font):window(hwnd), is_move_on(false), has_operator(false), is_go_back(false),is_finished(false), is_load_panel(false), is_operation_done(false) {
-	is_second = e_is_second , is_consequence = e_is_consequence, is_operator=e_is_operator;
+AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderWindow* hwnd, const bool& e_is_second, const bool& e_is_consequence, const bool& e_is_operator, const sf::Font& font) : window(hwnd), is_move_on(false), has_operator(false), is_go_back(false), is_finished(false), is_load_panel(false), is_operation_done(false) {
+	is_second = e_is_second, is_consequence = e_is_consequence, is_operator = e_is_operator;
 	is_operation_done = false;
 	is_finished = false;
 	is_trigger_finished = false;
 	for (int i = 0; i < num_text_fields; i++) {
-		text_fields.push_back(TextFieldObject(20, sf::Vector2f(250.f, 200.f),font));
+		text_fields.emplace_back(TextFieldObject(20, sf::Vector2f(250.f, 200.f), font));
 	}
 	for (int i = 0; i < num_display_text_fields; i++) {
-		display_text_fields.push_back(sf::Text());
+		display_text_fields.emplace_back(sf::Text());
 		display_text_fields[i].setFont(font);
 		display_text_fields[i].setFillColor(sf::Color(0, 0, 0));
 		display_text_fields[i].setCharacterSize(18);
 	}
 
 	bool_shape.setSize(sf::Vector2f(45, 45));
-	bool_shape.setPosition(600,400);
+	bool_shape.setPosition(600, 400);
 	bool_shape.setFillColor(sf::Color::White);
 	bool_shape.setOutlineColor(sf::Color::Black);
 	bool_shape.setOutlineThickness(1.f);
@@ -65,11 +65,12 @@ AddSetUI::AddSetUI(int num_text_fields, int num_display_text_fields, sf::RenderW
 	rule_number_text.setFont(font);
 	rule_number_text.setFillColor(sf::Color(0, 0, 0));
 	rule_number_text.setPosition(sf::Vector2f(200, 50));
-	rule_number_text.setString("Rule: 0" );
+	rule_number_text.setString("Rule: 0");
 	rule_number_text.setCharacterSize(18);
 
 	current_text_field = 0;
 	is_tabbed = false;
+	is_triangle_set = false;
 }
 void AddSetUI::Render() {
 	int loop_index = text_fields.size();
@@ -78,21 +79,21 @@ void AddSetUI::Render() {
 		loop_index -= 2;
 		loop_index_two -= 1;
 	}
-	for (size_t  i = 0; i < loop_index; i++){
+	for (size_t i = 0; i < loop_index; i++) {
 		window->draw(text_fields[i].GetShape());
 		window->draw(text_fields[i].GetTextField());
 	}
-	for (size_t  i = 0; i < loop_index_two; i++) {
+	for (size_t i = 0; i < loop_index_two; i++) {
 		window->draw(display_text_fields[i]);
 	}
-	if (ShouldRenderButton()){
+	if (ShouldRenderButton()) {
 		window->draw(bool_shape);
-		if (is_consequence){
+		if (is_consequence) {
 			window->draw(finish_button);
 			window->draw(finished_text);
 		}
 	}
-	if (is_second){
+	if (is_second) {
 		window->draw(bacK_button);
 		window->draw(back_text);
 	}
@@ -101,77 +102,80 @@ void AddSetUI::Render() {
 	window->draw(rule_number_text);
 }
 void AddSetUI::Update() {
-	if (!is_consequence){
-		if (text_fields[5].GetText()=="") {
+	if (!is_consequence) {
+		if (text_fields[5].GetText() == "") {
 			has_operator = false;
 		}
 		else {
 			has_operator = true;
 		}
 	}
+	if (text_fields[4].GetText() == "0"&& !is_triangle_set) {
+		IsTriangle();
+		is_triangle_set = true;
+	}
 }
 
-void AddSetUI::SetPreviousItems(FuzzySet temp, const bool&is_con_e, const bool&is_second_e, const int& rule_number) {
-//	if (is_go_back){
-		ChangeWindowAppearance(is_second_e,is_con_e, rule_number);
-		text_fields[0].SetPrevious(temp.GetxName());
-		text_fields[1].SetPrevious(temp.GetGraphName());
-		text_fields[2].SetPrevious(std::to_string(temp.GetMin()));
-		text_fields[3].SetPrevious(std::to_string(temp.GetMax()));
-		text_fields[4].SetPrevious(std::to_string(temp.GetGraphType()));
-		if (!is_con_e){
-			text_fields[5].SetPrevious(std::to_string(temp.GetOperatorValue()));
-		}
-		//is_go_back = false;
-	//}
+void AddSetUI::SetPreviousItems(FuzzySet temp, const bool& is_con_e, const bool& is_second_e, const int& rule_number) {
+	ChangeWindowAppearance(is_second_e, is_con_e, rule_number);
+	text_fields[0].SetPrevious(temp.GetxName());
+	text_fields[1].SetPrevious(temp.GetGraphName());
+	text_fields[2].SetPrevious(std::to_string(temp.GetMin()));
+	text_fields[3].SetPrevious(std::to_string(temp.GetMax()));
+	text_fields[4].SetPrevious(std::to_string(temp.GetGraphType()));
+	if (!is_con_e) {
+		text_fields[5].SetPrevious(std::to_string(temp.GetOperatorValue()));
+	}
+	if (text_fields[4].GetText() == "0"){
+		IsTriangle();
+		is_triangle_set = true;
+	}
 	current_text_field = 0;
 }
 
-void AddSetUI::HandleInput(InputManager input_manager,sf::Event e) {
-	for (size_t  i = 0; i < text_fields.size(); i++){
-		input_manager.HandleTextInput(text_fields[i], e,i);
+void AddSetUI::HandleInput(InputManager input_manager, sf::Event e) {
+	for (size_t i = 0; i < text_fields.size(); i++) {
+		input_manager.HandleTextInput(text_fields[i], e, i);
 	}
-	if (is_second){
-		input_manager.ButtonBoolPress(bacK_button, is_go_back,1);
+	if (is_second) {
+		input_manager.ButtonBoolPress(bacK_button, is_go_back, 1);
 	}
-	if (ShouldRenderButton()){
-		input_manager.ButtonBoolPress(bool_shape, is_move_on,1);
-		if (is_move_on &&is_consequence){
+	if (ShouldRenderButton()) {
+		input_manager.ButtonBoolPress(bool_shape, is_move_on, 1);
+		if (is_move_on && is_consequence) {
 			is_operation_done = true;
 		}
-		if (is_consequence){
-			input_manager.ButtonBoolPress(finish_button, is_trigger_finished,1);
+		if (is_consequence) {
+			input_manager.ButtonBoolPress(finish_button, is_trigger_finished, 1);
 		}
 	}
-	input_manager.ButtonBoolPress(description_button, is_load_panel,0);
+	input_manager.ButtonBoolPress(description_button, is_load_panel, 0);
 
-	input_manager.IsTabPressed(text_fields[current_text_field],current_text_field,is_consequence, is_tabbed);
-	input_manager.ChangeTabIndex(text_fields,current_text_field,is_consequence, is_tabbed);
-	//crashes here when current_text_field is 6
+	input_manager.IsTabPressed(text_fields[current_text_field], current_text_field, is_consequence, is_tabbed);
+	input_manager.ChangeTabIndex(text_fields, current_text_field, is_consequence, is_tabbed);
 }
 
 void AddSetUI::SetDisplayText() {
-	if (is_consequence){
+	if (is_consequence) {
 		text_fields[0].ChangePositions(sf::Vector2f(410, 200));
 		text_fields[1].ChangePositions(sf::Vector2f(590, 200));
-		
 	}
 	else {
 		text_fields[0].ChangePositions(sf::Vector2f(360, 200));
 		text_fields[1].ChangePositions(sf::Vector2f(550, 200));
 	}
-	
+
 	text_fields[2].ChangePositions(sf::Vector2f(320, 250));
 	text_fields[3].ChangePositions(sf::Vector2f(320, 300));
 	text_fields[4].ChangePositions(sf::Vector2f(320, 350));
-	
-	if (is_operator){
+
+	if (is_operator) {
 		text_fields[5].ChangePositions(sf::Vector2f(320, 400));
 		display_text_fields[6].setString("Operator: ");
 		display_text_fields[6].setPosition(sf::Vector2f(200, 400));
 	}
 
-	if (is_consequence){
+	if (is_consequence) {
 		display_text_fields[0].setString("Add consequence: Then: ");
 		display_text_fields[1].setString(" is: ");
 		display_text_fields[1].setPosition(sf::Vector2f(560, 200));
@@ -184,14 +188,14 @@ void AddSetUI::SetDisplayText() {
 		display_text_fields[4].setString("Graph type: ");
 		display_text_fields[4].setPosition(sf::Vector2f(200, 350));
 	}
-	display_text_fields[0].setPosition(sf::Vector2f(200,200));
-	
+	display_text_fields[0].setPosition(sf::Vector2f(200, 200));
+
 	display_text_fields[2].setString("Min value is: ");
 	display_text_fields[2].setPosition(sf::Vector2f(200, 250));
 	display_text_fields[3].setString("Max value is: ");
 	display_text_fields[3].setPosition(sf::Vector2f(200, 300));
 
-	if (is_consequence){
+	if (is_consequence) {
 		display_text_fields[5].setString("Add new:");
 		display_text_fields[5].setPosition(sf::Vector2f(500, 400));
 	}
@@ -211,27 +215,28 @@ bool AddSetUI::ShouldRenderButton() {
 	bool is_written = false;
 	int counter = 0;
 	int loop_index = 5;
-	if (is_consequence)	{
+	if (is_consequence) {
 		loop_index--;
 	}
-	for (int i = 0; i < loop_index; i++){
-		if (text_fields[i].GetText()!=""){
+	for (int i = 0; i < loop_index; i++) {
+		if (text_fields[i].GetText() != "") {
 			counter++;
 		}
 	}
-	if (counter>= loop_index){
+	if (counter >= loop_index) {
 		is_written = true;
 	}
 	return is_written;
 }
 
-void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_consequence_e,const int& rule_number) {
+void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_consequence_e, const int& rule_number) {
 	is_second = is_second_e;
 	is_consequence = is_consequence_e;
 	is_move_on = false;
+	is_triangle_set = false;
 	has_operator = false;
 	is_operator = !is_consequence_e;
-	for (int i = 0; i < text_fields.size(); i++){
+	for (int i = 0; i < text_fields.size(); i++) {
 		text_fields[i].ClearText();
 	}
 	SetDisplayText();
@@ -241,10 +246,28 @@ void AddSetUI::ChangeWindowAppearance(const bool& is_second_e, const bool& is_co
 }
 
 bool AddSetUI::GetHasOperator() {
-	if (text_fields[5].GetText() != ""&& text_fields[5].GetText() != "0"){
+	if (text_fields[5].GetText() != "" && text_fields[5].GetText() != "0") {
 		return true;
 	}
 	else {
 		return false;
 	}
+}
+
+void AddSetUI::IsTriangle() {
+	auto f = display_text_fields[0].getFont();
+	//add new input for peak
+	display_text_fields.emplace_back(sf::Text());
+	display_text_fields[display_text_fields.size() - 1].setFont(*f);
+	display_text_fields[display_text_fields.size() - 1].setFillColor(sf::Color(0, 0, 0));
+	display_text_fields[display_text_fields.size() - 1].setCharacterSize(18);
+	display_text_fields[display_text_fields.size() - 1].setString("Peak: ");
+	display_text_fields[display_text_fields.size() - 1].setPosition(500, 250);
+
+	text_fields.emplace_back(TextFieldObject(20, sf::Vector2f(550.f, 250.f), *f));
+	auto m=text_fields[2].GetText();
+	auto ma=text_fields[3].GetText();
+	float mid = (std::stof(m) + std::stof(ma)) / 2.f;
+	auto s = std::to_string(mid);
+	text_fields.back().SetPrevious(s);
 }

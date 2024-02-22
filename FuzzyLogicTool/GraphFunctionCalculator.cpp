@@ -2,11 +2,11 @@
 #include <vector>
 
 
-float GraphFunctionCalculator::TriangularFunction(const float& a, const float& c, const float& input_value) {
+float GraphFunctionCalculator::TriangularFunction(const float& a, const float& c, const float& input_value, const float& peak) {
 	//find middle
 	//write out rules
 	//a =min, b=midpoint, c=max
-	float b = (a+ c)/2.f;
+	float b = peak;
 	float return_value = 0.f;
 	if (input_value<=a){
 		return_value = 0.f;
