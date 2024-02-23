@@ -30,9 +30,11 @@ public:
 
 	void ClearOperationValues();
 
-	bool IsMinOrMax(const std::vector<float>& defuzzy_values);
+	bool IsMinOrMax(const int& rule_index);
 
 	bool IsOperatorChange();
+
+	std::pair<bool,int> CheckImplicationValues();
 private:
 	std::vector<Rule> rule_vector;
 

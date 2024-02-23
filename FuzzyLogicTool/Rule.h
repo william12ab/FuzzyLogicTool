@@ -21,6 +21,7 @@ public:
 	void ClearValues();
 
 	const float GetOperatorValue() const { return rule_fuzzy_value; }
+	const std::vector<float> GetHumanValues()const { return human_values; }
 private:
 	std::vector<FuzzySet> antecedent_vector;
 	std::vector<FuzzySet> consequence_vector;
@@ -28,5 +29,6 @@ private:
 	std::vector<float> fuzzy_values;
 	float rule_fuzzy_value;
 	MathsOperator calculator;
+	std::vector<float> human_values;
 };
 

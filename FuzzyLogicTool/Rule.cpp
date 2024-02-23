@@ -35,17 +35,20 @@ void Rule::ClearVectors() {
 
 void Rule::ClearValues() {
 	fuzzy_values.clear();
+	human_values.clear();
 	rule_fuzzy_value = 0.f;
 }
 const int Rule::OperationWork(const std::vector<float>& defuzzy_values) {
 	int index = 0;
 	for (size_t i = 0; i < antecedent_vector.size(); i++){
 		auto val = calculator.CalculateFuzzyValue(antecedent_vector[i],defuzzy_values[i]);
-		fuzzy_values.push_back(val);
+		fuzzy_values.emplace_back(val);
+		human_values.emplace_back(defuzzy_values[i]);
 	}
 	if (antecedent_vector[0].GetOperatorValue()==1){
 		auto temp = std::max_element(fuzzy_values.begin(), fuzzy_values.end());
 		rule_fuzzy_value = *temp;
+		
 	}
 	else if (antecedent_vector[0].GetOperatorValue() == 2) {
 		auto temp=std::min_element(fuzzy_values.begin(), fuzzy_values.end());

@@ -133,7 +133,19 @@ void LogicHandler::Update() {
 			sf::Vector2f finalvalue;
 			g.FindPoints(new_operation);
 			if (new_operation.GetRuleVector().size()>1){
-				finalvalue= g.FindDefuzzyValue();
+				auto pair_imp = new_operation.CheckImplicationValues();
+				if (pair_imp.first){
+					if (new_operation.IsMinOrMax(pair_imp.second)) {
+						finalvalue = g.FindMaxDefuzzyValue();
+					}
+					else {
+						finalvalue = g.FindMinDeFuzzyValue();
+					}
+				}
+				else {
+					finalvalue = g.FindDefuzzyValue();
+				}
+				
 			}
 			else {
 				if (input_panel.GetIsMax()){

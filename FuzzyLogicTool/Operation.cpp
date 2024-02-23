@@ -158,7 +158,7 @@ void Operation::ReplaceData(Rule temp_info, const int& rule_index) {
 void Operation::SortPoints() {
 	std::vector<sf::Vector2f> points;
 	for (int i = 0; i < rule_vector.size(); i++) {
-		points.emplace_back(rule_vector[i].GetConsequenceVector()[0].GetMin(), 0);
+		points.emplace_back(rule_vector[i].GetConsequenceVector()[0].GetMin(), 0.f);
 	}
 	int min_index = 0;
 	for (int i = 0; i < points.size() - 1; i++) {
@@ -221,20 +221,42 @@ bool Operation::ValidateData(const bool& is_cons, const int& counter_) {
 }
 
 
-bool Operation::IsMinOrMax(const std::vector<float>& defuzzy_values) {
+bool Operation::IsMinOrMax(const int& rule_index) {
 	bool to_return = false;
-	auto compare_min = defuzzy_values[0] - rule_vector[0].GetAntecedentVector()[0].GetMin();
+	auto compare_min = rule_vector[rule_index].GetHumanValues()[0] - rule_vector[rule_index].GetAntecedentVector()[0].GetMin();
 	if (compare_min <0){
 		compare_min *= -1;
 	}
-	auto compare_max = defuzzy_values[0] - rule_vector[0].GetAntecedentVector()[0].GetMax();
+	auto compare_max = rule_vector[rule_index].GetHumanValues()[0] - rule_vector[rule_index].GetAntecedentVector()[0].GetMax();
 	if (compare_max < 0) {
 		compare_max *= -1;
 	}
 	if (compare_min<compare_max){
 	}
 	else {
-		to_return = true;
+		to_return = true;//if true use max
 	}
 	return to_return;
+}
+
+std::pair<bool, int> Operation::CheckImplicationValues() {
+	bool to_return = false;
+	int counter = 0;
+	int index = 0;
+	for (size_t i = 0; i < rule_vector.size(); i++){
+		if (rule_vector[i].GetOperatorValue()>0.0f){
+			counter++;
+			index = i;
+		}
+	}
+	if (counter==1){
+		//use min or max
+		to_return = true;
+	}
+	std::pair<bool, int> return_value;
+	return_value.first = to_return;
+	return_value.second = index;
+	return return_value;
+
+	
 }
