@@ -29,6 +29,7 @@ public:
 	void SetIsOneRule(bool b) { is_one_rule = b; }
 
 	const bool GetIsMax()const { return is_max; }
+	void UpdateText(const std::vector<Rule>& rule_vec);
 	
 private:
 

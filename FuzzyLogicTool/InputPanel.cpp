@@ -186,8 +186,6 @@ void InputPanel::HandleInput(InputManager input_manger, sf::Event e) {
 	else {
 		input_manger.ButtonBoolPress(compute_button, is_input_addded, 0);
 	}
-	
-	
 	input_manger.ButtonBoolPress(clear_button, is_clear_button, 0);
 }
 
@@ -217,11 +215,39 @@ void InputPanel::UpdateOperatorText(const std::vector<sf::Vector2f>& points_) {
 	std::string temp_string = defuzzy_value_field.getString();
 	temp_string.append(std::to_string(defuzzy_value));
 	defuzzy_value_field.setString(temp_string);
-
-
 	graph_image.AddPoints(points_);
 	graph_image.setPosition(50, 500);
 	is_image_created = true;
 	graph_text.setString(cons_name);
 	graph_text.setPosition(70, 500);
+}
+
+void InputPanel::UpdateText(const std::vector<Rule>& rule_vec) {
+	int total_sum = 0;
+	std::vector<std::string> temp_names;
+	for (size_t i = 0; i < rule_vec.size(); i++) {
+		total_sum += rule_vec[i].GetAntecedentVector().size();
+		for (size_t j = 0; j < rule_vec[i].GetAntecedentVector().size(); j++) {
+			temp_names.push_back(rule_vec[i].GetAntecedentVector()[j].GetxName());
+		}
+	}
+	sf::Vector2f pos_ = sf::Vector2f(50, 50);
+	for (size_t i = 0; i < display_text_fields.size(); i++) {
+		pos_.x = 50;
+		std::string diplsay_text = "Enter value for ";
+		diplsay_text.append(temp_names[i]);
+		diplsay_text.append(" : ");
+		display_text_fields[i].setString(diplsay_text);
+		display_text_fields[i].setPosition(sf::Vector2f(pos_));
+		pos_.x += 200;
+		input_fields[i].ChangePositions(sf::Vector2f(pos_));
+		pos_.y += 50;
+	}
+	pos_ = sf::Vector2f(500, 50);
+	for (size_t i = 0; i < operator_text_fields.size(); i++) {
+		std::string display_text = "Rule Value\n after operator: ";
+		operator_text_fields[i].setString(display_text);
+		operator_text_fields[i].setPosition(sf::Vector2f(pos_));
+		pos_.y += 50;
+	}
 }

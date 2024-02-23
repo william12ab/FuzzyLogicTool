@@ -154,6 +154,7 @@ void LogicHandler::Update() {
 			input_panel.ClearValues();
 			is_input_complete = false;
 			new_operation.ClearOperationValues();
+			input_panel.UpdateText(new_operation.GetRuleVector());
 		}
 	}
 
