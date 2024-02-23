@@ -136,10 +136,10 @@ void LogicHandler::Update() {
 				auto pair_imp = new_operation.CheckImplicationValues();
 				if (pair_imp.first){
 					if (new_operation.IsMinOrMax(pair_imp.second)) {
-						finalvalue = g.FindMaxDefuzzyValue();
+						finalvalue = g.FindMinDeFuzzyValue();
 					}
 					else {
-						finalvalue = g.FindMinDeFuzzyValue();
+						finalvalue = g.FindMaxDefuzzyValue();
 					}
 				}
 				else {

@@ -173,7 +173,7 @@ sf::Vector2f DefuzzyCalculator::FindMaxDefuzzyValue() {
 		}
 	}
 	else {
-		return polygon_points[2];
+		return polygon_points[polygon_points.size()-2];
 	}
 }
 
