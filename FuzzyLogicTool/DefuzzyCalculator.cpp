@@ -21,9 +21,9 @@ void DefuzzyCalculator::FindPoints(Operation new_operation) {
 			index = new_operation.GetRuleVector().size() - 1;
 		}
 		for (size_t i = 0; i < index; i++) {
-			auto point_three = FindEdgePoint(first_point, peak, new_operation.GetRuleVector()[i].GetOperatorValue(), 1);
+			auto p4 = sf::Vector2f(new_operation.GetRuleVector()[0].GetConsequenceVector()[0].GetMax(), 0);
+			auto point_three = FindEdgePoint(p4, peak, new_operation.GetRuleVector()[i].GetOperatorValue(), 0);
 			auto point_five = sf::Vector2f(new_operation.GetRuleVector()[i + 1].GetConsequenceVector()[0].GetMin(), 0);
-			//auto new_peak = FindPeak(new_operation.GetRuleVector()[i+1].GetConsequenceVector()[0].GetMax(), point_five.x);
 			auto new_peak = sf::Vector2f(new_operation.GetRuleVector()[i + 1].GetConsequenceVector()[0].GetPeakValue(), 1.0f);
 			auto point_six = FindEdgePoint(point_five, new_peak, new_operation.GetRuleVector()[i+1].GetOperatorValue(), 0);
 
