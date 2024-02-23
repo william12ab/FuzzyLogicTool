@@ -18,6 +18,8 @@ public:
 
 	const std::vector<sf::Vector2f> GetPoints() const{ return polygon_points; }
 
+	void TestFunction(const float &max_value, const float&max_average);
+
 private:
 
 	std::vector<sf::Vector2f> polygon_points;

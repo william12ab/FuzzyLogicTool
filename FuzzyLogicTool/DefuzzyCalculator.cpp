@@ -145,8 +145,68 @@ sf::Vector2f DefuzzyCalculator::FindMaxDefuzzyValue() {
 	for (size_t i = (polygon_points.size()-1); i >0; i--) {
 		if (polygon_points[i].y > 0) {
 			return_value = polygon_points[i];
+			auto comparing = polygon_points[3].x;
+			comparing += return_value.x;
+			comparing /= 2;
+			TestFunction(return_value.x,comparing);
 			return return_value;
 		}
 	}
+}
 
+
+void DefuzzyCalculator::TestFunction(const float& max_value, const float& max_average) {
+	float range = max_average - max_value;
+	range /= 9.0f;
+	float m = (polygon_points[2].y - polygon_points[3].y) / (polygon_points[2].x - polygon_points[3].x);
+	float c = polygon_points[2].y - (m * polygon_points[2].x);
+	
+
+	//this is for centroid between max and average polygon shape.
+	float y = m * max_average + c;
+	float area = 0.0f;
+	float common_factor = 0.f;
+	sf::Vector2f centroid = sf::Vector2f(0.f, 0.f);
+	std::vector<sf::Vector2f> new_points;
+	new_points.emplace_back(polygon_points[2]);
+	new_points.emplace_back(sf::Vector2f(max_average, y));
+	new_points.emplace_back(sf::Vector2f(max_average, 0.f));
+	new_points.emplace_back(sf::Vector2f(polygon_points[2].x, 0.f));
+	for (size_t i = 0; i < new_points.size(); i++) {
+		sf::Vector2f obj_one = new_points[i];
+		sf::Vector2f obj_two = new_points[(i + 1) % new_points.size()];
+		common_factor = (obj_one.x * obj_two.y) - (obj_two.x * obj_one.y);
+		area += common_factor;
+		centroid.x += (obj_one.x + obj_two.x) * common_factor;
+		centroid.y += (obj_one.y + obj_two.y) * common_factor;
+	}
+	if (centroid.x != 0.f && centroid.y != 0.f) {
+		area *= 0.5f;
+		centroid /= (6.f * area);
+	}
+
+	//polygon between max and max from graph polygon shape.
+	std::vector<sf::Vector2f> full_;
+	full_.emplace_back(polygon_points[2]);
+	full_.emplace_back(sf::Vector2f(polygon_points[2].x, 0.f));
+	full_.emplace_back(polygon_points[3]);
+
+
+
+	//this is centroid of whole shape
+	area = 0.f;
+	common_factor = 0.f;
+	centroid = sf::Vector2f(0.f, 0.f);
+	for (size_t i = 0; i < polygon_points.size(); i++) {
+		sf::Vector2f obj_one = polygon_points[i];
+		sf::Vector2f obj_two = polygon_points[(i + 1) % polygon_points.size()];
+		common_factor = (obj_one.x * obj_two.y) - (obj_two.x * obj_one.y);
+		area += common_factor;
+		centroid.x += (obj_one.x + obj_two.x) * common_factor;
+		centroid.y += (obj_one.y + obj_two.y) * common_factor;
+	}
+	if (centroid.x != 0.f && centroid.y != 0.f) {
+		area *= 0.5f;
+		centroid /= (6.f * area);
+	}
 }
