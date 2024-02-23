@@ -55,8 +55,9 @@ void DefuzzyCalculator::FindPoints(Operation new_operation) {
 			temp_last2 = new_peak;
 		}
 	}
-	auto point_seven = FindEdgePoint(temp_last, temp_last2, new_operation.GetRuleVector()[new_operation.GetRuleVector().size() - 1].GetOperatorValue(), 1);
+
 	auto point_eight = sf::Vector2f(new_operation.GetRuleVector()[new_operation.GetRuleVector().size() - 1].GetConsequenceVector()[0].GetMax(), 0);
+	auto point_seven = FindEdgePoint(point_eight, temp_last2, new_operation.GetRuleVector()[new_operation.GetRuleVector().size() - 1].GetOperatorValue(), 0);
 	polygon_points.emplace_back(point_seven);
 	polygon_points.emplace_back(point_eight);
 }
