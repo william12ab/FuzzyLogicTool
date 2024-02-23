@@ -126,31 +126,54 @@ sf::Vector2f DefuzzyCalculator::FindDefuzzyValue() {
 	return centroid;
 }
 
+bool DefuzzyCalculator::CheckPoints() {
+	int counter = 0;
+	bool is_oob = false;
+	for (size_t i = 0; i < polygon_points.size(); i++){
+		if (polygon_points[i].y==0) {
+			counter++;
+		}
+	}
+	if (counter==4){
+		is_oob = true;
+	}
+	return is_oob;
+}
 
 sf::Vector2f DefuzzyCalculator::FindMinDeFuzzyValue() {
 	sf::Vector2f return_value;
-	for (size_t i = 0; i < polygon_points.size(); i++){
-		if (polygon_points[i].y > 0) {
-			return_value = polygon_points[i];
-			auto comparing = polygon_points[0].x;
-			comparing += return_value.x;
-			comparing /= 2;
-			return return_value;
+	if (!CheckPoints()) {
+		for (size_t i = 0; i < polygon_points.size(); i++) {
+			if (polygon_points[i].y > 0) {
+				return_value = polygon_points[i];
+				auto comparing = polygon_points[0].x;
+				comparing += return_value.x;
+				comparing /= 2;
+				return return_value;
+			}
 		}
+	}
+	else {
+		return polygon_points[0];
 	}
 }
 
 sf::Vector2f DefuzzyCalculator::FindMaxDefuzzyValue() {
 	sf::Vector2f return_value;
-	for (size_t i = (polygon_points.size()-1); i >0; i--) {
-		if (polygon_points[i].y > 0) {
-			return_value = polygon_points[i];
-			auto comparing = polygon_points[3].x;
-			comparing += return_value.x;
-			comparing /= 2;
-			TestFunction(return_value.x,comparing);
-			return return_value;
+	if (!CheckPoints()) {
+		for (size_t i = (polygon_points.size() - 1); i > 0; i--) {
+			if (polygon_points[i].y > 0) {
+				return_value = polygon_points[i];
+				auto comparing = polygon_points[3].x;
+				comparing += return_value.x;
+				comparing /= 2;
+				TestFunction(return_value.x, comparing);
+				return return_value;
+			}
 		}
+	}
+	else {
+		return polygon_points[2];
 	}
 }
 
