@@ -219,6 +219,7 @@ bool Operation::ValidateData(const bool& is_cons, const int& counter_) {
 	return is_duplicate;
 }
 
+//this needs changed
 void Operation::HasOperator(const int& rule_index, int& antecedent_index) {
 	if (rule_vector[rule_index].GetHumanValues().size()>1){
 		if (rule_vector[rule_index].GetAntecedentVector()[0].GetOperatorValue()==1){
