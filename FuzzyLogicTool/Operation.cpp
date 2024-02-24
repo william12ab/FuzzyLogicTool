@@ -1,4 +1,5 @@
 #include "Operation.h"
+#include <algorithm>
 
 Operation::Operation() {
 }
@@ -220,14 +221,29 @@ bool Operation::ValidateData(const bool& is_cons, const int& counter_) {
 	return is_duplicate;
 }
 
+void Operation::HasOperator(const int& rule_index, int& antecedent_index) {
+	if (rule_vector[rule_index].GetHumanValues().size()>1){
+		if (rule_vector[rule_index].GetAntecedentVector()[0].GetOperatorValue()==1){
+			//take max value
+			auto temp = std::max_element(rule_vector[rule_index].GetHumanValues().begin(), rule_vector[rule_index].GetHumanValues().end());
+		}
+		else if (rule_vector[rule_index].GetAntecedentVector()[0].GetOperatorValue() == 2){
+			//take min
+			auto temp = std::min_element(rule_vector[rule_index].GetHumanValues().begin(), rule_vector[rule_index].GetHumanValues().end());
+			
+		}
+	}
+}
 
 bool Operation::IsMinOrMax(const int& rule_index) {
 	bool to_return = false;
-	auto compare_min = rule_vector[rule_index].GetHumanValues()[0] - rule_vector[rule_index].GetAntecedentVector()[0].GetMin();
+	int ant_index = 0;
+	HasOperator(rule_index, ant_index);
+	auto compare_min = rule_vector[rule_index].GetHumanValues()[ant_index] - rule_vector[rule_index].GetAntecedentVector()[ant_index].GetMin();
 	if (compare_min <0){
 		compare_min *= -1;
 	}
-	auto compare_max = rule_vector[rule_index].GetHumanValues()[0] - rule_vector[rule_index].GetAntecedentVector()[0].GetMax();
+	auto compare_max = rule_vector[rule_index].GetHumanValues()[ant_index] - rule_vector[rule_index].GetAntecedentVector()[ant_index].GetMax();
 	if (compare_max < 0) {
 		compare_max *= -1;
 	}

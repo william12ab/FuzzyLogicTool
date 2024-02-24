@@ -35,6 +35,7 @@ public:
 	bool IsOperatorChange();
 
 	std::pair<bool,int> CheckImplicationValues();
+	void HasOperator(const int& rule_index, int& antecedent_index);
 private:
 	std::vector<Rule> rule_vector;
 
