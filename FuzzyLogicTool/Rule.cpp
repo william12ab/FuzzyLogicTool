@@ -24,7 +24,6 @@ const FuzzySet Rule::GetSetValues(const bool& is_consequence, const bool& has_op
 			FuzzySet s;
 			return s;
 		}
-		//crashes here when going from ant(0)to ant(1)
 	}
 }
 
@@ -45,14 +44,19 @@ const int Rule::OperationWork(const std::vector<float>& defuzzy_values) {
 		fuzzy_values.emplace_back(val);
 		human_values.emplace_back(defuzzy_values[i]);
 	}
-	if (antecedent_vector[0].GetOperatorValue()==1){
-		auto temp = std::max_element(fuzzy_values.begin(), fuzzy_values.end());
-		rule_fuzzy_value = *temp;
-		
-	}
-	else if (antecedent_vector[0].GetOperatorValue() == 2) {
-		auto temp=std::min_element(fuzzy_values.begin(), fuzzy_values.end());
-		rule_fuzzy_value = *temp;
+	if (antecedent_vector[0].GetOperatorValue()!=0){
+		float first_vlaue = fuzzy_values[0];
+		for (size_t i = 0; i < antecedent_vector.size()-1; i++){
+			if (antecedent_vector[i].GetOperatorValue()==1) {
+				auto max = std::max(first_vlaue, fuzzy_values[i + 1]);
+				first_vlaue = max;
+			}
+			if (antecedent_vector[i].GetOperatorValue() == 2){
+				auto min = std::min(first_vlaue, fuzzy_values[i + 1]);
+				first_vlaue = min;
+			}
+		}
+		rule_fuzzy_value = first_vlaue;
 	}
 	else {
 		rule_fuzzy_value = fuzzy_values[0];

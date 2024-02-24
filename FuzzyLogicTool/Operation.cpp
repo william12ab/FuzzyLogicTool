@@ -230,11 +230,11 @@ void Operation::HasOperator(const int& rule_index, int& antecedent_index) {
 		else if (rule_vector[rule_index].GetAntecedentVector()[0].GetOperatorValue() == 2){
 			//take min
 			auto temp = std::min_element(rule_vector[rule_index].GetHumanValues().begin(), rule_vector[rule_index].GetHumanValues().end());
-			
 		}
 	}
 }
 
+//finds if the human value is closer to the min or max from the antecedent
 bool Operation::IsMinOrMax(const int& rule_index) {
 	bool to_return = false;
 	int ant_index = 0;
