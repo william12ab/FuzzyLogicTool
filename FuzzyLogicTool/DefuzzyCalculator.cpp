@@ -164,10 +164,10 @@ sf::Vector2f DefuzzyCalculator::FindMaxDefuzzyValue() {
 		for (size_t i = (polygon_points.size() - 1); i > 0; i--) {
 			if (polygon_points[i].y > 0) {
 				return_value = polygon_points[i];
-				auto comparing = polygon_points[3].x;
-				comparing += return_value.x;
-				comparing /= 2;
-				TestFunction(return_value.x, comparing);
+				//auto comparing = polygon_points[3].x;
+				//comparing += return_value.x;
+				//comparing /= 2;
+				//TestFunction(return_value.x, comparing);
 				return return_value;
 			}
 		}

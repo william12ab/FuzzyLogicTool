@@ -37,6 +37,8 @@ void Rule::ClearValues() {
 	human_values.clear();
 	rule_fuzzy_value = 0.f;
 }
+
+//finds fuzzy values from human input, then checks if there are any operator rules in play, finds the operator value, or just the fuzzy value.
 const int Rule::OperationWork(const std::vector<float>& defuzzy_values) {
 	int index = 0;
 	for (size_t i = 0; i < antecedent_vector.size(); i++){

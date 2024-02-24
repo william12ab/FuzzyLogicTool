@@ -127,7 +127,6 @@ const FuzzySet Operation::GetData(int& counter_) {
 	return fuzzy_set_template;
 }
 
-
 void Operation::PerformOperation(const std::vector<float>& defuzzy_values) {
 	std::vector<float> values = defuzzy_values;
 	int start_value = 0;
@@ -138,7 +137,6 @@ void Operation::PerformOperation(const std::vector<float>& defuzzy_values) {
 		start_value = 0;
 	}
 }
-
 
 void swap(Rule* xp, Rule* yp) {
 	Rule temp = *xp;
