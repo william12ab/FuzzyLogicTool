@@ -11,16 +11,16 @@ Operation::~Operation() {
 
 void Operation::AddRule(const bool& is_consequence, int& counter_, const bool& is_validate) {
 	if (!is_consequence) {
-		if (rule_template.GetSizeOfAntecedent() == 0){
+		if (rule_template.GetSizeOfAntecedent() == 0) {
 			rule_template.AddAntecedent(fuzzy_set_template);
 		}
-		else if(!ValidateData(false,counter_)&&is_validate) {
-			if (!IsOperatorChange()){
+		else if (!ValidateData(false, counter_) && is_validate) {
+			if (!IsOperatorChange()) {
 				rule_template.ChangeInAntecedent();
 			}
 			rule_template.AddAntecedent(fuzzy_set_template);
 		}
-		else if (!is_validate){
+		else if (!is_validate) {
 			rule_template.AddAntecedent(fuzzy_set_template);
 		}
 	}
@@ -57,7 +57,7 @@ void Operation::ClearRuleTemplate() {
 }
 
 void Operation::ClearOperationValues() {
-	for (size_t i = 0; i < rule_vector.size(); i++){
+	for (size_t i = 0; i < rule_vector.size(); i++) {
 		rule_vector[i].ClearValues();
 	}
 }
@@ -109,7 +109,7 @@ void Operation::AddSetData(const std::string& data, const int& index, const bool
 		}
 		break;
 	case 6:
-		if (!is_consequence){
+		if (!is_consequence) {
 			fuzzy_set_template.SetPeakValue(std::stof(data));
 		}
 	}
@@ -123,7 +123,7 @@ const FuzzySet Operation::GetData(int& counter_) {
 	else {
 		whats_next = false;
 	}
-	fuzzy_set_template = rule_template.GetSetValues(whats_next, has_operator,counter_);
+	fuzzy_set_template = rule_template.GetSetValues(whats_next, has_operator, counter_);
 	return fuzzy_set_template;
 }
 
@@ -205,7 +205,7 @@ bool Operation::ValidateData(const bool& is_cons, const int& counter_) {
 	}
 	else {
 		if (rule_template.GetSizeOfAntecedent() > 0) {
-			if (counter_==1){
+			if (counter_ == 1) {
 				AddUp(counter, rule_template.GetAntecedentVector()[0]);
 			}
 			else {
@@ -219,17 +219,21 @@ bool Operation::ValidateData(const bool& is_cons, const int& counter_) {
 	return is_duplicate;
 }
 
-//this needs changed
+//this needs changed	TEST IF THIS IS NEEDED
 void Operation::HasOperator(const int& rule_index, int& antecedent_index) {
-	if (rule_vector[rule_index].GetHumanValues().size()>1){
-		if (rule_vector[rule_index].GetAntecedentVector()[0].GetOperatorValue()==1){
-			//take max value
-			auto temp = std::max_element(rule_vector[rule_index].GetHumanValues().begin(), rule_vector[rule_index].GetHumanValues().end());
+	if (rule_vector[rule_index].GetHumanValues().size() > 1) {
+		float first_value = 0.f;
+		for (size_t i = 0; i < rule_vector[rule_index].GetAntecedentVector().size(); i++) {
+			if (rule_vector[rule_index].GetAntecedentVector()[i].GetOperatorValue() == 1) {
+				auto max = std::max(first_value, rule_vector[rule_index].GetHumanValues()[i + 1]);
+				first_value= i;
+			}
+			if (rule_vector[rule_index].GetAntecedentVector()[i].GetOperatorValue() == 2) {
+				auto min = std::min(first_value, rule_vector[rule_index].GetHumanValues()[i + 1]);
+				first_value = i;
+			}
 		}
-		else if (rule_vector[rule_index].GetAntecedentVector()[0].GetOperatorValue() == 2){
-			//take min
-			auto temp = std::min_element(rule_vector[rule_index].GetHumanValues().begin(), rule_vector[rule_index].GetHumanValues().end());
-		}
+		antecedent_index = first_value;
 	}
 }
 
@@ -239,14 +243,14 @@ bool Operation::IsMinOrMax(const int& rule_index) {
 	int ant_index = 0;
 	HasOperator(rule_index, ant_index);
 	auto compare_min = rule_vector[rule_index].GetHumanValues()[ant_index] - rule_vector[rule_index].GetAntecedentVector()[ant_index].GetMin();
-	if (compare_min <0){
+	if (compare_min < 0) {
 		compare_min *= -1;
 	}
 	auto compare_max = rule_vector[rule_index].GetHumanValues()[ant_index] - rule_vector[rule_index].GetAntecedentVector()[ant_index].GetMax();
 	if (compare_max < 0) {
 		compare_max *= -1;
 	}
-	if (compare_min<compare_max){
+	if (compare_min < compare_max) {
 	}
 	else {
 		to_return = true;//if true use max
@@ -258,13 +262,13 @@ std::pair<bool, int> Operation::CheckImplicationValues() {
 	bool to_return = false;
 	int counter = 0;
 	int index = 0;
-	for (size_t i = 0; i < rule_vector.size(); i++){
-		if (rule_vector[i].GetOperatorValue()>0.0f){
+	for (size_t i = 0; i < rule_vector.size(); i++) {
+		if (rule_vector[i].GetOperatorValue() > 0.0f) {
 			counter++;
 			index = i;
 		}
 	}
-	if (counter==1){
+	if (counter == 1) {
 		//use min or max
 		to_return = true;
 	}
@@ -273,5 +277,5 @@ std::pair<bool, int> Operation::CheckImplicationValues() {
 	return_value.second = index;
 	return return_value;
 
-	
+
 }
