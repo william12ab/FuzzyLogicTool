@@ -276,6 +276,4 @@ std::pair<bool, int> Operation::CheckImplicationValues() {
 	return_value.first = to_return;
 	return_value.second = index;
 	return return_value;
-
-
 }

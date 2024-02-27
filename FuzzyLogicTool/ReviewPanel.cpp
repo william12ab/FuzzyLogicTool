@@ -41,6 +41,12 @@ ReviewPanel::ReviewPanel(sf::RenderWindow* hwnd, const int& size_of_rule_vector,
 	description_button.setFillColor(sf::Color::White);
 	description_button.setOutlineColor(sf::Color::Black);
 	description_button.setOutlineThickness(1.f);
+
+	Button* tempbutton= new Button(font,sf::Vector2f(500,500),sf::Vector2f(120,50));
+	b= *tempbutton;
+	delete tempbutton;
+	tempbutton = NULL;
+	b.SetButtonText("hello");
 }
 
 void ReviewPanel::SetSizes(const int& size) {
@@ -112,7 +118,7 @@ void ReviewPanel::Render() {
 	window->draw(done_text);
 	window->draw(description_button);
 	window->draw(description_text);
-
+	window->draw(b);
 	for (size_t i = 0; i < edit_buttons.size(); i++){
 		window->draw(edit_buttons[i]);
 	}

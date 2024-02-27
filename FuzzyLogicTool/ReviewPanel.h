@@ -2,7 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "InputManager.h"
 #include "Rule.h"
-
+#include "Button.h"
 class ReviewPanel
 {
 public:
@@ -37,5 +37,7 @@ private:
 	bool is_load_help;
 	std::vector<sf::RectangleShape> edit_buttons;
 	std::vector<bool> is_edit_pressed;
+
+	Button b;
 };
 
