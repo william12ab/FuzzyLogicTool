@@ -38,6 +38,5 @@ private:
 	std::vector<sf::RectangleShape> edit_buttons;
 	std::vector<bool> is_edit_pressed;
 
-	Button b;
 };
 
